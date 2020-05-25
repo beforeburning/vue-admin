@@ -1,3 +1,3 @@
 # vueask-admin
 
-demo
+一个vue的基础项目架构
