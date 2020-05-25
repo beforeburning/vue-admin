@@ -1,0 +1,99 @@
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+
+// 全局引入element
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+
+Vue.use(ElementUI);
+
+// 公共样式
+import '@/assets/less/normalize.less';
+import '@/assets/less/public.less';
+
+// 字体图标
+import 'font-awesome/css/font-awesome.min.css'
+
+// css3效果
+import animated from 'animate.css' // npm install animate.css --save安装，再引入
+Vue.use(animated)
+
+// 🌈进度条
+import VueInsProgressBar from 'vue-ins-progress-bar';
+
+Vue.use(VueInsProgressBar, {
+    position: 'fixed',
+    show: true,
+    height: '2px'
+});
+
+// 动态设置title
+import VueWechatTitle from 'vue-wechat-title';
+
+Vue.use(VueWechatTitle);
+
+// 阻止vue在启动时生成生产提示
+Vue.config.productionTip = false;
+
+// 过滤器
+import * as filters from './filters';
+
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+});
+
+// mock.js 模拟数据  要改为express
+import { mockXHR } from '../mock';
+
+// 是否开启mock
+if (process.env.NODE_ENV === 'development') {
+    mockXHR()
+}
+
+// token 刷新后保存
+router.beforeEach((to, from, next) => {
+    // 保持token
+    store.state.token ? store.state.token : store.commit('token', window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '');
+    // 保持user
+    let user = JSON.parse(window.localStorage.getItem('user'))
+    store.state.user ? store.state.user : store.commit('user', user ? user : '');
+    next();
+});
+
+// echarts
+import echarts from 'echarts';
+
+Vue.prototype.$echarts = echarts;
+
+// 视频组件
+import VideoPlayer from 'vue-video-player'
+
+require('video.js/dist/video-js.css');
+require('vue-video-player/src/custom-theme.css');
+Vue.use(VideoPlayer);
+
+// 图片延迟加载 v-lazy="img.src"
+import VueLazyload from 'vue-lazyload'
+
+Vue.use(VueLazyload);
+Vue.use(VueLazyload, {
+    preLoad: 1.3,
+    error: 'dist/error.png',
+    loading: 'dist/loading.gif',
+    attempt: 1
+});
+
+// mixin 全局混入
+Vue.mixin({
+    created() {
+        // console.log('全局混入的钩子函数');
+    }
+});
+
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app');
