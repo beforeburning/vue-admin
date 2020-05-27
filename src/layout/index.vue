@@ -43,8 +43,6 @@ export default {
         ...mapState({
             sidebar: state => state.app.sidebar,
         })
-
-
     },
     methods: {
         // 路由处理

@@ -10,7 +10,7 @@
           :default-active="defaultActive"
           background-color="#000c17"
           text-color="#fff"
-          active-text-color="#fff"
+          active-text-color="#ffff00"
           :unique-opened="true"
           @open="handleOpen"
           @close="handleClose"

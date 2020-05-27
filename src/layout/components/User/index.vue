@@ -1,15 +1,20 @@
 <template>
+
     <div class="userBox" @mouseenter="enter" @mouseleave="leave">
         <div class="userName">
             <p>{{user.name}}</p><i :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
         </div>
-        <div class="dropDownBox fadeInDown" v-show="isDropDown">
-            <div class="dropDown">
-                <p @click="personal"><i class='el-icon-s-custom'></i>个人中心</p>
-                <p @click="account"><i class='el-icon-s-tools'></i>账户设置</p>
-                <p @click="exit"><i class="el-icon-switch-button"></i>退出登录</p>
+
+        <!--        <transition name="fade">-->
+             <div class="dropDownBox animated flipInY" v-show="isDropDown">
+                <div class="dropDown">
+                    <p @click="personal"><i class='el-icon-s-custom'></i>个人中心</p>
+                    <p @click="account"><i class='el-icon-s-tools'></i>账户设置</p>
+                    <p @click="exit"><i class="el-icon-switch-button"></i>退出登录</p>
+                </div>
             </div>
-        </div>
+        <!--        </transition>-->
+
     </div>
 </template>
 
@@ -38,11 +43,9 @@
             },
             // 退出登录
             exit() {
-                // 清楚token
-                // token记录在vuex内
+                // 清楚token和user信息
                 this.$store.commit('token', '');
                 storage.remove('token');
-                // user 记录在vuex内
                 this.$store.commit('user', {});
                 storage.remove('user');
                 // 跳转到登录页

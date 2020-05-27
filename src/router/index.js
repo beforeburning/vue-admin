@@ -73,6 +73,10 @@ let separate = [
             }
         ]
     },
+]
+
+// 用户中心
+let user = [
     {
         path: '/user',
         component: Layout,
@@ -81,14 +85,14 @@ let separate = [
         children: [
             {
                 path: 'personal',
-                component: () => import('@/views/separate/personal'),
+                component: () => import('@/views/user/personal'),
                 hidden: true,
                 name: 'personal',
                 meta: {title: '个人中心'}
             },
             {
                 path: 'account',
-                component: () => import('@/views/separate/account'),
+                component: () => import('@/views/user/account'),
                 hidden: true,
                 name: 'account',
                 meta: {title: '账户设置'}
@@ -97,8 +101,8 @@ let separate = [
     },
 ]
 
-// 学院管理
-let school = [
+// 基础知识
+let basis = [
     {
         path: '/basis',
         component: Layout,
@@ -136,8 +140,8 @@ let school = [
     },
 ]
 
-// 仪器管理
-let apparatus = [
+// 基础类库
+let library = [
     {
         path: '/library',
         component: Layout,
@@ -184,9 +188,10 @@ export default new Router({
     mode: 'history',
     base: process.env.BASE_URL,
     routes: [
-        ...separate,
-        ...school,
-        ...apparatus,
         ...notFound,
+        ...separate,
+        ...user,
+        ...basis,
+        ...library
     ]
 });

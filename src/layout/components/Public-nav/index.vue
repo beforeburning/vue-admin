@@ -1,6 +1,5 @@
 <template>
     <div class="PublicNav">
-<!--        <p>当前页面：</p><strong>{{title}}</strong>-->
         <el-page-header class="header" @back="goBack" :content="title"></el-page-header>
     </div>
 </template>
