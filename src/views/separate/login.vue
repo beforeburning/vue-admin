@@ -1,56 +1,56 @@
 <template>
     <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on"
-             label-position="left">
+        <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on"
+                 label-position="left">
 
-        <div class="title-container">
-            <h3 class="title">Login Form</h3>
-        </div>
+            <div class="title-container">
+                <h3 class="title">Login Form</h3>
+            </div>
 
-        <el-form-item prop="username">
-            <span class="svg-container">
-                <i class="el-icon-user"></i>
-            </span>
-            <el-input
-                ref="username"
-                v-model="loginForm.username"
-                placeholder="请输入您的账号"
-                name="username"
-                type="text"
-                tabindex="1"
-                autocomplete="on"
-            ></el-input>
-        </el-form-item>
-
-        <el-tooltip v-model="capsTooltip" content="开启了大写哦!" placement="right" manual>
-            <el-form-item prop="password">
+            <el-form-item prop="username">
                 <span class="svg-container">
-                  <i class="el-icon-unlock"></i>
+                    <i class="el-icon-user"></i>
                 </span>
                 <el-input
-                    :key="passwordType"
-                    ref="password"
-                    v-model="loginForm.password"
-                    :type="passwordType"
-                    placeholder="请输入您的密码"
-                    name="password"
-                    tabindex="2"
+                    ref="username"
+                    v-model="loginForm.username"
+                    placeholder="请输入您的账号"
+                    name="username"
+                    type="text"
+                    tabindex="1"
                     autocomplete="on"
-                    @keyup.native="checkCapslock"
-                    @blur="capsTooltip = false"
-                    @keyup.enter.native="handleLogin"></el-input>
-                <span class="show-pwd" @click="showPwd">
-                    <i :class="passwordType === 'password' ? 'el-icon-view' : 'el-icon-sugar'"></i>
-                </span>
+                ></el-input>
             </el-form-item>
-        </el-tooltip>
 
-        <el-checkbox class="remember" v-model="isRemember" name="remember">记住密码</el-checkbox>
+            <el-tooltip v-model="capsTooltip" content="开启了大写哦!" placement="right" manual>
+                <el-form-item prop="password">
+                    <span class="svg-container">
+                      <i class="el-icon-unlock"></i>
+                    </span>
+                    <el-input
+                        :key="passwordType"
+                        ref="password"
+                        v-model="loginForm.password"
+                        :type="passwordType"
+                        placeholder="请输入您的密码"
+                        name="password"
+                        tabindex="2"
+                        autocomplete="on"
+                        @keyup.native="checkCapslock"
+                        @blur="capsTooltip = false"
+                        @keyup.enter.native="handleLogin"></el-input>
+                    <span class="show-pwd" @click="showPwd">
+                        <i :class="passwordType === 'password' ? 'el-icon-view' : 'el-icon-sugar'"></i>
+                    </span>
+                </el-form-item>
+            </el-tooltip>
 
-        <el-button :loading="loading" type="primary" class="loginBtn"
-                   @click.native.prevent="handleLogin">登录</el-button>
+            <el-checkbox class="remember" v-model="isRemember" name="remember">记住密码</el-checkbox>
 
-    </el-form>
+            <el-button :loading="loading" type="primary" class="loginBtn"
+                       @click.native.prevent="handleLogin">登录</el-button>
+
+        </el-form>
   </div>
 </template>
 
@@ -97,6 +97,7 @@
             }
         },
         mounted() {
+            // 获取记录的账号密码
             let loginForm = storage.get('loginForm');
             if (loginForm && typeof loginForm === 'object') {
                 this.loginForm = {
@@ -106,7 +107,7 @@
             }
         },
         methods: {
-            // 密码点击按钮明文
+            // 密码按钮点击明文
             showPwd() {
                 if (this.passwordType === 'password') {
                     this.passwordType = ''

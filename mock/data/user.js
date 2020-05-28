@@ -1,5 +1,5 @@
 /**
- Function: 登录
+ Function: mock 用户
  User: burning <923398776@qq.com>
  Date: 2019年08月14日
  */

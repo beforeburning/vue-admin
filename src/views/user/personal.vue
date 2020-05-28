@@ -2,7 +2,8 @@
 <template>
     <div class="personal">
 
-        <el-form ref="ruleForm" label-width="100px" class="ruleForm" label-position="left" :rules="rules">
+        <el-form ref="rulesForm" :model="rulesForm" autocomplete="on" label-width="100px" class="rulesForm"
+                 label-position="left" :rules="rules">
 
             <!--基础信息-->
             <div class="btn">
@@ -10,40 +11,46 @@
                            @click="editor">{{isEditor ? '编辑' : '保存'}}</el-button>
             </div>
 
-            <el-form-item class="id" label="账号ID：" prop="name">
-              <el-input v-model="ruleForm.id" disabled="disabled"></el-input>
+            <el-form-item class="id" label="账号ID：" prop="id">
+              <el-input v-model="rulesForm.id" disabled="disabled"></el-input>
             </el-form-item>
 
             <el-form-item class="name" label="账号昵称：" prop="name">
-              <el-input v-model="ruleForm.name" :disabled="isEditor" placeholder="请输入您的账号昵称"></el-input>
+              <el-input v-model="rulesForm.name" :disabled="isEditor" placeholder="请输入您的账号昵称" ref="name"
+                        name="name"></el-input>
             </el-form-item>
 
-            <el-form-item class="eMail" label="邮箱：" prop="name">
-              <el-input v-model="ruleForm.eMail" :disabled="isEditor" placeholder="请输入您的邮箱"></el-input>
+            <el-form-item class="eMail" label="邮箱：" prop="eMail">
+              <el-input v-model="rulesForm.eMail" :disabled="isEditor" placeholder="请输入您的邮箱" ref="eMail"
+                        name="eMail"></el-input>
             </el-form-item>
 
-            <el-form-item class="qq" label="QQ：" prop="name">
-              <el-input v-model.number="ruleForm.qq" :disabled="isEditor" placeholder="请输入您的QQ账号"></el-input>
+            <el-form-item class="qq" label="QQ：" prop="qq">
+              <el-input v-model.number="rulesForm.qq" :disabled="isEditor" placeholder="请输入您的QQ账号" ref="qq"
+                        name="qq"></el-input>
             </el-form-item>
 
-            <el-form-item class="weChat" label="weChat：" prop="name">
-              <el-input v-model.number="ruleForm.weChat" :disabled="isEditor" placeholder="请输入您的微信账号"></el-input>
+            <el-form-item class="weChat" label="weChat：" prop="weChat">
+              <el-input v-model.number="rulesForm.weChat" :disabled="isEditor" placeholder="请输入您的微信账号" ref="weChat"
+                        name="weChat"></el-input>
             </el-form-item>
 
-            <el-form-item class="phone" label="手机：" prop="name">
-              <el-input maxlength="11" v-model.number="ruleForm.phone" :disabled="isEditor"
-                        placeholder="请输入您的手机号"></el-input>
+            <el-form-item class="phone" label="手机：" prop="phone">
+              <el-input maxlength="11" v-model.number="rulesForm.phone" :disabled="isEditor"
+                        placeholder="请输入您的手机号" ref="phone" name="phone"></el-input>
             </el-form-item>
 
-            <el-form-item class="age" label="年龄：" prop="name">
-                <el-input maxlength="2" v-model.number="ruleForm.age" :disabled="isEditor" placeholder="请输入您的年龄">
+            <el-form-item class="age" label="年龄：" prop="age">
+                <el-input maxlength="2" v-model.number="rulesForm.age" :disabled="isEditor" placeholder="请输入您的年龄"
+                          ref="age" name="age">
                     <template slot="append">岁</template>
                 </el-input>
             </el-form-item>
 
-            <el-form-item class="introduction" label="个人简介：" prop="name">
-               <el-input type="textarea" v-model="ruleForm.introduction" :disabled="isEditor" :autosize="{ minRows: 3 }"
-                         placeholder="简单的介绍一下自己吧~"></el-input>
+            <el-form-item class="introduction" label="个人简介：" prop="introduction">
+               <el-input type="textarea" v-model="rulesForm.introduction" :disabled="isEditor"
+                         :autosize="{ minRows: 3 }"
+                         placeholder="简单的介绍一下自己吧~" ref="introduction" name="introduction"></el-input>
             </el-form-item>
 
             <!--城市三级联动-->
@@ -65,7 +72,7 @@
             return {
                 isEditor: true,
                 rules: {},
-                ruleForm: {
+                rulesForm: {
                     id: '923398776',
                     name: 'Burning',
                     eMail: '923398776@qq.com',
@@ -88,7 +95,18 @@
                 }
             },
             save() {
-                this.isEditor = !this.isEditor;
+                // this.isEditor = !this.isEditor;
+
+                // 验证表单内容格式正确
+                this.$refs.rulesForm.validate(valid => {
+                    console.log(valid);
+                    // if (valid) {
+                    //
+                    // } else {
+                    //
+                    // }
+                })
+
             }
         }
     }
@@ -107,7 +125,7 @@
     .personal {
         display: flex;flex-direction: column;
 
-        .ruleForm {
+        .rulesForm {
             display: flex;flex-direction: column;
 
             .id, .name, .eMail, .qq, .weChat, .phone, .age, .introduction {
