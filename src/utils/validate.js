@@ -84,6 +84,26 @@ export const CEN = (str) => {
 };
 
 /**
+ * 数字
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export const isNumber = (str) => {
+    const reg = /^[0-9]+$/;
+    return reg.test(str)
+};
+
+/**
+ * 微信号
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export const isWeChat = (str) => {
+    const reg = /^[a-zA-Z][a-zA-Z0-9_-]{5,19}$/;
+    return reg.test(str)
+};
+
+/**
  * 有效字符串
  * @param {string} str
  * @returns {Boolean}
@@ -93,6 +113,16 @@ export const isString = (str) => {
         return true
     }
     return false
+};
+
+/**
+ * 手机号
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export const isPhone = (str) => {
+    const reg = /^1[3456789]\d{9}$/;
+    return reg.test(str)
 };
 
 /**

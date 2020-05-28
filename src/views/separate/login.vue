@@ -55,31 +55,16 @@
 </template>
 
 <script>
-    import { CEN } from '@/utils/validate';
     import { login } from '@/api/user';
     import { storage } from "@/utils/localStorage.js";
+    import {
+        validateUsername,
+        validatePassword,
+    } from '@/components/validate';
 
     export default {
         name: 'login',
         data() {
-            // 账号密码的验证
-            const validateUsername = (rule, value, callback) => {
-                if (value.length < 2 || value.length > 12) {
-                    callback(new Error('您的用户名长度不正确'))
-                }
-                if (!CEN(value)) {
-                    callback(new Error('用户名只允许含有中英文加数字'))
-                } else {
-                    callback()
-                }
-            };
-            const validatePassword = (rule, value, callback) => {
-                if (value.length < 6 || value.length > 12) {
-                    callback(new Error('密码长度6到12位'))
-                } else {
-                    callback()
-                }
-            };
             return {
                 loginForm: {
                     username: '',

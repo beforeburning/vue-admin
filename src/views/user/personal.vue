@@ -7,6 +7,9 @@
 
             <!--基础信息-->
             <div class="btn">
+                <el-button type="warning" v-show="!isEditor" icon="el-icon-close" class="editor"
+                           @click="cancel">取消</el-button>
+
                 <el-button type="primary" :icon="isEditor ? 'el-icon-edit' : 'el-icon-check'" class="editor"
                            @click="editor">{{isEditor ? '编辑' : '保存'}}</el-button>
             </div>
@@ -30,7 +33,7 @@
                         name="qq"></el-input>
             </el-form-item>
 
-            <el-form-item class="weChat" label="weChat：" prop="weChat">
+            <el-form-item class="weChat" label="微信：" prop="weChat">
               <el-input v-model.number="rulesForm.weChat" :disabled="isEditor" placeholder="请输入您的微信账号" ref="weChat"
                         name="weChat"></el-input>
             </el-form-item>
@@ -65,13 +68,29 @@
 
 <script>
     import { login } from '@/api/user';
+    import {
+        validateName,
+        validateEMail,
+        validateNumber,
+        validateWeChat,
+        validatePhone,
+        validateAge
+    } from '@/components/validate';
 
     export default {
         name: "personal",
         data() {
             return {
                 isEditor: true,
-                rules: {},
+                rules: {
+                    name: [{required: true, trigger: 'blur', validator: validateName}],
+                    eMail: [{required: true, trigger: 'blur', validator: validateEMail}],
+                    qq: [{required: true, trigger: 'blur', validator: validateNumber}],
+                    weChat: [{required: true, trigger: 'blur', validator: validateWeChat}],
+                    phone: [{required: true, trigger: 'blur', validator: validatePhone}],
+                    age: [{required: true, trigger: 'blur', validator: validateAge}],
+                },
+                // 用户数据
                 rulesForm: {
                     id: '923398776',
                     name: 'Burning',
@@ -81,30 +100,48 @@
                     phone: '13000000000',
                     age: '26',
                     introduction: '啦啦啦~'
-                }
+                },
+                // 用来记录编辑前的数据
+                rulesFormCancel: {}
             }
         },
         mounted() {
         },
         methods: {
+            // 编辑
             editor() {
                 if (!this.isEditor) {
                     this.save();
                 } else {
+                    this.rulesFormCancel = {
+                        ...this.rulesForm
+                    };
                     this.isEditor = !this.isEditor;
                 }
             },
+            // 取消编辑
+            cancel() {
+                console.log(11)
+                this.$confirm('此操作将丢失已编辑内容', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.rulesForm = this.rulesFormCancel;
+                    this.isEditor = !this.isEditor;
+                }).catch(() => {
+                });
+            },
+            // 保存编辑
             save() {
                 // this.isEditor = !this.isEditor;
 
                 // 验证表单内容格式正确
                 this.$refs.rulesForm.validate(valid => {
                     console.log(valid);
-                    // if (valid) {
-                    //
-                    // } else {
-                    //
-                    // }
+                    if (valid) {
+
+                    }
                 })
 
             }
