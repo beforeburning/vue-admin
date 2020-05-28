@@ -14,7 +14,7 @@
             <el-input
                 ref="username"
                 v-model="loginForm.username"
-                placeholder="Username"
+                placeholder="请输入您的账号"
                 name="username"
                 type="text"
                 tabindex="1"
@@ -32,7 +32,7 @@
                     ref="password"
                     v-model="loginForm.password"
                     :type="passwordType"
-                    placeholder="Password"
+                    placeholder="请输入您的密码"
                     name="password"
                     tabindex="2"
                     autocomplete="on"
@@ -48,7 +48,7 @@
         <el-checkbox class="remember" v-model="isRemember" name="remember">记住密码</el-checkbox>
 
         <el-button :loading="loading" type="primary" class="loginBtn"
-                   @click.native.prevent="handleLogin">Login</el-button>
+                   @click.native.prevent="handleLogin">登录</el-button>
 
     </el-form>
   </div>
@@ -56,12 +56,13 @@
 
 <script>
     import { CEN } from '@/utils/validate';
-    import { login } from '@/api/login';
+    import { login } from '@/api/user';
     import { storage } from "@/utils/localStorage.js";
 
     export default {
         name: 'login',
         data() {
+            // 账号密码的验证
             const validateUsername = (rule, value, callback) => {
                 if (value.length < 2 || value.length > 12) {
                     callback(new Error('您的用户名长度不正确'))
@@ -132,21 +133,26 @@
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
                         login(this.loginForm).then(res => {
-                            this.loading = false;
-                            this.remember();
-                            // token记录在vuex内
-                            this.$store.commit('token', res.data.token);
-                            storage.set('token', res.data.token);
-                            // user 记录在vuex内
-                            this.$store.commit('user', res.data.user);
-                            storage.setJSON('user', res.data.user);
-                            // 登录成功
-                            this.$router.push({name: 'welcome'});
+                            if (res.state) {
+                                this.loading = false;
+                                // 记录密码
+                                this.remember();
+                                // token记录在vuex内
+                                this.$store.commit('token', res.data.token);
+                                storage.set('token', res.data.token);
+                                // user 记录在vuex内
+                                this.$store.commit('user', res.data.user);
+                                storage.setJSON('user', res.data.user);
+                                // 登录成功
+                                this.$message.success(res.message);
+                                this.$router.push({name: 'welcome'});
+                            } else {
+                                this.$message.error(res.message);
+                            }
                         }).catch(() => {
                             this.loading = false;
                         })
                     } else {
-                        console.log('error submit!!');
                         this.loading = false;
                         return false;
                     }

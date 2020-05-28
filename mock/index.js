@@ -7,12 +7,10 @@
 import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
-import login from './login'
-import management from './management'
+import user from './data/user'
 
 const mocks = [
-    ...login,
-    ...management
+    ...user
 ];
 
 // for front mock

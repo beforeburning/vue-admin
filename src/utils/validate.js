@@ -1,5 +1,5 @@
 /**
- Function: 正则
+ Function: 正则 摘抄与panjiachen的vue-admin
  User: burning <923398776@qq.com>
  Date: 2019年08月14日
  */
