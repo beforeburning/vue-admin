@@ -117,9 +117,6 @@ export default {
             this.$refs.msg.innerText = 111;
         }
     },
-    created: () => {
-        console.log('在dom加载前执行的方法')
-    },
 }
 </script>
 

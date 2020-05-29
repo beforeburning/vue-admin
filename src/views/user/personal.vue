@@ -67,7 +67,7 @@
 </template>
 
 <script>
-    import { login } from '@/api/user';
+    import { getUserData } from '@/api/user';
     import {
         validateName,
         validateEMail,
@@ -91,21 +91,13 @@
                     age: [{required: true, trigger: 'blur', validator: validateAge}],
                 },
                 // 用户数据
-                rulesForm: {
-                    id: '923398776',
-                    name: 'Burning',
-                    eMail: '923398776@qq.com',
-                    qq: '923398776',
-                    weChat: 'love923398776',
-                    phone: '13000000000',
-                    age: '26',
-                    introduction: '啦啦啦~'
-                },
+                rulesForm: {},
                 // 用来记录编辑前的数据
                 rulesFormCancel: {}
             }
         },
         mounted() {
+            this.init();
         },
         methods: {
             // 编辑
@@ -121,7 +113,6 @@
             },
             // 取消编辑
             cancel() {
-                console.log(11)
                 this.$confirm('此操作将丢失已编辑内容', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
@@ -134,16 +125,20 @@
             },
             // 保存编辑
             save() {
-                // this.isEditor = !this.isEditor;
-
                 // 验证表单内容格式正确
                 this.$refs.rulesForm.validate(valid => {
-                    console.log(valid);
                     if (valid) {
-
+                        this.isEditor = !this.isEditor;
                     }
                 })
-
+            },
+            // 获取用户数据
+            init() {
+                getUserData().then(res => {
+                    if (res.state) {
+                        this.rulesForm = res.data
+                    }
+                })
             }
         }
     }
