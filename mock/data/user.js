@@ -50,11 +50,24 @@ const userInformation = {
 
 // 登录和退出登录
 const user = [
+    // 退出登录
+    {
+        url: '/user/loginOut',
+        type: 'post',
+        response: res => {
+            return {
+                code: 200,
+                state: true,
+                message: '退出成功'
+            }
+        }
+    },
     // 用户登录
     {
         url: '/user/login',
         type: 'post',
         response: res => {
+            console.log(1122)
             // 获取用户输入的账号密码
             const {username} = res.body;
             const {password} = res.body
@@ -76,17 +89,6 @@ const user = [
                 state: true,
                 message: '登录成功',
                 data: validationUser
-            }
-        }
-    },
-    // 退出登录
-    {
-        url: '/user/loginOut',
-        type: 'post',
-        response: _ => {
-            return {
-                code: 200,
-                data: 'success'
             }
         }
     },

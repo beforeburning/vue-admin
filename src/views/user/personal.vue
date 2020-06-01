@@ -134,12 +134,11 @@
                                 this.isEditor = !this.isEditor;
                                 this.rulesFormCancel = {};
                             } else {
-                                this.$router.push({name: 'login'})
+                                this.$router.push({name: 'login'});
                             }
                         }).catch(() => {
                             console.log('请求失败');
                         })
-
                     }
                 })
             },

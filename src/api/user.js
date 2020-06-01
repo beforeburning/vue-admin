@@ -15,6 +15,15 @@ export const login = data => {
     })
 }
 
+// 退出登录
+export const loginOut = data => {
+    return request({
+        url: '/user/loginOut',
+        method: 'post',
+        data
+    })
+}
+
 // 获取用户数据
 export const getUserData = data => {
     return request({

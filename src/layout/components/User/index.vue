@@ -5,21 +5,20 @@
             <p>{{user.name}}</p><i :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
         </div>
 
-        <!--        <transition name="fade">-->
-             <div class="dropDownBox animated flipInY" v-show="isDropDown">
-                <div class="dropDown">
-                    <p @click="personal"><i class='el-icon-s-custom'></i>个人中心</p>
-                    <p @click="account"><i class='el-icon-s-tools'></i>账户设置</p>
-                    <p @click="exit"><i class="el-icon-switch-button"></i>退出登录</p>
-                </div>
+        <div class="dropDownBox animated flipInY" v-show="isDropDown">
+            <div class="dropDown">
+                <p @click="personal"><i class='el-icon-s-custom'></i>个人中心</p>
+                <p @click="account"><i class='el-icon-s-tools'></i>账户设置</p>
+                <p @click="exit"><i class="el-icon-switch-button"></i>退出登录</p>
             </div>
-        <!--        </transition>-->
+        </div>
 
     </div>
 </template>
 
 <script>
     import { storage } from "@/utils/localStorage.js";
+    import { loginOut } from '@/api/user';
 
     export default {
         name: 'user',
@@ -43,13 +42,20 @@
             },
             // 退出登录
             exit() {
-                // 清楚token和user信息
-                this.$store.commit('token', '');
-                storage.remove('token');
-                this.$store.commit('user', {});
-                storage.remove('user');
-                // 跳转到登录页
-                this.$router.push({name: 'login'});
+                loginOut().then(res => {
+                    if (res.state) {
+                        // 清楚token和user信息
+                        this.$store.commit('token', '');
+                        storage.remove('token');
+                        this.$store.commit('user', {});
+                        storage.remove('user');
+                        this.$message.success(res.message);
+                        // 跳转到登录页
+                        this.$router.push({name: 'login'});
+                    }
+                }).catch(() => {
+                    console.log('请求失败');
+                })
             },
             // 个人中心
             personal() {
