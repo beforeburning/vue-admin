@@ -128,8 +128,18 @@
                 // 验证表单内容格式正确
                 this.$refs.rulesForm.validate(valid => {
                     if (valid) {
-                        this.isEditor = !this.isEditor;
-                        console.log(saveUserData);
+                        // 请求接口 保存编辑
+                        saveUserData().then(res => {
+                            if (res.state) {
+                                this.isEditor = !this.isEditor;
+                                this.rulesFormCancel = {};
+                            } else {
+                                this.$router.push({name: 'login'})
+                            }
+                        }).catch(() => {
+                            console.log('请求失败');
+                        })
+
                     }
                 })
             },
