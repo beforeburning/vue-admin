@@ -102,11 +102,30 @@ const user = [
                     user = userData[item];
                 }
             }
+            if (JSON.stringify(user) === '{}') {
+                return {
+                    code: 200,
+                    state: false,
+                    message: 'token已失效'
+                }
+            }
             return {
                 code: 200,
                 state: true,
                 message: '获取成功',
                 data: userInformation[user.user.name]
+            }
+        }
+    },
+    // 保存用户编辑的数据
+    {
+        url: '/user/saveUserData',
+        type: 'post',
+        response: res => {
+            return {
+                code: 200,
+                state: true,
+                message: '获取成功',
             }
         }
     }

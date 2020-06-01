@@ -67,7 +67,7 @@
 </template>
 
 <script>
-    import { getUserData } from '@/api/user';
+    import { getUserData, saveUserData } from '@/api/user';
     import {
         validateName,
         validateEMail,
@@ -129,20 +129,30 @@
                 this.$refs.rulesForm.validate(valid => {
                     if (valid) {
                         this.isEditor = !this.isEditor;
+                        console.log(saveUserData);
                     }
                 })
             },
             // 获取用户数据
-            init() {
+            getUserData() {
                 getUserData().then(res => {
                     if (res.state) {
                         this.rulesForm = res.data
+                    } else {
+                        this.$router.push({name: 'login'})
                     }
+                }).catch(() => {
+                    console.log('请求失败');
                 })
+            },
+            // 初始化
+            init() {
+                this.getUserData();
             }
         }
     }
 </script>
+
 <style lang="less">
     // 修改disabled状态下文字颜色
     .personal {
@@ -153,6 +163,7 @@
         }
     }
 </style>
+
 <style scoped lang="less">
     .personal {
         display: flex;flex-direction: column;
@@ -165,7 +176,7 @@
             }
 
             .btn {
-                display: flex;width: 100%;margin-left: 30px;margin-bottom: 22px;margin-top: 12px;
+                display: flex;width: 100%;margin-left: 20px;margin-bottom: 22px;margin-top: 12px;
 
                 .editor {
                     width: 100px;

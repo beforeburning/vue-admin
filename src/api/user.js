@@ -23,3 +23,12 @@ export const getUserData = data => {
         data
     })
 }
+
+// 保存用户数据
+export const saveUserData = data => {
+    return request({
+        url: '/user/saveUserData',
+        method: 'post',
+        data
+    })
+}

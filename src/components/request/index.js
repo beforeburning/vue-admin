@@ -8,14 +8,14 @@ import { Message } from 'element-ui'
 import store from '@/store'
 import { getConfig } from '@/utils/getConfig';
 
-// create an axios instance
+// axios配置
 const service = axios.create({
     baseURL: getConfig(['basis', 'baseURL']),
     withCredentials: true,
     timeout: 5000
 });
 
-// request interceptor
+// 发送数据时 自动添加token
 service.interceptors.request.use(config => {
         if (store.state.token) {
             config.data = {
@@ -29,28 +29,20 @@ service.interceptors.request.use(config => {
     }
 );
 
-// response interceptor
+// 接受数据时 处理错误信息
 service.interceptors.response.use(response => {
         const res = response.data;
-
         if (res.code !== 200) {
-            Message({
-                message: res.message || 'Error',
-                type: 'error',
-                duration: 5 * 1000
-            });
-
+            Message.error(res.message);
             return Promise.reject(new Error(res.message || 'Error'))
+        } else if (res.state === false) {
+            Message.error(res.message);
+            return res;
         } else {
-            return res
+            return res;
         }
     }, error => {
-        console.log('err' + error); // for debug
-        Message({
-            message: error.message,
-            type: 'error',
-            duration: 5 * 1000
-        });
+        Message.error(res.message);
         return Promise.reject(error)
     }
 );
