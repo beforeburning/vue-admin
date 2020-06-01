@@ -8,9 +8,11 @@ import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
 import user from './data/user'
+import dictionary from './data/dictionary'
 
 const mocks = [
-    ...user
+    ...user,
+    ...dictionary
 ];
 
 // for front mock

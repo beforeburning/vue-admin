@@ -50,16 +50,18 @@
                 </el-input>
             </el-form-item>
 
+            <el-form-item class="cityBox" label="城市：">
+                <!--城市三级联动-->
+                <city ref="city" :disabled="isEditor" :province="rulesForm.province" :city="rulesForm.city"
+                      :area="rulesForm.area"
+                ></city>
+            </el-form-item>
+
             <el-form-item class="introduction" label="个人简介：" prop="introduction">
                <el-input type="textarea" v-model="rulesForm.introduction" :disabled="isEditor"
                          :autosize="{ minRows: 3 }"
                          placeholder="简单的介绍一下自己吧~" ref="introduction" name="introduction"></el-input>
             </el-form-item>
-
-            <!--城市三级联动-->
-            <div>
-                1
-            </div>
 
         </el-form>
 
@@ -68,6 +70,7 @@
 
 <script>
     import { getUserData, saveUserData } from '@/api/user';
+    import city from '@/components/city';
     import {
         validateName,
         validateEMail,
@@ -79,6 +82,9 @@
 
     export default {
         name: "personal",
+        components: {
+            city
+        },
         data() {
             return {
                 isEditor: true,
@@ -129,7 +135,12 @@
                 this.$refs.rulesForm.validate(valid => {
                     if (valid) {
                         // 请求接口 保存编辑
-                        saveUserData().then(res => {
+                        let str = {
+                            // 获取城市三级联动的数据
+                            ...this.$refs.city.dataReturn(),
+                            ...this.rulesForm
+                        }
+                        saveUserData(str).then(res => {
                             if (res.state) {
                                 this.isEditor = !this.isEditor;
                                 this.rulesFormCancel = {};
@@ -182,6 +193,10 @@
 
             .id, .name, .eMail, .qq, .weChat, .phone, .age, .introduction {
                 width: 600px;margin-left: 30px;
+            }
+
+            .cityBox {
+                margin-left: 30px;
             }
 
             .btn {

@@ -34,7 +34,10 @@ const userInformation = {
         weChat: 'love923398776',
         phone: '13000000000',
         age: '26',
-        introduction: '啦啦啦~'
+        introduction: '啦啦啦~',
+        province: 1,
+        city: 101,
+        area: 10101
     },
     test: {
         id: '111111111',
@@ -44,7 +47,10 @@ const userInformation = {
         weChat: '111111111',
         phone: '13000000000',
         age: '18',
-        introduction: '啦啦啦 我是test账号~'
+        introduction: '啦啦啦 我是test账号~',
+        province: 2,
+        city: 202,
+        area: 20201,
     }
 }
 
@@ -67,7 +73,6 @@ const user = [
         url: '/user/login',
         type: 'post',
         response: res => {
-            console.log(1122)
             // 获取用户输入的账号密码
             const {username} = res.body;
             const {password} = res.body
