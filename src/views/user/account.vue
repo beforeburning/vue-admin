@@ -2,6 +2,7 @@
 <template>
     <div class="account">
 <!--        修改密码-->
+        <el-tag>标签一</el-tag>
 
     </div>
 </template>

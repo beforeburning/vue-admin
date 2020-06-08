@@ -2,8 +2,9 @@
 
     <div class="userBox" @mouseenter="enter" @mouseleave="leave">
         <div class="userName">
-            <img :src="user.header" alt=""><p>{{user.name}}</p><i
-            :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
+            <el-avatar class="header" :size="30" :src="user.header"></el-avatar>
+            <p>{{user.name}}</p>
+            <i :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
         </div>
 
         <div class="dropDownBox animated flipInY" v-show="isDropDown">
@@ -83,8 +84,8 @@
         .userName {
             display: flex;justify-content: center;align-items: center;
 
-            img {
-                width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;
+            .header {
+                margin-right: 10px;
             }
 
             p {
