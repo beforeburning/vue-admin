@@ -11,7 +11,7 @@ const userData = {
         password: '123456',
         user: {
             name: 'Burning',
-            header: ''
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
         }
     },
     test: {
@@ -19,7 +19,7 @@ const userData = {
         password: '123456',
         user: {
             name: 'test',
-            header: ''
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
         }
     }
 };

@@ -2,7 +2,8 @@
 
     <div class="userBox" @mouseenter="enter" @mouseleave="leave">
         <div class="userName">
-            <p>{{user.name}}</p><i :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
+            <img :src="user.header" alt=""><p>{{user.name}}</p><i
+            :class="isDropDown ? 'el-icon-arrow-down' : 'el-icon-arrow-up'"></i>
         </div>
 
         <div class="dropDownBox animated flipInY" v-show="isDropDown">
@@ -30,7 +31,13 @@
             }
         },
         mounted() {
-            this.user = this.$store.state.user;
+            let user = this.$store.state.user;
+            if (!user) {
+                this.$message.error('未获取到用户信息,请重新登录~');
+                this.$router.push({name: 'login'});
+                return false
+            }
+            this.user = user;
         },
         methods: {
             // 展开收起
@@ -74,20 +81,24 @@
         margin-right: 15px;cursor: pointer;position: relative;
 
         .userName {
-            line-height: 50px;
+            display: flex;justify-content: center;align-items: center;
+
+            img {
+                width: 30px;height: 30px;border-radius: 50%;margin-right: 10px;
+            }
 
             p {
-                font-size: 16px;color: rgba(0, 0, 0, .65);margin: 0;padding: 0;display: inline-block;margin-right: 10px;
+                font-size: 16px;color: rgba(0, 0, 0, .65);margin: 0 10px 0 0;padding: 0;display: inline-block;
             }
 
             i {
-                color: rgba(0, 0, 0, .65)
+                color: rgba(0, 0, 0, .65);display: flex;justify-content: center;align-items: center;
             }
 
         }
 
         .dropDownBox {
-            position: absolute;left: -60px;top: 50px;width: 150px;
+            position: absolute;left: -30px;top: 50px;width: 150px;
             display: flex;z-index: 2;transition: .3s;
 
             .dropDown {
@@ -95,7 +106,7 @@
                 margin-top: 10px;border-radius: 10px;
 
                 p {
-                    background: #fff;margin: 0;padding: 0;width: 100%;padding: 10px 0;transition: .1s;font-size: 14px;
+                    background: #fff;margin: 0;width: 100%;padding: 10px 0;transition: .1s;font-size: 14px;
 
                     i {
                         margin-right: 10px;

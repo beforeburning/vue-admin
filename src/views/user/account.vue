@@ -1,7 +1,8 @@
 <!-- 个人中心 -->
 <template>
     <div class="account">
-        <p>账户设置</p>
+<!--        修改密码-->
+
     </div>
 </template>
 

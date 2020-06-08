@@ -73,7 +73,7 @@
                         ];
                     }
                 }).catch(() => {
-                    console.log('请求失败');
+                    this.$message.error('请求失败')
                 })
             },
             // 市数据
@@ -86,7 +86,7 @@
                         ];
                     }
                 }).catch(() => {
-                    console.log('请求失败');
+                    this.$message.error('请求失败')
                 })
             },
             // 区数据
@@ -99,7 +99,7 @@
                         ];
                     }
                 }).catch(() => {
-                    console.log('请求失败');
+                    this.$message.error('请求失败')
                 })
             },
             // 数据修改 刷新下拉框

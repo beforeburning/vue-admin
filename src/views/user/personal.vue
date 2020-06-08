@@ -144,6 +144,7 @@
                             if (res.state) {
                                 this.isEditor = !this.isEditor;
                                 this.rulesFormCancel = {};
+                                this.$message.success(res.message);
                             } else {
                                 this.$router.push({name: 'login'});
                             }
