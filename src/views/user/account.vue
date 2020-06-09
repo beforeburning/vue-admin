@@ -2,21 +2,36 @@
 <template>
     <div class="account">
 <!--        修改密码-->
-        <el-tag>标签一</el-tag>
+        <el-tag @click="changeComp('passwordModify')">修改密码</el-tag>
+
+        <component v-bind:is="compName"></component>
 
     </div>
 </template>
 
 <script>
-export default {
-    name: "account",
-    data() {
-        return {}
-    },
-    mounted() {
-    },
-    methods: {}
-}
+    // 修改密码组件
+    import passwordModify from './components/passwordModify';
+
+    export default {
+        name: "account",
+        // 注册组件
+        components: {
+            passwordModify,
+        },
+        data() {
+            return {
+                compName: ''
+            }
+        },
+        mounted() {
+        },
+        methods: {
+            changeComp(e) {
+                this.compName = e
+            },
+        }
+    }
 </script>
 
 <style scoped lang="less">

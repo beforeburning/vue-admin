@@ -51,15 +51,14 @@
     }
 
     & .sidebar-logo-link {
-        height: 100%;width: 100%;cursor: pointer;
+        height: 100%;width: 100%;cursor: pointer;display: flex;justify-content: center;align-items: center;
 
         & .sidebar-logo {
-            width: 32px;height: 32px;vertical-align: middle;
+            width: 32px;height: 32px;
         }
 
         & .sidebar-title {
-            display: inline-block;margin: 0;color: #fff;font-weight: 600;line-height: 50px;font-size: 14px;font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;vertical-align: middle;
-            margin-left: 12px;
+            display: inline-block;margin: 0 0 0 12px;color: #fff;font-weight: 600;line-height: 50px;font-size: 14px;font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;vertical-align: middle;
         }
     }
 
