@@ -24,6 +24,7 @@
       },
       mounted() {
           this.isLocal = getConfig(['basis', 'isLocal'])
+
       },
   };
 </script>

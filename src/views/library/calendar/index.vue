@@ -24,11 +24,12 @@
             placeholder="选择时间">
         </el-time-select>
 
-           <el-radio-group v-model="radio2">
+        <el-radio-group v-model="radio2">
             <el-radio :label="1">备选项</el-radio>
             <el-radio :label="2">备选项</el-radio>
             <el-radio :label="3">备选项</el-radio>
           </el-radio-group>
+
     </div>
 </template>
 
@@ -39,13 +40,13 @@
             return {
                 radio2: 1,
                 value: '',
-                value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)]
+                value1: [new Date(2016, 9, 10, 8, 40), new Date(2016, 9, 10, 9, 40)],
             }
         },
         methods: {},
         mounted() {
             var PI = "a";
-            if(true){
+            if (true) {
                 console.log(PI);  // ReferenceError: PI is not defined
                 const PI = "3.1415926";
             }
