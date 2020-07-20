@@ -3,6 +3,7 @@
  User: burning <923398776@qq.com>
  Date: 2019年08月14日
  */
+import fa from "element-ui/src/locale/lang/fa";
 
 // 用户账号密码验证和基础数据
 const userData = {
@@ -134,6 +135,35 @@ const user = [
                 state: true,
                 message: '保存成功',
             }
+        }
+    },
+    // 修改密码
+    {
+        url: '/user/passwordModify',
+        type: 'post',
+        response: res => {
+            // 通过token找到用户
+            let user = {};
+            for (let item in userData) {
+                if (userData[item].token === res.body.token) {
+                    user = userData[item];
+                }
+            }
+            let oldPassword = res.body.password
+            if (res.body.password === user.password) {
+                return {
+                    code: 200,
+                    state: true,
+                    message: '修改成功',
+                }
+            } else {
+                return {
+                    code: 200,
+                    state: false,
+                    message: '您输入的旧密码不正确',
+                }
+            }
+
         }
     }
 ]

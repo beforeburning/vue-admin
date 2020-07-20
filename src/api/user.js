@@ -41,3 +41,12 @@ export const saveUserData = data => {
         data
     })
 }
+
+// 修改密码
+export const passwordModify = data => {
+    return request({
+        url: '/user/passwordModify',
+        method: 'post',
+        data
+    })
+}

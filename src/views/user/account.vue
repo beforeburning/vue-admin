@@ -41,7 +41,7 @@
         display: flex;flex-direction: column;
 
         .box {
-            width: 500px;display: flex;margin-left: 50px;
+            width: 500px;display: flex;margin-left: 30px;
 
             .el-tag {
                 width: 200px;height: 40px;display: flex;justify-content: center;align-items: center;cursor: pointer;
