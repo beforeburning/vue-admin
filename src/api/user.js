@@ -50,3 +50,12 @@ export const passwordModify = data => {
         data
     })
 }
+
+// 登录记录
+export const loginRecord = data => {
+    return request({
+        url: '/user/loginRecord',
+        method: 'post',
+        data
+    })
+}

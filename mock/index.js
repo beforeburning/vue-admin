@@ -7,8 +7,8 @@
 import Mock from 'mockjs'
 import { param2Obj } from '../src/utils'
 
-import user from './data/user'
-import dictionary from './data/dictionary'
+import user from './api/user'
+import dictionary from './api/dictionary'
 
 const mocks = [
     ...user,

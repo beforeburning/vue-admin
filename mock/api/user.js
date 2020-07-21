@@ -3,57 +3,8 @@
  User: burning <923398776@qq.com>
  Date: 2019年08月14日
  */
-import fa from "element-ui/src/locale/lang/fa";
-
-// 用户账号密码验证和基础数据
-const userData = {
-    admin: {
-        token: 'admin-token',
-        password: '123456',
-        user: {
-            name: 'Burning',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
-        }
-    },
-    test: {
-        token: 'test-token',
-        password: '123456',
-        user: {
-            name: 'test',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
-        }
-    }
-};
-
-// 用户数据
-const userInformation = {
-    Burning: {
-        id: '923398776',
-        name: 'Burning',
-        eMail: '923398776@qq.com',
-        qq: '923398776',
-        weChat: 'love923398776',
-        phone: '13000000000',
-        age: '26',
-        introduction: '啦啦啦~',
-        province: 1,
-        city: 101,
-        area: 10101
-    },
-    test: {
-        id: '111111111',
-        name: 'Burning',
-        eMail: '111111111@qq.com',
-        qq: '111111111',
-        weChat: '111111111',
-        phone: '13000000000',
-        age: '18',
-        introduction: '啦啦啦 我是test账号~',
-        province: 2,
-        city: 202,
-        area: 20201,
-    }
-}
+import userMockData from "../mockData/user";
+import { tokenGetUser } from "../utils";
 
 // 登录和退出登录
 const user = [
@@ -61,7 +12,7 @@ const user = [
     {
         url: '/user/loginOut',
         type: 'post',
-        response: res => {
+        response: () => {
             return {
                 code: 200,
                 state: true,
@@ -78,7 +29,7 @@ const user = [
             const {username} = res.body;
             const {password} = res.body
 
-            const validationUser = userData[username];
+            const validationUser = userMockData.userData[username];
             const validationPassword = validationUser.password;
 
             // 验证账号密码是否正确
@@ -103,13 +54,9 @@ const user = [
         url: '/user/getUserData',
         type: 'post',
         response: res => {
-            // 通过token找到用户
-            let user = {};
-            for (let item in userData) {
-                if (userData[item].token === res.body.token) {
-                    user = userData[item];
-                }
-            }
+            // 找到用户
+            let user = tokenGetUser(res.body.token);
+
             if (JSON.stringify(user) === '{}') {
                 return {
                     code: 200,
@@ -121,7 +68,7 @@ const user = [
                 code: 200,
                 state: true,
                 message: '获取成功',
-                data: userInformation[user.user.name]
+                data: userMockData.userInformation[user.user.name]
             }
         }
     },
@@ -129,7 +76,7 @@ const user = [
     {
         url: '/user/saveUserData',
         type: 'post',
-        response: res => {
+        response: () => {
             return {
                 code: 200,
                 state: true,
@@ -142,15 +89,11 @@ const user = [
         url: '/user/passwordModify',
         type: 'post',
         response: res => {
-            // 通过token找到用户
-            let user = {};
-            for (let item in userData) {
-                if (userData[item].token === res.body.token) {
-                    user = userData[item];
-                }
-            }
+            // 找到用户
+            let user = tokenGetUser(res.body.token);
+
             let oldPassword = res.body.password
-            if (res.body.password === user.password) {
+            if (oldPassword === user.password) {
                 return {
                     code: 200,
                     state: true,
@@ -162,6 +105,23 @@ const user = [
                     state: false,
                     message: '您输入的旧密码不正确',
                 }
+            }
+
+        }
+    },
+    // 登录记录
+    {
+        url: '/user/loginRecord',
+        type: 'post',
+        response: res => {
+            // 找到用户
+            let user = tokenGetUser(res.body.token);
+            console.log(user);
+
+            return {
+                code: 200,
+                state: true,
+                message: '修改成功',
             }
 
         }
