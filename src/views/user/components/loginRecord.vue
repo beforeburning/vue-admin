@@ -17,28 +17,23 @@
                     >
                     </el-table-column>
                     <el-table-column
-                        prop="name"
-                        label="姓名"
+                        prop="equipment"
+                        label="设备"
                         min-width="10%">
                     </el-table-column>
                     <el-table-column
-                        prop="province"
-                        label="省份"
+                        prop="system"
+                        label="系统"
                         min-width="10%">
                     </el-table-column>
                     <el-table-column
-                        prop="city"
-                        label="市区"
+                        prop="way"
+                        label="登录方式"
                         min-width="10%">
                     </el-table-column>
                     <el-table-column
-                        prop="address"
-                        label="地址"
-                        min-width="20%">
-                    </el-table-column>
-                    <el-table-column
-                        prop="zip"
-                        label="邮编"
+                        prop="ip"
+                        label="IP"
                         min-width="10%">
                     </el-table-column>
                 </el-table>
@@ -53,7 +48,7 @@
 </template>
 
 <script>
-     import { loginRecord } from '@/api/user';
+     import { recordLog } from '@/api/user';
 
      export default {
          name: "loginRecord",
@@ -63,200 +58,7 @@
                  width: '90%',
                  //模态框是否显示
                  dialogVisible: false,
-                 tableData: [
-                     {
-                         date: '2016-05-03',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-02',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-04',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-01',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-08',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-06',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-07',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-04',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-01',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-08',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-06',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-07',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-03',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-02',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-04',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-01',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-08',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-06',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-07',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-04',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-01',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-08',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-06',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                     {
-                         date: '2016-05-07',
-                         name: '王小虎',
-                         province: '上海',
-                         city: '普陀区',
-                         address: '上海市普陀区金沙江路 1518 弄',
-                         zip: 200333
-                     },
-                 ]
+                 tableData: []
              }
          },
          mounted() {
@@ -279,7 +81,13 @@
              },
              // 初始化
              init() {
-                 // console.log(111);
+                 recordLog({}).then(res => {
+                     if (res.state) {
+                         this.tableData = res.data;
+                     }
+                 }).catch(() => {
+                     console.log('请求失败');
+                 })
              }
          }
      }

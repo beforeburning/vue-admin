@@ -52,9 +52,9 @@ export const passwordModify = data => {
 }
 
 // 登录记录
-export const loginRecord = data => {
+export const recordLog = data => {
     return request({
-        url: '/user/loginRecord',
+        url: '/user/recordLog',
         method: 'post',
         data
     })

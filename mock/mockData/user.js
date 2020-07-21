@@ -54,7 +54,34 @@ const userInformation = {
     }
 }
 
+// 用户登录日志数据
+let recordLog = {
+    Burning: [],
+    test: []
+}
+// 循环插入数据
+for (let i = 0; i < 20; i++) {
+    let demoData = [
+        {
+            date: '2020-07-21',
+            equipment: '移动端',
+            system: 'ios',
+            way: '普通登录',
+            ip: '192.168.1.1',
+        },
+        {
+            date: '2020-07-21',
+            equipment: '电脑端',
+            system: 'macOS Catalina',
+            way: '普通登录',
+            ip: '192.168.1.1',
+        }
+    ]
+    recordLog.Burning.push(...demoData)
+}
+
 export default {
     userData,
-    userInformation
+    userInformation,
+    recordLog
 }

@@ -25,11 +25,13 @@ const user = [
         url: '/user/login',
         type: 'post',
         response: res => {
+            console.log(111111);
             // 获取用户输入的账号密码
             const {username} = res.body;
             const {password} = res.body
 
             const validationUser = userMockData.userData[username];
+            console.log(validationUser);
             const validationPassword = validationUser.password;
 
             // 验证账号密码是否正确
@@ -111,17 +113,18 @@ const user = [
     },
     // 登录记录
     {
-        url: '/user/loginRecord',
+        url: '/user/recordLog',
         type: 'post',
         response: res => {
             // 找到用户
             let user = tokenGetUser(res.body.token);
-            console.log(user);
-
+            // 日志数据
+            let data = userMockData.recordLog[user.user.name];
             return {
                 code: 200,
                 state: true,
-                message: '修改成功',
+                data: data,
+                message: '获取成功',
             }
 
         }
