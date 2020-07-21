@@ -92,9 +92,9 @@
                  dialogVisible: false,
                  // 修改密码表单
                  passwordModifyForm: {
-                     password: '123456',
-                     newPassword: '111111',
-                     newPasswordAgain: '111111'
+                     password: '',
+                     newPassword: '',
+                     newPasswordAgain: ''
                  },
                  isRemember: true,
                  passWordRules: {
@@ -108,9 +108,6 @@
              this.dialogVisible = true;
          },
          methods: {
-             handleClose: function () {
-                 this.dialogVisible = false;
-             },
              // 取消
              cancel() {
                  this.dialogVisible = false;
