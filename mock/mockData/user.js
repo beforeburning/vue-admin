@@ -59,7 +59,8 @@ let recordLog = {
     Burning: [],
     test: []
 }
-// 循环插入数据
+
+// 循环插入用户登录日志的数据
 for (let i = 0; i < 20; i++) {
     let demoData = [
         {
@@ -80,8 +81,17 @@ for (let i = 0; i < 20; i++) {
     recordLog.Burning.push(...demoData)
 }
 
+const identity = {
+    Burning: {
+        name: '啦**',
+        idCard: '3201051994********'
+    },
+    test: {}
+}
+
 export default {
     userData,
     userInformation,
-    recordLog
+    recordLog,
+    identity
 }

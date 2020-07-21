@@ -25,13 +25,11 @@ const user = [
         url: '/user/login',
         type: 'post',
         response: res => {
-            console.log(111111);
             // 获取用户输入的账号密码
             const {username} = res.body;
             const {password} = res.body
 
             const validationUser = userMockData.userData[username];
-            console.log(validationUser);
             const validationPassword = validationUser.password;
 
             // 验证账号密码是否正确
@@ -128,7 +126,35 @@ const user = [
             }
 
         }
-    }
+    },
+    // 是否进行过身份认证
+    {
+        url: '/user/getIdentity',
+        type: 'post',
+        response: res => {
+            // 找到用户
+            let user = tokenGetUser(res.body.token);
+            let data = userMockData.identity[user.user.name]
+            return {
+                code: 200,
+                state: true,
+                data: data,
+                message: '获取成功'
+            }
+        }
+    },
+    // 提交身份信息
+    {
+        url: '/user/submitIdentity',
+        type: 'post',
+        response: () => {
+            return {
+                code: 200,
+                state: true,
+                message: '提交成功'
+            }
+        }
+    },
 ]
 
 

@@ -1,41 +1,15 @@
 <template>
     <div class="loginRecord">
-        <el-dialog
-            :title="title" :visible.sync="dialogVisible" :width="width" :modal="false" @closed="closed" top='5vh'
-            class="dialog"
-        >
+        <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal="false" @closed="closed" top='5vh'
+                   class="dialog">
+
             <div class="modify">
-                <el-table
-                    :data="tableData"
-                    style="width: 100%"
-                    height="100%">
-                    <el-table-column
-                        fixed
-                        prop="date"
-                        label="日期"
-                        min-width="10%"
-                    >
-                    </el-table-column>
-                    <el-table-column
-                        prop="equipment"
-                        label="设备"
-                        min-width="10%">
-                    </el-table-column>
-                    <el-table-column
-                        prop="system"
-                        label="系统"
-                        min-width="10%">
-                    </el-table-column>
-                    <el-table-column
-                        prop="way"
-                        label="登录方式"
-                        min-width="10%">
-                    </el-table-column>
-                    <el-table-column
-                        prop="ip"
-                        label="IP"
-                        min-width="10%">
-                    </el-table-column>
+                <el-table :data="tableData" height="100%">
+                    <el-table-column fixed prop="date" label="日期" min-width="10%"></el-table-column>
+                    <el-table-column prop="equipment" label="设备" min-width="10%"></el-table-column>
+                    <el-table-column prop="system" label="系统" min-width="10%"></el-table-column>
+                    <el-table-column prop="way" label="登录方式" min-width="10%"></el-table-column>
+                    <el-table-column prop="ip" label="IP" min-width="10%"></el-table-column>
                 </el-table>
             </div>
 
@@ -100,11 +74,10 @@
 
             .el-dialog__body {
                 display: flex;flex: 1;overflow-y: scroll;padding: 0; margin: 30px 20px;
-
             }
 
             .el-dialog__footer {
-                display: flex;
+                display: flex;justify-content: flex-end;
             }
         }
     }

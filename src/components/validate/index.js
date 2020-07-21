@@ -4,7 +4,7 @@
  Date: 2020年05月28日
  */
 
-import { CEN, validEmail, isNumber, isWeChat, isPhone } from '@/utils/validate';
+import { CEN, validEmail, isNumber, isWeChat, isPhone, isChinese, isIdCard } from '@/utils/validate';
 
 // 账号验证
 export const validateUsername = (rule, value, callback) => {
@@ -82,6 +82,30 @@ export const validateAge = (rule, value, callback) => {
     }
     if (!isNumber(value)) {
         callback(new Error('您的输入必须是数字'))
+    } else {
+        callback()
+    }
+};
+
+// 真实姓名验证
+export const validateRealName = (rule, value, callback) => {
+    if (value.length === 0 || value.length > 5) {
+        callback(new Error('您输入的姓名不正确'))
+    }
+    if (!isChinese(value)) {
+        callback(new Error('您的输入必须是中文'))
+    } else {
+        callback()
+    }
+};
+
+// 身份证验证
+export const validateIdCard = (rule, value, callback) => {
+    if (value.length === 0 || value.length > 18) {
+        callback(new Error('您输入的身份证号不正确'))
+    }
+    if (!isIdCard(value)) {
+        callback(new Error('您的输入的身份证号格式有问题'))
     } else {
         callback()
     }

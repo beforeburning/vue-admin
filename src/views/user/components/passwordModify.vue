@@ -5,54 +5,23 @@
         <div class="modify">
 
             <el-form ref="passWordRules" :model="passwordModifyForm" :rules="passWordRules" class="password-form"
-                     autocomplete="off"
-                     label-position="left">
+                     autocomplete="off" label-position="left" label-width="70px">
 
-                <el-form-item prop="password">
-                    <span class="svg-container">
-                      <i class="el-icon-unlock"></i>
-                    </span>
-                    <el-input
-                        key="password"
-                        ref="password"
-                        v-model="passwordModifyForm.password"
-                        type="password"
-                        placeholder="请输入您的旧密码"
-                        name="password"
-                        tabindex="2"
-                        autocomplete="off"
+                <el-form-item prop="password" label="旧密码">
+                    <el-input key="password" ref="password" v-model="passwordModifyForm.password" type="password"
+                              placeholder="请输入您的旧密码" name="password" tabindex="2" autocomplete="off"
                     ></el-input>
                 </el-form-item>
 
-                <el-form-item prop="password">
-                    <span class="svg-container">
-                      <i class="el-icon-unlock"></i>
-                    </span>
-                    <el-input
-                        key="password"
-                        ref="password"
-                        v-model="passwordModifyForm.newPassword"
-                        type="password"
-                        placeholder="请输入您的旧密码"
-                        name="password"
-                        tabindex="2"
-                        autocomplete="off"
+                <el-form-item prop="password" label="新密码">
+                    <el-input key="password" ref="password" v-model="passwordModifyForm.newPassword" type="password"
+                              placeholder="请输入您的旧密码" name="password" tabindex="2" autocomplete="off"
                     ></el-input>
                 </el-form-item>
 
-                <el-form-item prop="newPasswordAgain">
-                    <span class="svg-container">
-                      <i class="el-icon-unlock"></i>
-                    </span>
-                    <el-input
-                        key="password"
-                        ref="password"
-                        v-model="passwordModifyForm.newPasswordAgain"
-                        type="password"
-                        placeholder="请输入您的旧密码"
-                        name="password"
-                        tabindex="2"
-                        autocomplete="off"
+                <el-form-item prop="newPasswordAgain" label="新密码">
+                    <el-input key="password" ref="password" v-model="passwordModifyForm.newPasswordAgain"
+                              type="password" placeholder="请输入您的旧密码" name="password" tabindex="2" autocomplete="off"
                     ></el-input>
                 </el-form-item>
 
@@ -62,7 +31,7 @@
 
         <span slot="footer" class="dialog-footer">
           <el-button @click="cancel">取 消</el-button>
-          <el-button type="primary" @click="save">确 定</el-button>
+          <el-button type="primary" @click="save">修 改</el-button>
         </span>
   </el-dialog>
 </template>
@@ -139,7 +108,7 @@
 <style lang="less">
     .modify {
         .el-form-item__error {
-            left: 68px !important;
+            left: 30px !important;
         }
     }
 </style>

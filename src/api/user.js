@@ -59,3 +59,21 @@ export const recordLog = data => {
         data
     })
 }
+
+// 是否进行过身份认证
+export const getIdentity = data => {
+    return request({
+        url: '/user/getIdentity',
+        method: 'post',
+        data
+    })
+}
+
+// 提交身份信息
+export const submitIdentity = data => {
+    return request({
+        url: '/user/submitIdentity',
+        method: 'post',
+        data
+    })
+}

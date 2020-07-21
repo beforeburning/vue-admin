@@ -94,6 +94,16 @@ export const isNumber = (str) => {
 };
 
 /**
+ * 中文
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export const isChinese = (str) => {
+    const reg = /^[\u4e00-\u9fa5]+$/;
+    return reg.test(str)
+};
+
+/**
  * 微信号
  * @param {string} str
  * @returns {Boolean}
@@ -122,6 +132,16 @@ export const isString = (str) => {
  */
 export const isPhone = (str) => {
     const reg = /^1[3456789]\d{9}$/;
+    return reg.test(str)
+};
+
+/**
+ * 身份证
+ * @param {string} str
+ * @returns {Boolean}
+ */
+export const isIdCard = (str) => {
+    const reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
     return reg.test(str)
 };
 

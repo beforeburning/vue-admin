@@ -7,7 +7,7 @@
 
             <el-tag @click="changeComp('loginRecord')">登录记录</el-tag>
 
-            <el-tag @click="changeComp('passwordModify')">身份认证</el-tag>
+            <el-tag @click="changeComp('identity')">身份认证</el-tag>
         </div>
 
         <component v-bind:is="compName"></component>
@@ -19,13 +19,15 @@
     // 修改密码组件
     import passwordModify from './components/passwordModify';
     import loginRecord from './components/loginRecord';
+    import identity from './components/identity';
 
     export default {
         name: "account",
         // 注册组件
         components: {
             passwordModify,
-            loginRecord
+            loginRecord,
+            identity
         },
         data() {
             return {
