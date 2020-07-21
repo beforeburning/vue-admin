@@ -1,7 +1,7 @@
 <template>
     <div class="notFound">
         <img class="img" v-lazy="img" alt="">
-        <el-button type="text" class="button">回到首页</el-button>
+        <el-button type="text" class="button" @click="returnIndex">回到首页</el-button>
     </div>
 </template>
 
@@ -16,7 +16,11 @@ export default {
     },
     mounted() {
     },
-    methods: {}
+    methods: {
+        returnIndex() {
+            this.$router.push({name: 'welcome'})
+        }
+    }
 }
 </script>
 
