@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
    .el-submenu__title {
        transition: 0s !important;
    }

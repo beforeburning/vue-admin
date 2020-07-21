@@ -4,7 +4,7 @@
  Date: 2020年03月11日
  */
 
-import store from '@/store.js';
+import store from '@/store';
 import config from '../../public/config.json';
 
 // 读取vuex里面的config数据

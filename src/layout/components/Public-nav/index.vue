@@ -34,7 +34,7 @@ export default {
         display: flex;background: white;height: 40px;align-items: center;
 
         .header {
-            margin: 0;padding: 0;margin-left: 15px;font-size: 14px !important;display: flex;align-items: center;height: 40px;
+            margin: 0 0 0 15px;padding: 0;font-size: 14px !important;display: flex;align-items: center;height: 40px;
 
             .el-page-header__left {
                 display: flex;align-items: center;height: 40px;

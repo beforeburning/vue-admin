@@ -80,7 +80,7 @@ export const formatTime = (time, option) => {
  * @param {string} url
  * @returns {Object}
  */
-export const getQueryObject = (url) => {
+export const getQueryObject = url => {
     url = url == null ? window.location.href : url;
     const search = url.substring(url.lastIndexOf('?') + 1);
     const obj = {};
@@ -97,10 +97,10 @@ export const getQueryObject = (url) => {
 
 /**
  * 计算字节数量 中文 英文 emoji
- * @param {string} input value
  * @returns {number} output value
+ * @param str
  */
-export const byteLength = (str) => {
+export const byteLength = str => {
     // returns the byte length of an utf8 string
     let s = str.length;
     for (var i = str.length - 1; i >= 0; i--) {

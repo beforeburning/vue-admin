@@ -1,6 +1,5 @@
 <template>
     <div>
-        <!-- Select Options-->
         <el-time-picker
             is-range
             v-model="value1"
@@ -45,11 +44,6 @@
         },
         methods: {},
         mounted() {
-            var PI = "a";
-            if (true) {
-                console.log(PI);  // ReferenceError: PI is not defined
-                const PI = "3.1415926";
-            }
         }
     }
 </script>

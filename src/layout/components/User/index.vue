@@ -19,7 +19,7 @@
 </template>
 
 <script>
-    import { storage } from "@/utils/localStorage.js";
+    import { storage } from "@/utils/localStorage";
     import { loginOut } from '@/api/user';
 
     export default {

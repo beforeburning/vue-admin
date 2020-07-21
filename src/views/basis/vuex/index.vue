@@ -1,7 +1,9 @@
 <template>
     <div>
         <el-button @click="add">增加</el-button>
-        <input type="number" v-model='num'>
+        <label>
+            <input type="number" v-model='num' />
+        </label>
         <div>
             通过state获取值
             {{this.$store.state.num}}
@@ -25,7 +27,6 @@ export default {
     },
     methods: {
         add() {
-            // this.$store.commit('add', this.num);
             this.$store.dispatch('add', this.num);
         }
     }

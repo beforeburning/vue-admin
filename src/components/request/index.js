@@ -8,7 +8,7 @@ import { Message } from 'element-ui'
 import store from '@/store'
 import { getConfig } from '@/utils/getConfig';
 
-// axios配置
+// axios 配置
 const service = axios.create({
     baseURL: getConfig(['basis', 'baseURL']),
     withCredentials: true,

@@ -9,7 +9,6 @@
 </template>
 
 <script>
-
     // main.js全局引入了echarts
     // https://echarts.baidu.com/examples/
     export default {
@@ -116,7 +115,7 @@
                 // 数据
                 let data = [];
 
-                for (var i = 0; i <= 360; i++) {
+                for (let i = 0; i <= 360; i++) {
                     let t = i / 180 * Math.PI;
                     let r = Math.sin(2 * t) * Math.cos(2 * t);
                     data.push([r, i]);
