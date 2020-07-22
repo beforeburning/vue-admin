@@ -86,6 +86,7 @@
              save() {
                  this.$refs.passWordRules.validate(valid => {
                      if (valid) {
+                         // 加密
                          let str = {
                              password: aes.aesEncrypt(this.passwordModifyForm.password),
                              newPassword: aes.aesEncrypt(this.passwordModifyForm.newPassword),
