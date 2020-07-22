@@ -5,8 +5,8 @@
       <div class="sidebarContent">
           <!-- 头部 -->
           <div class="header">
-              <i @click="collapse"
-                 :class="isCollapse ? 'collapseIcon el-icon-s-unfold' : 'collapseIcon el-icon-s-fold'" />
+              <i :class="isCollapse ? 'collapseIcon el-icon-s-unfold' : 'collapseIcon el-icon-s-fold'"
+                 @click="collapse" />
               <User class="user"></User>
           </div>
           <!-- 导航栏 -->
@@ -50,6 +50,7 @@ export default {
             let routes = this.$router.options.routes;
             return routes;
         },
+        // 展开收起侧边栏
         collapse() {
             let sidebar = this.$refs.sidebar;
             sidebar.isCollapse = !sidebar.isCollapse;

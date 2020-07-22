@@ -183,6 +183,27 @@ let library = [
     },
 ]
 
+// 管理
+let management = [
+    {
+        path: '/management',
+        component: Layout,
+        redirect: '/management/permissions',
+        meta: {
+            title: '权限配置',
+            icon: 'el-icon-s-tools'
+        },
+        children: [
+            {
+                path: 'permissions',
+                component: () => import('@/views/management/permissions'),
+                name: 'permissions',
+                meta: {title: '权限管理'}
+            },
+        ]
+    },
+]
+
 // 路由
 export default new Router({
     mode: 'history',
@@ -192,6 +213,7 @@ export default new Router({
         ...separate,
         ...user,
         ...basis,
-        ...library
+        ...library,
+        ...management
     ]
 });

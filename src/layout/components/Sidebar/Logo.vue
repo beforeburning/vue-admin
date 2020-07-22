@@ -15,6 +15,7 @@
   export default {
       name: 'SidebarLogo',
       props: {
+          // 判断标题是否显示
           collapse: {
               type: Boolean
           }
@@ -59,6 +60,12 @@
 
         & .sidebar-title {
             display: inline-block;margin: 0 0 0 12px;color: #fff;font-weight: 600;line-height: 50px;font-size: 14px;font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;vertical-align: middle;
+        }
+    }
+
+    &.close {
+        h1 {
+            display: none !important;
         }
     }
 
