@@ -41,6 +41,7 @@
      import {
          validatePassword
      } from '@/components/validate';
+     import { aes } from "@/utils/crypto";
 
      export default {
          name: "passwordModify",
@@ -61,9 +62,9 @@
                  dialogVisible: false,
                  // 修改密码表单
                  passwordModifyForm: {
-                     password: '',
-                     newPassword: '',
-                     newPasswordAgain: ''
+                     password: '123456',
+                     newPassword: '111111',
+                     newPasswordAgain: '111111'
                  },
                  isRemember: true,
                  passWordRules: {
@@ -85,8 +86,13 @@
              save() {
                  this.$refs.passWordRules.validate(valid => {
                      if (valid) {
+                         let str = {
+                             password: aes.aesEncrypt(this.passwordModifyForm.password),
+                             newPassword: aes.aesEncrypt(this.passwordModifyForm.newPassword),
+                             newPasswordAgain: aes.aesEncrypt(this.passwordModifyForm.newPasswordAgain)
+                         }
                          // 请求接口 修改密码
-                         passwordModify(this.passwordModifyForm).then(res => {
+                         passwordModify(str).then(res => {
                              if (res.state) {
                                  this.dialogVisible = false;
                                  this.$message.success(res.message);

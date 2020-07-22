@@ -43,6 +43,7 @@
 <script>
     import { login } from '@/api/user';
     import { storage } from "@/utils/localStorage";
+    import { aes } from "@/utils/crypto";
     import {
         validateUsername,
         validatePassword,
@@ -73,7 +74,7 @@
             if (loginForm && typeof loginForm === 'object') {
                 this.loginForm = {
                     username: loginForm.username,
-                    password: loginForm.password
+                    password: aes.aesDecrypt(loginForm.password)
                 }
             }
         },
@@ -104,7 +105,10 @@
                 // 验证账号密码格式正确
                 this.$refs.loginForm.validate(valid => {
                     if (valid) {
-                        login(this.loginForm).then(res => {
+                        login({
+                            username: this.loginForm.username,
+                            password: aes.aesEncrypt(this.loginForm.password)
+                        }).then(res => {
                             if (res.state) {
                                 this.loading = false;
                                 // 记录密码
@@ -133,7 +137,10 @@
             // 记住密码
             remember() {
                 if (this.isRemember) {
-                    storage.setJSON('loginForm', this.loginForm);
+                    storage.setJSON('loginForm', {
+                        username: this.loginForm.username,
+                        password: aes.aesEncrypt(this.loginForm.password)
+                    });
                 } else {
                     storage.remove('loginForm');
                 }

@@ -8,18 +8,7 @@
             <!--基础信息-->
             <div class="btn">
 
-               <el-popconfirm
-                   v-show="!isEditor"
-                   class="editor"
-                   confirmButtonText='好的'
-                   cancelButtonText='不用了'
-                   icon="el-icon-info"
-                   iconColor="red"
-                   title="您确定取消编辑操作吗？"
-                   @onConfirm="cancel"
-               >
-                  <el-button type="warning" slot="reference">取消</el-button>
-                </el-popconfirm>
+                <el-button v-show="!isEditor" type="warning" @click="cancel" slot="reference">取消</el-button>
 
                 <el-button type="primary" :icon="isEditor ? 'el-icon-edit' : 'el-icon-check'" class="editor"
                            @click="editor">{{isEditor ? '编辑' : '保存'}}</el-button>
@@ -130,8 +119,15 @@
             },
             // 取消编辑
             cancel() {
-                this.rulesForm = this.rulesFormCancel;
-                this.isEditor = !this.isEditor;
+                this.$confirm('您将失去所有已编辑内容?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.rulesForm = this.rulesFormCancel;
+                    this.isEditor = !this.isEditor;
+                }).catch(() => {
+                });
             },
             // 保存编辑
             save() {
