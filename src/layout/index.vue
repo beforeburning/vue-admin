@@ -59,10 +59,6 @@ export default {
     },
     mounted() {
         // 如果没有token 直接跳转到登录页
-        if (!this.$store.state.token) {
-            this.$message.error('登录失效');
-            this.$router.push({name: 'login'});
-        }
         this.routes = this.routesList();
     }
 }

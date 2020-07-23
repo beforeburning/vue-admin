@@ -29,6 +29,12 @@ let notFound = [
                 name: 'notFound',
                 meta: {title: '找不到页面'}
             },
+            {
+                path: '403',
+                component: () => import('@/views/error/403'),
+                name: 'notPermissions',
+                meta: {title: '没有权限'}
+            }
         ]
     }
 ]
@@ -37,26 +43,12 @@ let notFound = [
 let separate = [
     {
         path: '/',
-        hidden: true,
-        redirect: '/index',
-        component: () => import('@/views/separate/index'),
-        meta: {
-            title: '首页',
-        },
-        children: [
-            {
-                path: 'index',
-            },
-
-        ]
-    },
-    {
-        path: '/login',
         component: () => import('@/views/separate/login'),
         name: 'login',
         hidden: true,
         meta: {
             title: '登录',
+            donToKen: true
         },
     },
     {
@@ -198,7 +190,10 @@ let management = [
                 path: 'permissions',
                 component: () => import('@/views/management/permissions'),
                 name: 'permissions',
-                meta: {title: '权限管理'}
+                meta: {
+                    title: '权限管理',
+                    permissions: ['admin', 'super']
+                }
             },
         ]
     },

@@ -11,7 +11,8 @@ const userData = {
         password: 'de1d0799cddb7336ef97331c016008a4',
         user: {
             name: 'Burning',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'admin'
         }
     },
     test: {
@@ -19,7 +20,8 @@ const userData = {
         password: 'de1d0799cddb7336ef97331c016008a4',
         user: {
             name: 'test',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg'
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'employees'
         }
     }
 };

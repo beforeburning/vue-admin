@@ -52,15 +52,10 @@ if (process.env.NODE_ENV === 'development') {
     mockXHR()
 }
 
-// token 刷新后保存
-router.beforeEach((to, from, next) => {
-    // 保持token
-    store.state.token ? store.state.token : store.commit('token', window.localStorage.getItem('token') ? window.localStorage.getItem('token') : '');
-    // 保持user
-    let user = JSON.parse(window.localStorage.getItem('user'))
-    store.state.user ? store.state.user : store.commit('user', user ? user : '');
-    next();
-});
+// 权限管理 刷新后恢复token router.beforeEach
+import { permissions } from './components/permissions';
+
+permissions();
 
 // echarts
 import echarts from 'echarts';
