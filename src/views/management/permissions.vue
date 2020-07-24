@@ -3,16 +3,37 @@
 
         <el-table class="table" :data="tableData" max-height="9999" height="0" border style="width: 100%">
 
-            <el-table-column prop="date" label="日期" width="180"></el-table-column>
+            <el-table-column prop="id" label="id" min-width="10%" align="center"></el-table-column>
 
-            <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+            <el-table-column prop="name" label="姓名" min-width="15%" align="center"></el-table-column>
 
-            <el-table-column prop="address" label="地址"></el-table-column>
+            <el-table-column prop="position" label="职位" min-width="15%" align="center"></el-table-column>
+
+            <el-table-column prop="permissions" label="权限" min-width="15%" align="center"></el-table-column>
+
+            <el-table-column prop="phone" label="联系方式" min-width="18%" align="center"></el-table-column>
+
+            <el-table-column prop="eMail" label="邮箱" min-width="18%" align="center"></el-table-column>
+
+            <el-table-column label="操作" align="center" min-width="15%">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="primary" @click="detailed(scope.$index, scope.row)">详细</el-button>
+                    <el-button size="mini" type="warning" @click="operation(scope.$index, scope.row)">操作</el-button>
+                </template>
+            </el-table-column>
 
         </el-table>
 
         <div class="page">
-            111
+            <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-sizes="[20, 30, 40, 50]"
+                :page-size="20"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="count">
+            </el-pagination>
         </div>
     </div>
 </template>
@@ -25,15 +46,27 @@
         data() {
             return {
                 tableData: [],
-                count: 0
+                count: 0,
+                currentPage: 1
             }
         },
         mounted() {
             this.init();
         },
         methods: {
-            handleClick(row) {
-                console.log(row);
+            // 详细
+            detailed(index, row) {
+                console.log(index, row);
+            },
+            // 操作
+            operation(index, row) {
+                console.log(index, row);
+            },
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
             },
             init() {
                 getUserList({}).then(res => {
@@ -59,7 +92,7 @@
         }
 
         .page {
-            display: flex;height: 80px;width: 100%;
+            display: flex;height: 80px;width: 100%;justify-content: center;align-items: center;
         }
     }
 </style>

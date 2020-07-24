@@ -42,7 +42,7 @@ const userData = {
 };
 
 // 循环插入测试用户
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 200; i++) {
     userData[`demo${i}`] = {
         token: 'demo-token',
         password: '',
