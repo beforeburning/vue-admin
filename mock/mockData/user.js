@@ -39,41 +39,25 @@ const userData = {
             position: '用户',
             state: true
         }
-    },
-    demo1: {
-        token: 'demo-token',
-        password: '',
-        user: {
-            name: '用户1',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-            permissions: 'employees',
-            position: '用户',
-            state: true
-        }
-    },
-    demo2: {
-        token: 'demo-token',
-        password: '',
-        user: {
-            name: '用户2',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-            permissions: 'employees',
-            position: '用户',
-            state: true
-        }
-    },
-    demo3: {
-        token: 'demo-token',
-        password: '',
-        user: {
-            name: '用户3',
-            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-            permissions: 'employees',
-            position: '用户',
-            state: false
-        }
     }
 };
+
+// 循环插入测试用户
+for (let i = 0; i < 20; i++) {
+    userData[`demo${i}`] = {
+        [`demo${i}`]: {
+            token: 'demo-token',
+            password: '',
+            user: {
+                name: `用户${i}`,
+                header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+                permissions: 'employees',
+                position: '用户',
+                state: i !== 0
+            }
+        }
+    }
+}
 
 // 用户数据 通过账号数据下的name定位
 const userInformation = {
