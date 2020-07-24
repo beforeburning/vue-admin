@@ -3,6 +3,7 @@
  User: burning <923398776@qq.com>
  Date: 2020年07月21日
  */
+import fa from "element-ui/src/locale/lang/fa";
 
 // 用户账号密码验证和基础数据
 const userData = {
@@ -12,7 +13,20 @@ const userData = {
         user: {
             name: 'Burning',
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-            permissions: 'admin'
+            permissions: 'admin',
+            position: '超级管理员',
+            state: true
+        }
+    },
+    super: {
+        token: 'super-token',
+        password: 'de1d0799cddb7336ef97331c016008a4',
+        user: {
+            name: 'super',
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'super',
+            position: '管理员',
+            state: true
         }
     },
     test: {
@@ -21,12 +35,47 @@ const userData = {
         user: {
             name: 'test',
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-            permissions: 'employees'
+            permissions: 'employees',
+            position: '用户',
+            state: true
+        }
+    },
+    demo1: {
+        token: 'demo-token',
+        password: '',
+        user: {
+            name: '用户1',
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'employees',
+            position: '用户',
+            state: true
+        }
+    },
+    demo2: {
+        token: 'demo-token',
+        password: '',
+        user: {
+            name: '用户2',
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'employees',
+            position: '用户',
+            state: true
+        }
+    },
+    demo3: {
+        token: 'demo-token',
+        password: '',
+        user: {
+            name: '用户3',
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'employees',
+            position: '用户',
+            state: false
         }
     }
 };
 
-// 用户数据
+// 用户数据 通过账号数据下的name定位
 const userInformation = {
     Burning: {
         id: '923398776',
@@ -41,9 +90,22 @@ const userInformation = {
         city: 101,
         area: 10101
     },
+    super: {
+        id: '111111111',
+        name: 'super',
+        eMail: '111111111@qq.com',
+        qq: '111111111',
+        weChat: '111111111',
+        phone: '13000000000',
+        age: '18',
+        introduction: '啦啦啦 我是super账号~',
+        province: 2,
+        city: 202,
+        area: 20201,
+    },
     test: {
         id: '111111111',
-        name: 'Burning',
+        name: 'test',
         eMail: '111111111@qq.com',
         qq: '111111111',
         weChat: '111111111',
@@ -59,6 +121,7 @@ const userInformation = {
 // 用户登录日志数据
 let recordLog = {
     Burning: [],
+    super: [],
     test: []
 }
 
@@ -88,6 +151,7 @@ const identity = {
         name: '啦**',
         idCard: '3201051994********'
     },
+    super: {},
     test: {}
 }
 
