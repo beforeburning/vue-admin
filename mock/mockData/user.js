@@ -3,7 +3,6 @@
  User: burning <923398776@qq.com>
  Date: 2020年07月21日
  */
-import fa from "element-ui/src/locale/lang/fa";
 
 // 用户账号密码验证和基础数据
 const userData = {
@@ -36,7 +35,7 @@ const userData = {
             name: 'test',
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'employees',
-            position: '用户',
+            position: '普通用户',
             state: true
         }
     }
@@ -45,16 +44,14 @@ const userData = {
 // 循环插入测试用户
 for (let i = 0; i < 20; i++) {
     userData[`demo${i}`] = {
-        [`demo${i}`]: {
-            token: 'demo-token',
-            password: '',
-            user: {
-                name: `用户${i}`,
-                header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
-                permissions: 'employees',
-                position: '用户',
-                state: i !== 0
-            }
+        token: 'demo-token',
+        password: '',
+        user: {
+            name: `demo`,
+            header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
+            permissions: 'employees',
+            position: '普通用户',
+            state: i !== 0
         }
     }
 }
@@ -96,6 +93,19 @@ const userInformation = {
         phone: '13000000000',
         age: '18',
         introduction: '啦啦啦 我是test账号~',
+        province: 2,
+        city: 202,
+        area: 20201,
+    },
+    demo: {
+        id: '111111111',
+        name: 'demo',
+        eMail: '111111111@qq.com',
+        qq: '111111111',
+        weChat: '111111111',
+        phone: '13000000000',
+        age: '18',
+        introduction: '啦啦啦 我是demo账号~',
         province: 2,
         city: 202,
         area: 20201,
