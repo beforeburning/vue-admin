@@ -19,7 +19,6 @@ export const permissions = () => {
 
         // 判断是否有token
         if (!store.state.token && !to.meta.donToKen) {
-            // console.log(!to.meta.donToKen);
             Message.error('您的登录已失效,请重新登录')
             next({name: 'login'})
         }

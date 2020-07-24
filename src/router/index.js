@@ -183,13 +183,15 @@ let management = [
         redirect: '/management/permissions',
         meta: {
             title: '权限配置',
-            icon: 'el-icon-s-tools'
+            icon: 'el-icon-s-tools',
+            permissions: ['admin', 'super']
         },
         children: [
             {
                 path: 'permissions',
                 component: () => import('@/views/management/permissions'),
                 name: 'permissions',
+                // hidden: true,
                 meta: {
                     title: '权限管理',
                     permissions: ['admin', 'super']

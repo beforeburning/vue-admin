@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { Sidebar, AppMain, User, PublicNav, PublicFooter } from './components';
+import { AppMain, PublicFooter, PublicNav, Sidebar, User } from './components';
 import { mapState } from 'vuex';
 
 export default {
@@ -47,8 +47,7 @@ export default {
     methods: {
         // 路由处理
         routesList() {
-            let routes = this.$router.options.routes;
-            return routes;
+            return this.$router.options.routes;
         },
         // 展开收起侧边栏
         collapse() {
