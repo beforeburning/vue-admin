@@ -69,7 +69,8 @@ const userInformation = {
         introduction: '啦啦啦~',
         province: 1,
         city: 101,
-        area: 10101
+        area: 10101,
+        createTime: 1595579664
     },
     super: {
         id: '111111111',
@@ -83,6 +84,7 @@ const userInformation = {
         province: 2,
         city: 202,
         area: 20201,
+        createTime: 1595493264
     },
     test: {
         id: '111111111',
@@ -96,6 +98,7 @@ const userInformation = {
         province: 2,
         city: 202,
         area: 20201,
+        createTime: 1595406864
     },
     demo: {
         id: '111111111',
@@ -109,6 +112,7 @@ const userInformation = {
         province: 2,
         city: 202,
         area: 20201,
+        createTime: 1595320464
     }
 }
 

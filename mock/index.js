@@ -9,10 +9,12 @@ import { param2Obj } from '../src/utils'
 
 import user from './api/user'
 import dictionary from './api/dictionary'
+import management from './api/management'
 
 const mocks = [
     ...user,
-    ...dictionary
+    ...dictionary,
+    ...management
 ];
 
 // for front mock
