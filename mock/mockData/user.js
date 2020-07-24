@@ -42,11 +42,12 @@ const userData = {
 };
 
 // 循环插入测试用户
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 50; i++) {
     userData[`demo${i}`] = {
         token: 'demo-token',
         password: '',
         user: {
+            id: `${100 + i}`,
             name: `demo`,
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'employees',
@@ -59,7 +60,7 @@ for (let i = 0; i < 20; i++) {
 // 用户数据 通过账号数据下的name定位
 const userInformation = {
     Burning: {
-        id: '923398776',
+        id: '0',
         name: 'Burning',
         eMail: '923398776@qq.com',
         qq: '923398776',
@@ -73,7 +74,7 @@ const userInformation = {
         createTime: 1595579664
     },
     super: {
-        id: '111111111',
+        id: '1',
         name: 'super',
         eMail: '111111111@qq.com',
         qq: '111111111',
@@ -87,7 +88,7 @@ const userInformation = {
         createTime: 1595493264
     },
     test: {
-        id: '111111111',
+        id: '2',
         name: 'test',
         eMail: '111111111@qq.com',
         qq: '111111111',
@@ -101,7 +102,7 @@ const userInformation = {
         createTime: 1595406864
     },
     demo: {
-        id: '111111111',
+        id: '3',
         name: 'demo',
         eMail: '111111111@qq.com',
         qq: '111111111',

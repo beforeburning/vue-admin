@@ -10,8 +10,8 @@ const userListData = () => {
     let userList = [];
     for (let item in userMockData.userData) {
         let newObj = {
-            ...userMockData.userData[item].user,
-            ...userMockData.userInformation[userMockData.userData[item].user.name]
+            ...userMockData.userInformation[userMockData.userData[item].user.name],
+            ...userMockData.userData[item].user
         }
         userList.push(newObj)
     }

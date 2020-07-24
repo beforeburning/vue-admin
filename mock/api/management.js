@@ -11,10 +11,15 @@ const management = [
         url: '/management/getUserList',
         type: 'post',
         response: () => {
-            managementMockData.userListData()
+            let list = managementMockData.userListData();
+
             return {
                 code: 200,
                 state: true,
+                data: {
+                    list: list,
+                    count: list.length
+                },
                 message: '获取成功'
             }
         }
