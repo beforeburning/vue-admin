@@ -29,7 +29,7 @@
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
                 :current-page="pagination.currentPage"
-                :page-sizes="pagination.sizes"
+                :page-sizes="[20, 30, 40, 50]"
                 :page-size="pagination.size"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="count">
@@ -49,7 +49,6 @@
                 count: 0,
                 pagination: {
                     currentPage: 1,
-                    sizes: [20, 30, 40, 50],
                     size: 20
                 }
             }
@@ -66,18 +65,22 @@
             operation(index, row) {
                 console.log(index, row);
             },
+            // 修改每页的数量
             handleSizeChange(val) {
-                console.log(`每页 ${val} 条`);
+                this.pagination.size = val;
+                this.pagination.currentPage = 1;
+                this.listData();
             },
+            // 翻页
             handleCurrentChange(val) {
-                console.log(`当前页: ${val}`);
+                this.pagination.currentPage = val;
+                this.listData();
             },
             // 列表数据
             listData() {
-                getUserList({}).then(res => {
+                getUserList(this.pagination).then(res => {
                     if (res.state) {
                         this.tableData = res.data.list;
-                        console.log(res.data.list[0]);
                         this.count = res.data.count
                     }
                 }).catch(() => {

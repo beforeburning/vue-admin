@@ -10,14 +10,16 @@ const management = [
     {
         url: '/management/getUserList',
         type: 'post',
-        response: () => {
+        response: res => {
             let list = managementMockData.userListData();
+            let currentPage = res.body.currentPage;
+            let size = res.body.size;
 
             return {
                 code: 200,
                 state: true,
                 data: {
-                    list: list,
+                    list: list.slice(currentPage * size - size, currentPage * size),
                     count: list.length
                 },
                 message: '获取成功'

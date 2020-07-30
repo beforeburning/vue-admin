@@ -2,6 +2,7 @@
   <div class="app-wrapper">
       <!-- 侧边栏 -->
       <Sidebar ref="sidebar" :class="isCollapse ? 'sidebar close' : 'sidebar'" :routes="routes" />
+
       <div class="sidebarContent">
           <!-- 头部 -->
           <div class="header">
