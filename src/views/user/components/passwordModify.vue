@@ -1,7 +1,6 @@
 <template>
-    <el-dialog
-        :title="title" :visible.sync="dialogVisible" :width="width" :modal="false" @closed="closed"
-    >
+    <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal-append-to-body='false'
+               @closed="closed">
         <div class="modify">
 
             <el-form ref="passWordRules" :model="passwordModifyForm" :rules="passWordRules" class="password-form"

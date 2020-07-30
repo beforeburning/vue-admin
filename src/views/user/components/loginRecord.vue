@@ -1,7 +1,7 @@
 <template>
     <div class="loginRecord">
-        <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal="false" @closed="closed" top='5vh'
-                   class="dialog">
+        <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal-append-to-body='false'
+                   @closed="closed" top='5vh' class="dialog">
 
             <div class="modify">
                 <el-table :data="tableData" height="100%">

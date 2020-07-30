@@ -1,8 +1,7 @@
 <template>
     <div class="identity">
-        <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal="false" @closed="closed"
-                   top='15vh'
-                   class="dialog">
+        <el-dialog :title="title" :visible.sync="dialogVisible" :width="width" :modal-append-to-body='false'
+                   @closed="closed" top='15vh' class="dialog">
 
             <div class="authorized" v-if="isIdentity">
                 <div class="information">
