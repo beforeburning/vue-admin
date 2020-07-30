@@ -10,7 +10,7 @@
             <el-tag @click="changeComp('identity')">身份认证</el-tag>
         </div>
 
-        <component v-bind:is="compName"></component>
+        <component :is="compName"></component>
 
     </div>
 </template>

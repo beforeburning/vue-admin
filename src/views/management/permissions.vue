@@ -17,7 +17,7 @@
 
             <el-table-column label="操作" align="center" min-width="15%">
                 <template slot-scope="scope">
-                    <el-button size="mini" type="primary" @click="detailed(scope.$index, scope.row)">详细</el-button>
+                    <el-button size="mini" type="primary" @click="detailed(scope.$index, scope.row)">详情</el-button>
                     <el-button size="mini" type="warning" @click="operation(scope.$index, scope.row)">操作</el-button>
                 </template>
             </el-table-column>
@@ -35,16 +35,24 @@
                 :total="count">
             </el-pagination>
         </div>
+
+        <component :is="compName" :row="row"></component>
     </div>
 </template>
 
 <script>
     import { getUserList } from '@/api/management';
+    import detailed from './components/detailed';
 
     export default {
         name: "permissions",
+        components: {
+            detailed
+        },
         data() {
             return {
+                compName: '',
+                row: {},
                 tableData: [],
                 count: 0,
                 pagination: {
@@ -59,7 +67,8 @@
         methods: {
             // 详细
             detailed(index, row) {
-                console.log(index, row);
+                this.row = row;
+                this.compName = 'detailed';
             },
             // 操作
             operation(index, row) {
