@@ -15,6 +15,14 @@ const management = [
             let currentPage = res.body.currentPage;
             let size = res.body.size;
 
+            if (!currentPage || !size) {
+                return {
+                    code: 200,
+                    state: false,
+                    message: '参数错误'
+                }
+            }
+
             return {
                 code: 200,
                 state: true,
