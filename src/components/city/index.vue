@@ -1,18 +1,16 @@
 <template>
     <div class="city">
 
-        <el-select class="select" v-model="form.province" :disabled="disabled" placeholder="请选择省"
-                   @change="handleChange('province')">
+        <el-select class="select" v-model="form.province" :disabled="disabled" @change="handleChange('province')">
             <el-option v-for="item in provinceData" :label="item.name" :value="item.id" :key="item.id"></el-option>
         </el-select>
 
-        <el-select class="select" v-model="form.city" :disabled="disabled || form.province === 0" placeholder="请选择市"
+        <el-select class="select" v-model="form.city" :disabled="disabled || form.province === 0"
                    @change="handleChange('city')">
             <el-option v-for="item in cityData" :label="item.name" :value="item.id" :key="item.id"></el-option>
         </el-select>
 
         <el-select class="select" v-model="form.area" :disabled="disabled || form.province === 0 || form.city === 0"
-                   placeholder="请选择区"
                    @change="handleChange('area')">
             <el-option v-for="item in areaData" :label="item.name" :value="item.id" :key="item.id"></el-option>
         </el-select>
@@ -106,7 +104,7 @@
             handleChange(res) {
                 if (res === 'province') {
                     this.form.city = 0;
-                    this.form.area = 0;
+                    this.form.area = '';
                     this.areaData = [];
                     this.getCityData(this.form.province);
                 }

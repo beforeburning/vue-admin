@@ -28,9 +28,9 @@
             <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-sizes="[20, 30, 40, 50]"
-                :page-size="20"
+                :current-page="pagination.currentPage"
+                :page-sizes="pagination.sizes"
+                :page-size="pagination.size"
                 layout="total, sizes, prev, pager, next, jumper"
                 :total="count">
             </el-pagination>
@@ -47,7 +47,11 @@
             return {
                 tableData: [],
                 count: 0,
-                currentPage: 1
+                pagination: {
+                    currentPage: 1,
+                    sizes: [20, 30, 40, 50],
+                    size: 20
+                }
             }
         },
         mounted() {
@@ -68,7 +72,8 @@
             handleCurrentChange(val) {
                 console.log(`当前页: ${val}`);
             },
-            init() {
+            // 列表数据
+            listData() {
                 getUserList({}).then(res => {
                     if (res.state) {
                         this.tableData = res.data.list;
@@ -78,6 +83,9 @@
                 }).catch(() => {
                     console.log('请求失败');
                 })
+            },
+            init() {
+                this.listData();
             }
         }
     }
