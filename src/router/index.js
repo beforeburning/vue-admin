@@ -193,7 +193,7 @@ let management = [
                 name: 'permissions',
                 // hidden: true,
                 meta: {
-                    title: '权限管理',
+                    title: '用户管理',
                     permissions: ['admin', 'super']
                 }
             },
