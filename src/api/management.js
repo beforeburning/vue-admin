@@ -14,3 +14,21 @@ export const getUserList = data => {
         data
     })
 }
+
+// 权限列表
+export const getPermissionsList = data => {
+    return request({
+        url: '/management/getPermissionsList',
+        method: 'post',
+        data
+    })
+}
+
+// 保存用户操作
+export const saveOperation = data => {
+    return request({
+        url: '/management/saveOperation',
+        method: 'post',
+        data
+    })
+}

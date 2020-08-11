@@ -14,7 +14,7 @@ const userData = {
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'admin',
             position: '超级管理员',
-            state: true
+            state: '1'
         }
     },
     super: {
@@ -25,7 +25,7 @@ const userData = {
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'super',
             position: '管理员',
-            state: true
+            state: '1'
         }
     },
     test: {
@@ -36,7 +36,7 @@ const userData = {
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'employees',
             position: '普通用户',
-            state: true
+            state: '1'
         }
     }
 };
@@ -52,7 +52,7 @@ for (let i = 0; i < 200; i++) {
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'employees',
             position: '普通用户',
-            state: i !== 0
+            state: i === 0 ? '0' : '1'
         }
     }
 }

@@ -36,83 +36,96 @@
             </el-pagination>
         </div>
 
-        <component :is="compName" :row="row"></component>
+        <component :is="compName" :row="row" :permissions="permissions"></component>
     </div>
 </template>
 
 <script>
-    import { getUserList } from '@/api/management';
+    import { getUserList, getPermissionsList } from '@/api/management';
     import detailed from './components/detailed';
+    import operation from './components/operation';
 
     export default {
-        name: "permissions",
-        components: {
-            detailed
-        },
-        data() {
-            return {
-                compName: '',
-                row: {},
-                tableData: [],
-                count: 0,
-                pagination: {
-                    currentPage: 1,
-                    size: 20
-                }
-            }
-        },
-        mounted() {
-            this.init();
-        },
-        methods: {
-            // 详细
-            detailed(index, row) {
-                this.row = row;
-                this.compName = 'detailed';
-            },
-            // 操作
-            operation(index, row) {
-                console.log(index, row);
-            },
-            // 修改每页的数量
-            handleSizeChange(val) {
-                this.pagination.size = val;
-                this.pagination.currentPage = 1;
-                this.listData();
-            },
-            // 翻页
-            handleCurrentChange(val) {
-                this.pagination.currentPage = val;
-                this.listData();
-            },
-            // 列表数据
-            listData() {
-                getUserList(this.pagination).then(res => {
-                    if (res.state) {
-                        this.tableData = res.data.list;
-                        this.count = res.data.count
-                    }
-                }).catch(() => {
-                    console.log('请求失败');
-                })
-            },
-            init() {
-                this.listData();
-            }
+      name: "permissions",
+      components: {
+        detailed,
+        operation
+      },
+      data() {
+        return {
+          compName: '',
+          row: {},
+          tableData: [],
+          count: 0,
+          pagination: {
+            currentPage: 1,
+            size: 20
+          },
+          permissions: []
         }
+      },
+      mounted() {
+        this.init();
+      },
+      methods: {
+        // 详细
+        detailed(index, row) {
+          this.row = row;
+          this.compName = 'detailed';
+        },
+        // 操作
+        operation(index, row) {
+          this.row = row;
+          this.compName = 'operation';
+        },
+        // 修改每页的数量
+        handleSizeChange(val) {
+          this.pagination.size = val;
+          this.pagination.currentPage = 1;
+          this.listData();
+        },
+        // 翻页
+        handleCurrentChange(val) {
+          this.pagination.currentPage = val;
+          this.listData();
+        },
+        // 列表数据
+        listData() {
+          getUserList(this.pagination).then(res => {
+            this.tableData = res.data.list;
+            this.count = res.data.count;
+          }).catch(() => {
+            console.log('请求失败');
+          })
+        },
+        // 权限列表
+        permissionsList() {
+          getPermissionsList().then(res => {
+            if (res.state) {
+              this.permissions = res.data.list
+            }
+          }).catch(() => {
+            console.log('请求失败');
+          })
+        },
+        init() {
+          this.listData();
+          this.permissionsList();
+        }
+      }
     }
 </script>
 
 <style scoped lang="less">
     .permissionsBox {
-        width: 98%;margin-left: 1%;display: flex;flex-direction: column;height: 100%;
+      width: 98%;margin-left: 1%;display: flex;flex-direction: column;height: 100%;
 
-        .table {
-            overflow-y: scroll;
-        }
+      .table {
+        overflow-y: scroll;
+      }
 
-        .page {
-            display: flex;height: 80px;width: 100%;justify-content: center;align-items: center;
-        }
+      .page {
+        display: flex;height: 80px;width: 100%;justify-content: center;align-items: center;
+      }
     }
 </style>

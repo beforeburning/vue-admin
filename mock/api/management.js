@@ -34,6 +34,32 @@ const management = [
             }
         }
     },
+    {
+        url: '/management/getPermissionsList',
+        type: 'post',
+        response: () => {
+            return {
+                code: 200,
+                state: true,
+                data: {
+                    list: managementMockData.permissionsList
+                },
+                message: '获取成功'
+            }
+        }
+    },
+    {
+        url: '/management/saveOperation',
+        type: 'post',
+        response: res => {
+            console.log(res);
+            return {
+                code: 200,
+                state: true,
+                message: '保存成功'
+            }
+        }
+    },
 ]
 
 export default [

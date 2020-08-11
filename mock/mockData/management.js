@@ -6,6 +6,7 @@
 
 import userMockData from "../mockData/user";
 
+// 用户列表 通过用户user数据集合出来后返回
 const userListData = () => {
     let userList = [];
     for (let item in userMockData.userData) {
@@ -18,6 +19,23 @@ const userListData = () => {
     return userList
 }
 
+// 权限列表
+const permissionsList = [
+    {
+        name: 'admin',
+        label: '超级管理员'
+    },
+    {
+        name: 'super',
+        label: '管理员'
+    },
+    {
+        name: 'employees',
+        label: '用户'
+    }
+]
+
 export default {
-    userListData
+    userListData,
+    permissionsList
 }
