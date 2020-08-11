@@ -188,9 +188,9 @@ let management = [
         },
         children: [
             {
-                path: 'userPermissions',
+                path: 'user',
                 component: () => import('@/views/management/userPermissions'),
-                name: 'userPermissions',
+                name: 'user',
                 meta: {
                     title: '用户管理',
                     permissions: ['admin', 'super']
