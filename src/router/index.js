@@ -189,7 +189,7 @@ let management = [
         children: [
             {
                 path: 'permissions',
-                component: () => import('@/views/management/permissions'),
+                component: () => import('@/views/management/userPermissions'),
                 name: 'permissions',
                 // hidden: true,
                 meta: {

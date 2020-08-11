@@ -52,7 +52,6 @@ const management = [
         url: '/management/saveOperation',
         type: 'post',
         response: res => {
-            console.log(res);
             return {
                 code: 200,
                 state: true,
