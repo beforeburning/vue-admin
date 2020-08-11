@@ -31,7 +31,7 @@ const permissionsList = [
     },
     {
         name: 'employees',
-        label: '用户'
+        label: '普通用户'
     }
 ]
 
