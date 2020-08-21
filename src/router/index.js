@@ -196,6 +196,15 @@ let management = [
                     permissions: ['admin', 'super']
                 }
             },
+            {
+                path: 'role',
+                component: () => import('@/views/management/roleConfiguration'),
+                name: 'role',
+                meta: {
+                    title: '角色配置',
+                    permissions: ['admin', 'super']
+                }
+            },
         ]
     },
 ]

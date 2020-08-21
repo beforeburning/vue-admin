@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import { getUserList, saveOperation } from '@/api/management';
+  import { saveOperation } from '@/api/management';
 
   export default {
     name: "operation",

@@ -22,16 +22,22 @@ const userListData = () => {
 // 权限列表
 const permissionsList = [
     {
+        id: 1,
         name: 'admin',
-        label: '超级管理员'
+        label: '超级管理员',
+        addTime: 1597136214
     },
     {
+        id: 2,
         name: 'super',
-        label: '管理员'
+        label: '管理员',
+        addTime: 1597049813
     },
     {
+        id: 3,
         name: 'employees',
-        label: '普通用户'
+        label: '普通用户',
+        addTime: 1596963413
     }
 ]
 

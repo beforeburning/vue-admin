@@ -42,8 +42,8 @@
 
 <script>
     import { getUserList, getPermissionsList } from '@/api/management';
-    import detailed from './components/detailed';
-    import operation from './components/operation';
+    import detailed from './components/userDetailed';
+    import operation from './components/userOperation';
 
     export default {
       name: "permissions",
