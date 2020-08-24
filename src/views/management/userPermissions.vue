@@ -137,7 +137,6 @@
             // 列表数据
             listData() {
                 getUserList(this.pagination).then(res => {
-                    console.log(res);
                     this.tableData = res.data.list;
                     this.count = res.data.count;
                 }).catch(() => {
