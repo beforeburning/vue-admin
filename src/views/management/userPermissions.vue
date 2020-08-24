@@ -6,12 +6,12 @@
                     <el-option label="id" value="id"></el-option>
                     <el-option label="姓名" value="name"></el-option>
                     <el-option label="职位" value="position"></el-option>
-                     <el-option label="权限" value="permissions"></el-option>
-                     <el-option label="联系方式" value="phone"></el-option>
-                     <el-option label="邮箱" value="eMail"></el-option>
-                     <el-option label="状态" value="state"></el-option>
+                    <el-option label="权限" value="permissions"></el-option>
+                    <el-option label="联系方式" value="phone"></el-option>
+                    <el-option label="邮箱" value="eMail"></el-option>
+                    <el-option label="状态" value="state"></el-option>
                 </el-select>
-              </el-input>
+            </el-input>
             <el-button type="primary" @click="searchBtn">搜索</el-button>
             <el-button type="warning" @click="resetBtn">重置</el-button>
         </el-row>
@@ -47,14 +47,9 @@
         </el-table>
 
         <div class="page">
-            <el-pagination
-                @size-change="handleSizeChange"
-                @current-change="handleCurrentChange"
-                :current-page="pagination.currentPage"
-                :page-sizes="[20, 30, 40, 50]"
-                :page-size="pagination.size"
-                layout="total, sizes, prev, pager, next, jumper"
-                :total="count">
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                           :current-page="pagination.currentPage" :page-sizes="[20, 30, 40, 50]"
+                           :page-size="pagination.size" layout="total, sizes, prev, pager, next, jumper" :total="count">
             </el-pagination>
         </div>
 
