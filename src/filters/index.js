@@ -102,3 +102,8 @@ export const formatDate = number => {
 export const shorthandTime = string => {
     return string.split(' ')[0]
 }
+
+// 账号状态
+export const state = number => {
+    return parseInt(number) === 1 ? '正常' : '禁用'
+}

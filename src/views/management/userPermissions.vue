@@ -15,6 +15,13 @@
 
             <el-table-column prop="eMail" label="邮箱" min-width="18%" align="center"></el-table-column>
 
+           <el-table-column
+               label="状态" min-width="10%" align="center">
+            <template scope="scope">
+              {{ scope.row.state  | state }}
+            </template>
+          </el-table-column>
+
             <el-table-column label="操作" align="center" min-width="15%">
                 <template slot-scope="scope">
                     <el-button size="mini" type="primary" @click="detailed(scope.$index, scope.row)">详情</el-button>
@@ -92,6 +99,7 @@
         // 列表数据
         listData() {
           getUserList(this.pagination).then(res => {
+            console.log(res);
             this.tableData = res.data.list;
             this.count = res.data.count;
           }).catch(() => {

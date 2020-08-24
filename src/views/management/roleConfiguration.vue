@@ -75,7 +75,7 @@
 
 <style scoped lang="less">
  .permissionsConfigureBox {
-   width: 98%;margin-left: 1%;display: flex;flex-direction: column;height: 100%;
+   width: 98%;margin-left: 1%;display: flex;flex-direction: column;margin-bottom: 10px;flex: 1;
 
    .table {
      overflow-y: scroll;
