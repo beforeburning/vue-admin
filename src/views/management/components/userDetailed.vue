@@ -89,36 +89,36 @@
 
 <script>
 export default {
-  name: "detailed",
-  data() {
-    return {
-      dialogTableVisible: false,
+    name: "detailed",
+    data() {
+        return {
+            dialogTableVisible: false,
+        }
+    },
+    props: {
+        row: {
+            type: Object,
+            required: false,
+        }
+    },
+    mounted() {
+        this.dialogTableVisible = true;
+    },
+    methods: {
+        closed() {
+            this.$parent.row = {};
+            this.$parent.compName = '';
+        }
     }
-  },
-  props: {
-    row: {
-      type: Object,
-      required: false,
-    }
-  },
-  mounted() {
-    this.dialogTableVisible = true;
-  },
-  methods: {
-    closed() {
-      this.$parent.row = {};
-      this.$parent.compName = '';
-    }
-  }
 }
 </script>
 
 <style scoped lang="less">
     .name {
-      text-align: right;font-size: 16px;margin-right: 20px;padding-top: 0; margin-top: 0;
+        text-align: right;font-size: 16px;margin-right: 20px;padding-top: 0; margin-top: 0;
     }
 
     .val {
-      text-align: left;font-size: 16px;margin-left: 20px;padding-top: 0; margin-top: 0;
+        text-align: left;font-size: 16px;margin-left: 20px;padding-top: 0; margin-top: 0;
     }
 </style>

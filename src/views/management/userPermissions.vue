@@ -100,7 +100,7 @@
         methods: {
             // 搜索按钮
             searchBtn() {
-                if (this.search) {
+                if (this.search && this.select) {
                     this.searchData = this.tableData.filter(data => {
                         return data[this.select].toLowerCase().includes(this.search.toLowerCase())
                     })

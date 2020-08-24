@@ -7,11 +7,11 @@
                 <div class="information">
                     <span>
                         <strong>姓名：</strong>
-                        <em>{{information.name}}</em>
+                        <em>{{ information.name }}</em>
                     </span>
                     <span>
                         <strong>身份证：</strong>
-                        <em>{{information.idCard}}</em>
+                        <em>{{ information.idCard }}</em>
                     </span>
                 </div>
                 <div class="title">
@@ -43,8 +43,8 @@
             </div>
 
             <span slot="footer" class="dialog-footer">
-              <el-button @click="cancel">取 消</el-button>
-              <el-button type="primary" @click="success">{{isIdentity === true ? '确 定' : '认 证'}}</el-button>
+                <el-button @click="cancel">取 消</el-button>
+                <el-button type="primary" @click="success">{{ isIdentity === true ? '确 定' : '认 证' }}</el-button>
             </span>
         </el-dialog>
     </div>

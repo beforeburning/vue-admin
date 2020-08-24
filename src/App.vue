@@ -1,12 +1,11 @@
 <template>
   <div id="app">
-
-    <!--    <keep-alive>-->
-    <router-view></router-view>
+      <!--    <keep-alive>-->
+          <router-view></router-view>
       <!--    </keep-alive>-->
 
-    <div v-wechat-title="$route.meta.title"></div>
-    <vue-ins-progress-bar></vue-ins-progress-bar>
+      <div v-wechat-title="$route.meta.title"></div>
+      <vue-ins-progress-bar></vue-ins-progress-bar>
   </div>
 </template>
 
