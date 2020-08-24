@@ -33,7 +33,7 @@
 
             <el-table-column label="状态" min-width="10%" align="center">
                 <template scope="scope">
-                  {{ scope.row.state  | state }}
+                    {{ scope.row.state  | state }}
                 </template>
             </el-table-column>
 
