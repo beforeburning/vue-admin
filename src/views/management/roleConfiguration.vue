@@ -1,26 +1,32 @@
 <template>
   <div class="permissionsConfigureBox">
 
+    <el-row class="btn">
+      <el-button type="primary">添加角色</el-button>
+    </el-row>
+
     <el-table
         :data="permissions"
         style="width: 100%">
       <el-table-column
           prop="id"
           label="id"
-          width="180">
+          align="center"
+          min-width="10%">
       </el-table-column>
       <el-table-column
           prop="label"
           label="权限"
-          width="180">
+          min-width="15%">
       </el-table-column>
        <el-table-column
            prop="name"
            label="key"
-           width="180">
+           min-width="15%">
       </el-table-column>
       <el-table-column
-          label="添加时间">
+          label="添加时间"
+          min-width="15%">
         <template scope="scope">
           {{ scope.row.addTime | formatDate }}
         </template>
@@ -74,11 +80,15 @@
 </script>
 
 <style scoped lang="less">
- .permissionsConfigureBox {
-   width: 98%;margin-left: 1%;display: flex;flex-direction: column;margin-bottom: 10px;flex: 1;
+  .permissionsConfigureBox {
+    width: 98%;margin-left: 1%;display: flex;flex-direction: column;margin-bottom: 10px;flex: 1;
 
-   .table {
-     overflow-y: scroll;
-   }
- }
+    .btn {
+      display: flex;width: 100%;margin-bottom: 10px;
+    }
+
+    .table {
+      overflow-y: scroll;
+    }
+  }
 </style>
