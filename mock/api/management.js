@@ -93,6 +93,26 @@ const management = [
             }
         }
     },
+    {
+        url: '/management/saveRole',
+        type: 'post',
+        response: res => {
+            if (res.body.type === 'modify') {
+                return {
+                    code: 200,
+                    state: true,
+                    message: '修改成功'
+                }
+            } else {
+                return {
+                    code: 200,
+                    state: true,
+                    message: '添加成功'
+                }
+            }
+
+        }
+    },
 ]
 
 export default [

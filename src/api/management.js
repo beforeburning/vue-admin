@@ -50,3 +50,11 @@ export const permissionsTree = () => {
     })
 }
 
+// 保存/修改角色
+export const saveRole = data => {
+    return request({
+        url: '/management/saveRole',
+        method: 'post',
+        data
+    })
+}

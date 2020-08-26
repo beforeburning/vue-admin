@@ -42,19 +42,23 @@ import {
     roleName,
     roleKey
 } from "@/components/validate";
-import { permissionsTree } from '@/api/management';
+import { permissionsTree, saveRole } from '@/api/management';
 
 export default {
     name: "roleOperation",
     data() {
         return {
             title: '',
+            type: '',
             rules: {
                 label: [{required: true, trigger: 'blur', validator: roleName}],
                 name: [{required: true, trigger: 'blur', validator: roleKey}],
             },
             dialogTableVisible: false,
-            roleOperationForm: {},
+            roleOperationForm: {
+                label: '',
+                name: ''
+            },
             // 权限树
             permissionsTreeList: [],
             defaultProps: {
@@ -77,10 +81,11 @@ export default {
         this.dialogTableVisible = true;
         if (JSON.stringify(this.row) === '{}') {
             this.title = '添加角色'
+            this.type = 'add'
         } else {
-            this.title = '角色详情'
+            this.title = '修改角色'
+            this.type = 'modify'
             this.roleOperationForm = this.row;
-            console.log(this.row);
         }
 
         // 获取权限树
@@ -98,8 +103,22 @@ export default {
         },
         save() {
             // 获取权限树的已选中的key
-            let arr = this.$refs.tree.getCheckedKeys();
-            console.log(arr);
+            this.$refs.rulesForm.validate(valid => {
+                if (valid) {
+                    let str = {
+                        ...this.roleOperationForm,
+                        permissionsTree: this.$refs.tree.getCheckedKeys(),
+                        type: this.type,
+                    }
+                    saveRole(str).then(res => {
+                        if (res.state) {
+                            this.$message.success(res.message);
+                            this.closed();
+                            this.$parent.init()
+                        }
+                    })
+                }
+            })
         }
     }
 }
