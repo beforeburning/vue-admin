@@ -85,7 +85,8 @@ export default {
         } else {
             this.title = '修改角色'
             this.type = 'modify'
-            this.roleOperationForm = this.row;
+            // 深拷贝的一种方式
+            this.roleOperationForm = JSON.parse(JSON.stringify(this.row));
         }
 
         // 获取权限树
@@ -96,11 +97,13 @@ export default {
         })
     },
     methods: {
+        // 关闭
         closed() {
             this.$parent.row = {};
             this.$parent.index = '';
             this.$parent.compName = '';
         },
+        // 保存
         save() {
             // 获取权限树的已选中的key
             this.$refs.rulesForm.validate(valid => {
