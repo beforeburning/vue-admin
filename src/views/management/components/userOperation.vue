@@ -22,8 +22,8 @@
             </el-form>
 
             <div slot="footer" class="dialog-footer">
-            <el-button @click="closed">取 消</el-button>
-            <el-button type="primary" @click="save">保 存</el-button>
+                <el-button @click="closed">取 消</el-button>
+                <el-button type="primary" @click="save">保 存</el-button>
             </div>
         </el-dialog>
     </div>

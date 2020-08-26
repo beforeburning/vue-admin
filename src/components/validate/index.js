@@ -4,7 +4,7 @@
  Date: 2020年05月28日
  */
 
-import { CEN, validEmail, isNumber, isWeChat, isPhone, isChinese, isIdCard } from '@/utils/validate';
+import { CEN, validEmail, isNumber, isWeChat, isPhone, isChinese, isIdCard, validAlphabets } from '@/utils/validate';
 
 // 账号验证
 export const validateUsername = (rule, value, callback) => {
@@ -106,6 +106,30 @@ export const validateIdCard = (rule, value, callback) => {
     }
     if (!isIdCard(value)) {
         callback(new Error('您的输入的身份证号格式有问题'))
+    } else {
+        callback()
+    }
+};
+
+// 角色名验证
+export const roleName = (rule, value, callback) => {
+    if (value.length < 2 || value.length > 12) {
+        callback(new Error('您的角色名长度不正确'))
+    }
+    if (!CEN(value)) {
+        callback(new Error('角色名只允许含有中英文加数字'))
+    } else {
+        callback()
+    }
+};
+
+// 角色key验证
+export const roleKey = (rule, value, callback) => {
+    if (value.length < 2 || value.length > 12) {
+        callback(new Error('您的角色key长度不正确'))
+    }
+    if (!validAlphabets(value)) {
+        callback(new Error('角色key只允许输入英文'))
     } else {
         callback()
     }

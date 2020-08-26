@@ -32,3 +32,21 @@ export const saveOperation = data => {
         data
     })
 }
+
+// 删除角色
+export const delRole = data => {
+    return request({
+        url: '/management/delRole',
+        method: 'post',
+        data
+    })
+}
+
+// 权限树
+export const permissionsTree = () => {
+    return request({
+        url: '/management/permissionsTree',
+        method: 'post'
+    })
+}
+

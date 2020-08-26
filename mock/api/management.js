@@ -59,6 +59,40 @@ const management = [
             }
         }
     },
+    {
+        url: '/management/permissionsTree',
+        type: 'post',
+        response: () => {
+            return {
+                code: 200,
+                state: true,
+                data: {
+                    list: managementMockData.permissionsTreeList
+                },
+                message: '获取成功'
+            }
+        }
+    },
+    {
+        url: '/management/delRole',
+        type: 'post',
+        response: res => {
+            console.log(res.body.id);
+            if (res.body.id === 1) {
+                return {
+                    code: 200,
+                    state: false,
+                    message: '禁止删除admin账户'
+                }
+            } else {
+                return {
+                    code: 200,
+                    state: true,
+                    message: '删除成功'
+                }
+            }
+        }
+    },
 ]
 
 export default [
