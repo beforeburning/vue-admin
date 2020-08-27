@@ -11,6 +11,10 @@ Router.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
 
+import { getConfig } from '@/utils/getConfig';
+
+let permissions = getConfig(['permissions', 'management'])
+
 // 路由分类
 // 404状态类
 let notFound = [
@@ -184,7 +188,7 @@ let management = [
         meta: {
             title: '权限配置',
             icon: 'el-icon-s-tools',
-            permissions: ['admin', 'super']
+            permissions: permissions
         },
         children: [
             {
@@ -193,7 +197,7 @@ let management = [
                 name: 'user',
                 meta: {
                     title: '用户管理',
-                    permissions: ['admin', 'super']
+                    permissions: permissions
                 }
             },
             {
@@ -202,7 +206,7 @@ let management = [
                 name: 'role',
                 meta: {
                     title: '角色配置',
-                    permissions: ['admin', 'super']
+                    permissions: permissions
                 }
             },
         ]

@@ -1,8 +1,14 @@
 {
-  "basis": {
-    "isLocal": false,
-    "logo": "material/logo.png",
-    "name": "管理后台",
-    "baseURL": "http://localhost:8080/"
-  }
+    "basis": {
+        "isLocal": false,
+        "logo": "material/logo.png",
+        "name": "管理后台",
+        "baseURL": "http://localhost:8080/"
+    },
+    "permissions": {
+        "management": [
+            "admin",
+            "super"
+        ]
+    }
 }

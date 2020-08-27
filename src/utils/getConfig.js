@@ -8,7 +8,7 @@ import store from '@/store';
 import config from '../../public/config.json';
 
 // 读取vuex里面的config数据
-export const getConfig = (str) => {
+export const getConfig = str => {
     let configData = store.getters.config;
     if (JSON.stringify(configData) === '{}') {
         store.commit('config', config);
