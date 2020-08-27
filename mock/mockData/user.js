@@ -25,7 +25,7 @@ const userData = {
             header: 'https://himg.bdimg.com/sys/portrait/item/b08ee6a5aae7a5885f5f5f5f5f5f5f4a43.jpg',
             permissions: 'super',
             position: '管理员',
-            state: '1'
+            state: '0'
         }
     },
     test: {

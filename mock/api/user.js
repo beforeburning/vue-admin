@@ -27,7 +27,15 @@ const user = [
         response: res => {
             // 获取用户输入的账号密码
             const {username} = res.body;
-            const {password} = res.body
+            const {password} = res.body;
+
+            if (userMockData.userData[username].user.state === '0') {
+                return {
+                    code: 200,
+                    state: false,
+                    message: '账户已禁用'
+                }
+            }
 
             if (!userMockData.userData[username]) {
                 return {

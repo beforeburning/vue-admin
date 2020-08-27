@@ -77,7 +77,6 @@ const management = [
         url: '/management/delRole',
         type: 'post',
         response: res => {
-            console.log(res.body.id);
             if (res.body.id === 1) {
                 return {
                     code: 200,
