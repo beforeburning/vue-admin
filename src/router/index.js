@@ -213,6 +213,42 @@ let management = [
     },
 ]
 
+// 影像系统
+let dicom = [
+    {
+        path: '/dicom',
+        component: Layout,
+        redirect: '/dicom/index',
+        meta: {
+            title: '影响系统',
+            icon: 'el-icon-video-camera'
+        },
+        children: [
+            {
+                path: 'dicom',
+                component: () => import('@/views/dicom/index'),
+                name: 'dicom',
+                meta: {
+                    title: '影像系统',
+                    noCache: true,
+                    affix: true
+                },
+            },
+            {
+                path: 'dicomContent/*',
+                component: () => import('@/views/dicom/dicomContent'),
+                name: 'dicomContent',
+                hidden: true,
+                meta: {
+                    title: '影像详情',
+                    noCache: true,
+                    affix: true
+                },
+            }
+        ]
+    },
+]
+
 // 路由
 export default new Router({
     mode: 'history',
@@ -223,6 +259,7 @@ export default new Router({
         ...user,
         ...basis,
         ...library,
+        ...dicom,
         ...management
     ]
 });

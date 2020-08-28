@@ -83,7 +83,7 @@
     }
 </style>
 <style scoped lang="less">
-.modify {
-    width: 100%;
-}
+    .modify {
+        width: 100%;
+    }
 </style>

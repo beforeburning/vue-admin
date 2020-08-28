@@ -156,6 +156,14 @@
     }
 </script>
 
+
+<style lang="less">
+    .permissionsBox {
+        .el-table__body-wrapper.is-scrolling-none {
+            height: auto !important;
+        }
+    }
+</style>
 <style scoped lang="less">
     .permissionsBox {
         width: 98%;margin-left: 1%;display: flex;flex-direction: column;height: 100%;

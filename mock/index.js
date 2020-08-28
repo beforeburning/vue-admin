@@ -5,16 +5,18 @@
  */
 
 import Mock from 'mockjs'
-import { param2Obj } from '../src/utils'
+import { param2Obj } from '@/utils'
 
 import user from './api/user'
 import dictionary from './api/dictionary'
 import management from './api/management'
+import dicom from './api/dicom'
 
 const mocks = [
     ...user,
     ...dictionary,
-    ...management
+    ...management,
+    ...dicom
 ];
 
 // for front mock
