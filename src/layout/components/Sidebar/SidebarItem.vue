@@ -1,32 +1,36 @@
 <template>
-  <!-- 如果当前 subroute 有子节点 -->
-    <el-submenu v-if="!subroute.hidden && subroute.children && subroute.children.length > 0 && permissions(subroute)"
-                :index="genPath(fatherpath, subroute.path, subroute)">
+    <div>
+        <!-- 如果当前 subroute 有子节点 -->
+        <el-submenu
+            v-if="!subroute.hidden && subroute.children && subroute.children.length > 0 && permissions(subroute)"
+            :index="genPath(fatherpath, subroute.path, subroute)">
 
-        <template slot="title">
-            <i :class="subroute.meta.icon"></i>
-            <span>{{subroute.meta.title}}</span>
-        </template>
+            <template slot="title">
+                <i :class="subroute.meta.icon"></i>
+                <span>{{ subroute.meta.title }}</span>
+            </template>
 
-        <!-- 递归调用自身，直到 subroute 不含子节点 -->
-        <SidebarItem v-for="(submenu, subidx) in subroute.children"
-                     :subroute="submenu"
-                     :fatherpath="genPath(fatherpath, subroute.path, subroute)"
-                     :barIdx="subidx"
-                     :key="barIdx + '-' + subidx" />
-    </el-submenu>
+            <!-- 递归调用自身，直到 subroute 不含子节点 -->
+            <SidebarItem v-for="(submenu, subidx) in subroute.children"
+                         :subroute="submenu"
+                         :fatherpath="genPath(fatherpath, subroute.path, subroute)"
+                         :barIdx="subidx"
+                         :key="barIdx + '-' + subidx" />
+        </el-submenu>
 
-    <!-- 当前节点不含子节点且非隐藏 -->
-    <el-menu-item
-        v-else-if="!subroute.hidden && permissions(subroute)"
-        :index="genPath(fatherpath, subroute.path, subroute)"
-    >{{subroute.meta.title}}
-    </el-menu-item>
+        <!-- 当前节点不含子节点且非隐藏 -->
+        <el-menu-item
+            v-else-if="!subroute.hidden && permissions(subroute)"
+            :index="genPath(fatherpath, subroute.path, subroute)"
+        >{{ subroute.meta.title }}
+        </el-menu-item>
 
-    <el-menu-item
-        v-else-if="!subroute.hidden && permissions(subroute)"
-        :index="genPath(fatherpath, subroute.path, subroute)"
-    >{{subroute.meta.title}}</el-menu-item>
+        <el-menu-item
+            v-else-if="!subroute.hidden && permissions(subroute)"
+            :index="genPath(fatherpath, subroute.path, subroute)"
+        >{{ subroute.meta.title }}</el-menu-item>
+
+    </div>
 
 </template>
 
@@ -65,15 +69,21 @@ export default {
 </script>
 
 <style lang="less">
-   .el-submenu__title {
-       transition: 0s !important;
-   }
+     &.close {
+         span {
+             font-size: 0 !important;
+         }
+     }
 
-   .el-menu-item {
-       transition: 0s !important;
-   }
+     .el-submenu__title {
+         transition: 0s !important;
+     }
 
-   .el-menu {
-       border: 0 !important;
-   }
+     .el-menu-item {
+         transition: 0s !important;
+     }
+
+     .el-menu {
+         border: 0 !important;
+     }
 </style>
