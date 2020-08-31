@@ -4,11 +4,12 @@
                    @closed="closed">
 
             <el-form :model="permissionsForm" class="permissions-form" autocomplete="off" label-position="left"
-                    label-width="100px">
+                     label-width="100px">
 
                 <el-form-item label="账户权限">
                     <el-select v-model="permissionsForm.permissions" placeholder="请选择账户权限">
-                        <el-option v-for="item in permissions" :label="item.label" :value="item.name"></el-option>
+                        <el-option v-for="item in permissions" :key="item.label" :label="item.label"
+                                   :value="item.name"></el-option>
                     </el-select>
                 </el-form-item>
 

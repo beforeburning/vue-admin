@@ -80,6 +80,28 @@ Vue.use(VueLazyload, {
     attempt: 1
 });
 
+// // dicom 引入 cornerstone, dicomParser, cornerstoneWADOImageLoader
+// import * as cornerstone from "cornerstone-core";
+// import * as dicomParser from "dicom-parser";
+// // import * as cornerstoneWADOImageLoader from "cornerstone-wado-image-loader";
+// import * as cornerstoneWADOImageLoader from "./assets/dicom/cornerstoneWADOImageLoader.min";
+//
+// Vue.use(cornerstone);
+// Vue.use(dicomParser);
+// Vue.use(cornerstoneWADOImageLoader);
+// // //指定要注册加载程序的基石实例
+// // cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+// //
+// // const config = {
+// //     webWorkerPath: "/src/assets/dicom/cornerstoneWADOImageLoaderWebWorker.min",
+// //     taskConfiguration: {
+// //         decodeTask: {
+// //             codecsPath: "/src/assets/dicom/cornerstoneWADOImageLoaderCodecs.min"
+// //         }
+// //     }
+// // };
+// // cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
+
 // mixin 全局混入
 Vue.mixin({
     created() {
