@@ -4,6 +4,11 @@ const resolve = dir => join(__dirname, dir);
 
 module.exports = {
     runtimeCompiler: true,
+    // 解决127.0.0.1指向其他域名时出现"Invalid Host header"问题
+    devServer: {
+        disableHostCheck: true,
+        // port: 8080,
+    }
     // configureWebpack: {
     //     resolve: {
     //         alias: {

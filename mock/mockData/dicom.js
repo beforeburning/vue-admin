@@ -41,16 +41,16 @@ const dicomContent = {
                 "seriesNumber": "2",
                 "instanceList": [
                     {
-                        "imageId": "two/1.5191KB.DCM"
+                        "imageId": "patients1/1.5191KB.DCM"
                     },
                     {
-                        "imageId": "two/2.516KB.DCM"
+                        "imageId": "patients1/2.516KB.DCM"
                     },
                     {
-                        "imageId": "two/3.79KB.DCM"
+                        "imageId": "patients1/3.79KB.DCM"
                     },
                     {
-                        "imageId": "two/test.dcm"
+                        "imageId": "patients1/3.79KB.DCM"
                     }
                 ]
             },
@@ -60,7 +60,7 @@ const dicomContent = {
                 "seriesNumber": "1",
                 "instanceList": [
                     {
-                        "imageId": "two/2.516KB.DCM"
+                        "imageId": "patients1/2.516KB.DCM"
                     }
                 ]
             },
@@ -68,11 +68,7 @@ const dicomContent = {
                 "seriesUid": "3.79",
                 "seriesDescription": "SCOUT LAT",
                 "seriesNumber": "1.1",
-                "instanceList": [
-                    {
-                        "imageId": "two/3.79KB.DCM"
-                    }
-                ]
+                "instanceList": []
             }
         ]
     }
