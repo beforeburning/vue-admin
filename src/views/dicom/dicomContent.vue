@@ -15,8 +15,19 @@
                     <el-button
                         type="danger"
                         :icon="isInvert ? 'el-icon-sunny' : 'el-icon-moon'"
-                        ref="invert"
                         @click="invert()" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'zoom' ? 'success' : 'danger' "
+                        icon="el-icon-search"
+                        @click="zoom()" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'pan' ? 'success' : 'danger' "
+                        icon="el-icon-rank"
+                        @click="pan()" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'stackScroll' ? 'success' : 'danger' "
+                        icon="el-icon-orange"
+                        @click="stackScroll()" round></el-button>
                 </div>
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false"></div>
             </div>
@@ -108,19 +119,25 @@
                     resize(canvas)
                 })
             },
-            // 亮度调整
-            wwwc() {
+            // 功能按钮的抽象方法
+            btnType(type, fun) {
                 let canvas = this.currentCanvas;
-                if (canvas && this.currentBtn === 'wwwc') {
-                    // 禁用全部
+                if (canvas && this.currentBtn === type) {
+                    // 关闭功能 禁用全部
                     this.currentBtn = '';
                     dicomTool.disableAllTools(canvas);
                     return false;
+                } else {
+                    this.currentBtn = type;
+                    dicomTool.disableAllTools(canvas);
+                    fun(canvas)
                 }
-                // 亮度调增
-                this.currentBtn = 'wwwc';
-                dicomTool.disableAllTools(canvas);
-                dicomTool.wwwc(canvas)
+            },
+            // 亮度调整
+            wwwc() {
+                this.btnType('wwwc', canvas => {
+                    dicomTool.wwwc(canvas)
+                })
             },
             // 反色
             invert() {
@@ -129,6 +146,34 @@
                 this.currentBtn = '';
                 dicomTool.disableAllTools(canvas);
                 dicomTool.invert(canvas, this.isInvert)
+            },
+            // 放大
+            zoom() {
+                this.btnType('zoom', canvas => {
+                    dicomTool.zoom(canvas)
+                })
+            },
+            // 移动
+            pan() {
+                this.btnType('pan', canvas => {
+                    dicomTool.pan(canvas)
+                })
+            },
+            // 滚动
+            stackScroll() {
+
+                let allImageIds = [];
+                this.currentImageList.forEach(item => {
+                    let imageUrl = realUrl(item.imageId);
+                    allImageIds.push(imageUrl);
+                });
+                let canvasStack = {
+                    currentImageIdIndex: 0,
+                    imageIds: allImageIds
+                };
+                this.btnType('stackScroll', canvas => {
+                    dicomTool.stackScroll(canvas, canvasStack)
+                })
             },
             // 初始化
             init() {

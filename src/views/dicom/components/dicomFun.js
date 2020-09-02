@@ -19,13 +19,6 @@ export const parser = (url, callback) => {
         console.log('加载失败', err);
         callback(false);
     });
-
-    // 加载进度 不知道为什么undefined (?)
-    corn.cornerstone.events.addEventListener("cornerstoneimageloadprogress", function (event) {
-            const eventData = event.detail.percentComplete;
-            console.log(eventData);
-        }
-    );
 }
 
 // 初始化canvas
@@ -62,8 +55,33 @@ export const dicomTool = {
         viewport.invert = isInvert;
         corn.cornerstone.setViewport(canvas, viewport);
     },
+    // 放大
+    zoom(canvas) {
+        corn.cornerstoneTools.zoom.activate(canvas, 5); // 5 is right mouse button and left mouse button
+        corn.cornerstoneTools.zoomTouchDrag.activate(canvas);
+    },
+    // 移动
+    pan(canvas) {
+        corn.cornerstoneTools.pan.activate(canvas, 3); // 3 is middle mouse button and left mouse button
+        corn.cornerstoneTools.panTouchDrag.activate(canvas);
+    },
+    // 滚动
+    stackScroll(canvas, canvasStack) {
+        corn.cornerstoneTools.addStackStateManager(canvas, ["stack"]);
+        corn.cornerstoneTools.addToolState(canvas, "stack", canvasStack);//将工具状态添加到toolStateManager，这由工具以及恢复已保存状态的模块完成。addToolState(element, toolType, measurementData)
+        corn.cornerstoneTools.stackScroll.activate(canvas, 5);
+        corn.cornerstoneTools.stackScrollTouchDrag.activate(canvas, 5);
+    },
     // 禁用所有工具
     disableAllTools(canvas) {
         corn.cornerstoneTools.wwwc.disable(canvas);
+        corn.cornerstoneTools.wwwcTouchDrag.deactivate(canvas);
+        corn.cornerstoneTools.zoom.disable(canvas);
+        corn.cornerstoneTools.zoomTouchDrag.deactivate(canvas);
+        corn.cornerstoneTools.pan.disable(canvas);
+        corn.cornerstoneTools.panTouchDrag.deactivate(canvas);
+        corn.cornerstoneTools.stackScroll.disable(canvas);
+        corn.cornerstoneTools.stackScrollTouchDrag.deactivate(canvas);
+
     }
 }
