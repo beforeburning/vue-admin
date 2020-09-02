@@ -5,7 +5,6 @@
  */
 
 import corn from "@/views/dicom/components/index";
-import tools from "@/views/dicom/components/index";
 
 // 创建canvas的盒子
 export const enable = div => {
@@ -39,14 +38,32 @@ export const displayImage = (canvas, image, viewport) => {
     corn.cornerstone.displayImage(canvas, image, viewport);
 }
 
-// // 监听加载进度
-export const tool = () => {
-    // Enable Inputs
+// 刷新canvas
+export const resize = canvas => {
+    corn.cornerstone.resize(canvas, true);
+}
 
-    // corn.cornerstone.events.addEventListener('cornerstoneimageloadprogress', function (event) {
-    //     const eventData = event.detail.percentComplete;
-    //     // console.log(eventData);
-    //     // const loadProgress = document.getElementById('loadProgress');
-    //     // loadProgress.textContent = `Image Load Progress: ${eventData.percentComplete}%`;
-    // })
+// 工具栏
+export const dicomTool = {
+    // 开启鼠标控制
+    init(canvas) {
+        corn.cornerstoneTools.mouseInput.enable(canvas);
+        corn.cornerstoneTools.mouseWheelInput.enable(canvas);
+        corn.cornerstoneTools.touchInput.enable(canvas);
+    },
+    // 亮度调整
+    wwwc(canvas) {
+        corn.cornerstoneTools.wwwc.activate(canvas, 1); // ww/wc is the default tool for left mouse button
+        corn.cornerstoneTools.wwwcTouchDrag.activate(canvas);
+    },
+    // 反色
+    invert(canvas, isInvert) {
+        let viewport = corn.cornerstone.getViewport(canvas);
+        viewport.invert = isInvert;
+        corn.cornerstone.setViewport(canvas, viewport);
+    },
+    // 禁用所有工具
+    disableAllTools(canvas) {
+        corn.cornerstoneTools.wwwc.disable(canvas);
+    }
 }
