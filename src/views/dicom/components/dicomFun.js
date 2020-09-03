@@ -44,6 +44,32 @@ export const dicomTool = {
         corn.cornerstoneTools.mouseWheelInput.enable(canvas);
         corn.cornerstoneTools.touchInput.enable(canvas);
     },
+    // 监听各个参数
+    imageRenderedMonitoring(canvas, callback) {
+        canvas.addEventListener('cornerstoneimagerendered', e => {
+            const contextData = e.detail;
+            const viewport = corn.cornerstone.getViewport(canvas);
+            let zoomValue = viewport.scale.toFixed(3);
+            let wwwcValue = Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);
+            let renderTime = contextData.renderTimeInMs.toFixed(3);
+            callback({
+                zoom: zoomValue,
+                wwwc: wwwcValue,
+                renderTime,
+            })
+        });
+    },
+    newImageMonitoring(canvas, callback) {
+        canvas.addEventListener('cornerstonenewimage', (e) => {
+            let toolData = corn.cornerstoneTools.getToolState(canvas, 'stack');
+            let stack = toolData.data[0];
+            callback({
+                currentImageIdIndex: stack.currentImageIdIndex + 1,
+                imageIds: stack.imageIds.length,
+                frameRate: e.detail.frameRate
+            })
+        })
+    },
     // 亮度调整
     wwwc(canvas) {
         corn.cornerstoneTools.wwwc.activate(canvas, 1); // ww/wc is the default tool for left mouse button
@@ -51,7 +77,7 @@ export const dicomTool = {
     },
     // 反色
     invert(canvas, isInvert) {
-        let viewport = corn.cornerstone.getViewport(canvas);
+        const viewport = corn.cornerstone.getViewport(canvas);
         viewport.invert = isInvert;
         corn.cornerstone.setViewport(canvas, viewport);
     },

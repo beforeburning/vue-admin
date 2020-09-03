@@ -29,7 +29,28 @@
                         icon="el-icon-orange"
                         @click="stackScroll()" round></el-button>
                 </div>
-                <div ref="canvas" class="image-canvas" oncontextmenu="return false"></div>
+                <div ref="canvas" class="image-canvas" oncontextmenu="return false">
+                </div>
+                <div class="parameterMonitoringRight">
+                    <span>
+                        <p>Img:</p>
+                        <em>
+                            {{ newImageMonitoring.currentImageIdIndex }}/{{ newImageMonitoring.imageIds }}
+                        </em>
+                    </span>
+                    <span>
+                        <p>FPS:</p><em>{{ newImageMonitoring.frameRate ? newImageMonitoring.frameRate : 0 }}</em>
+                    </span>
+                    <span>
+                        <p>Zoom:</p><em>{{ imageRenderedMonitoring.zoom }}</em>
+                    </span>
+                    <span>
+                        <p>WW/WL:</p><em>{{ imageRenderedMonitoring.wwwc }}</em>
+                    </span>
+                    <span>
+                        <p>renderTime:</p><em>{{ imageRenderedMonitoring.renderTime }}</em>
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -54,7 +75,9 @@
                 currentImageList: '',
                 currentViewPort: '',
                 // 工具类用到的值
-                isInvert: false
+                isInvert: false,
+                imageRenderedMonitoring: {},
+                newImageMonitoring: {}
             }
         },
         activated() {
@@ -111,6 +134,14 @@
                         this.currentViewPort = viewport;
                         // 开启鼠标控制
                         dicomTool.init(canvas);
+
+                        // 监听各个参数
+                        dicomTool.imageRenderedMonitoring(canvas, data => {
+                            this.imageRenderedMonitoring = data;
+                        })
+                        dicomTool.newImageMonitoring(canvas, data => {
+                            this.newImageMonitoring = data;
+                        })
                     }
                 });
 
@@ -161,7 +192,6 @@
             },
             // 滚动
             stackScroll() {
-
                 let allImageIds = [];
                 this.currentImageList.forEach(item => {
                     let imageUrl = realUrl(item.imageId);
@@ -208,9 +238,7 @@
             }
 
             .dicomMain {
-                display: block;height: 100%;margin-left: 10px;position: relative;
-                //flex: 1;
-                width: calc(~'100% - 200px');
+                display: block;height: 100%;margin-left: 10px;position: relative;width: calc(~'100% - 200px');
 
                 .btn {
                     display: flex;width: 100%;height: 50px;align-items: center;
@@ -227,6 +255,19 @@
                         width: 100% !important;height: 100% !important;
                     }
                 }
+
+                .parameterMonitoringRight {
+                    position: absolute;right: 0;bottom: 0;color: #e4ad00;width: 100%;display: flex;
+
+                    span {
+                        display: flex;align-items: center;margin-right: 20px;margin-left: 10px;
+
+                        em {
+                            font-style: normal; margin-left: 5px;
+                        }
+                    }
+                }
+
             }
         }
     }
