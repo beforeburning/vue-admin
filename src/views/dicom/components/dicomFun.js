@@ -13,7 +13,7 @@ export const enable = div => {
 
 // 解析dicom
 export const parser = (url, callback) => {
-    corn.cornerstone.loadAndCacheImage(url).then(image => {
+    corn.cornerstone.loadImage(url).then(image => {
         callback(image)
     }, err => {
         console.log('加载失败', err);
@@ -39,10 +39,31 @@ export const resize = canvas => {
 // 工具栏
 export const dicomTool = {
     // 开启鼠标控制
-    init(canvas) {
-        corn.cornerstoneTools.mouseInput.enable(canvas);
-        corn.cornerstoneTools.mouseWheelInput.enable(canvas);
-        corn.cornerstoneTools.touchInput.enable(canvas);
+    init(canvas, allImageIds) {
+        corn.cornerstoneTools.init({
+            // 监听鼠标元素
+            mouseEnabled: true,
+            // 监听touch元素
+            touchEnabled: true,
+            globalToolSyncEnabled: false,
+            showSVGCursors: false,
+        });
+
+        // 工具的颜色
+        corn.cornerstoneTools.toolStyle.setToolWidth(1);
+        corn.cornerstoneTools.toolColors.setToolColor('rgb(255, 0, 0)');
+        corn.cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
+
+        // 绑定元素
+        corn.cornerstone.enable(canvas);
+
+        // 添加工具
+        this.addTool(canvas, allImageIds);
+
+        // 比例工具
+        const ScaleOverlayTool = corn.cornerstoneTools.ScaleOverlayTool;
+        corn.cornerstoneTools.addTool(ScaleOverlayTool)
+        corn.cornerstoneTools.setToolActive('ScaleOverlay', {mouseButtonMask: 1})
     },
     // 监听各个参数
     imageRenderedMonitoring(canvas, callback) {
@@ -70,44 +91,94 @@ export const dicomTool = {
             })
         })
     },
-    // 亮度调整
-    wwwc(canvas) {
-        corn.cornerstoneTools.wwwc.activate(canvas, 1); // ww/wc is the default tool for left mouse button
-        corn.cornerstoneTools.wwwcTouchDrag.activate(canvas);
+    addTool(canvas, allImageIds) {
+        // 添加亮度调整工具
+        const WwwcTool = corn.cornerstoneTools.WwwcTool;
+        corn.cornerstoneTools.addTool(WwwcTool)
+
+        // 添加放大工具
+        const ZoomTool = corn.cornerstoneTools.ZoomTool;
+        corn.cornerstoneTools.addTool(ZoomTool, {
+            // Optional configuration
+            configuration: {
+                invert: false,
+                preventZoomOutsideImage: false,
+                minScale: .1,
+                maxScale: 20.0,
+            }
+        });
+
+        // 添加平移工具
+        const PanTool = corn.cornerstoneTools.PanTool;
+        corn.cornerstoneTools.addTool(PanTool)
+
+        // 添加堆叠工具
+        const StackScrollTool = corn.cornerstoneTools.StackScrollTool
+        const StackScrollMouseWheelTool = corn.cornerstoneTools.StackScrollMouseWheelTool;
+        corn.cornerstoneTools.addTool(StackScrollTool);
+        corn.cornerstoneTools.addTool(StackScrollMouseWheelTool)
+
+        const stack = {
+            currentImageIdIndex: 0,
+            imageIds: allImageIds
+        }
+        corn.cornerstoneTools.addStackStateManager(canvas, ['stack'])
+        corn.cornerstoneTools.addToolState(canvas, 'stack', stack)
+
+        // 长度测量工具
+        const LengthTool = corn.cornerstoneTools.LengthTool;
+        corn.cornerstoneTools.addTool(LengthTool)
+
+        // 角度测量工具
+        const AngleTool = corn.cornerstoneTools.AngleTool;
+        corn.cornerstoneTools.addTool(AngleTool)
+
+        // 探针工具
+        const ProbeTool = corn.cornerstoneTools.ProbeTool;
+        corn.cornerstoneTools.addTool(ProbeTool)
+
+        // 橡皮擦工具
+        const EraserTool = corn.cornerstoneTools.EraserTool;
+        corn.cornerstoneTools.addTool(EraserTool)
+
     },
-    // 反色
-    invert(canvas, isInvert) {
-        const viewport = corn.cornerstone.getViewport(canvas);
-        viewport.invert = isInvert;
-        corn.cornerstone.setViewport(canvas, viewport);
-    },
-    // 放大
-    zoom(canvas) {
-        corn.cornerstoneTools.zoom.activate(canvas, 5); // 5 is right mouse button and left mouse button
-        corn.cornerstoneTools.zoomTouchDrag.activate(canvas);
-    },
-    // 移动
-    pan(canvas) {
-        corn.cornerstoneTools.pan.activate(canvas, 3); // 3 is middle mouse button and left mouse button
-        corn.cornerstoneTools.panTouchDrag.activate(canvas);
-    },
-    // 滚动
-    stackScroll(canvas, canvasStack) {
-        corn.cornerstoneTools.addStackStateManager(canvas, ["stack"]);
-        corn.cornerstoneTools.addToolState(canvas, "stack", canvasStack);//将工具状态添加到toolStateManager，这由工具以及恢复已保存状态的模块完成。addToolState(element, toolType, measurementData)
-        corn.cornerstoneTools.stackScroll.activate(canvas, 5);
-        corn.cornerstoneTools.stackScrollTouchDrag.activate(canvas, 5);
+    // 工具集合
+    toolCollection(type) {
+        // 亮度调整
+        if (type === 'Wwwc') {
+            corn.cornerstoneTools.setToolActive('Wwwc', {mouseButtonMask: 1})
+        }
+        if (type === 'Zoom') {
+            corn.cornerstoneTools.setToolActive('Zoom', {mouseButtonMask: 1})
+        }
+        if (type === 'Pan') {
+            corn.cornerstoneTools.setToolActive('Pan', {mouseButtonMask: 1})
+        }
+        if (type === 'StackScrollTool') {
+            corn.cornerstoneTools.setToolActive('StackScroll', {mouseButtonMask: 1})
+            // corn.cornerstoneTools.setToolActive('StackScrollMouseWheel', { })
+        }
+        if (type === 'Length') {
+            corn.cornerstoneTools.setToolActive('Length', {mouseButtonMask: 1})
+        }
+        if (type === 'Angle') {
+            corn.cornerstoneTools.setToolActive('Angle', {mouseButtonMask: 1})
+        }
+        if (type === 'Probe') {
+            corn.cornerstoneTools.setToolActive('Probe', {mouseButtonMask: 1})
+        }
+        if (type === 'Eraser') {
+            corn.cornerstoneTools.setToolActive('Eraser', {mouseButtonMask: 1})
+        }
     },
     // 禁用所有工具
-    disableAllTools(canvas) {
-        corn.cornerstoneTools.wwwc.disable(canvas);
-        corn.cornerstoneTools.wwwcTouchDrag.deactivate(canvas);
-        corn.cornerstoneTools.zoom.disable(canvas);
-        corn.cornerstoneTools.zoomTouchDrag.deactivate(canvas);
-        corn.cornerstoneTools.pan.disable(canvas);
-        corn.cornerstoneTools.panTouchDrag.deactivate(canvas);
-        corn.cornerstoneTools.stackScroll.disable(canvas);
-        corn.cornerstoneTools.stackScrollTouchDrag.deactivate(canvas);
-
+    disableAllTools() {
+        corn.cornerstoneTools.setToolPassive('Wwwc')
+        corn.cornerstoneTools.setToolPassive('Zoom')
+        corn.cornerstoneTools.setToolPassive('Pan')
+        corn.cornerstoneTools.setToolPassive('StackScroll')
+        corn.cornerstoneTools.setToolPassive('Length')
+        corn.cornerstoneTools.setToolPassive('Angle')
+        corn.cornerstoneTools.setToolPassive('Probe')
     }
 }

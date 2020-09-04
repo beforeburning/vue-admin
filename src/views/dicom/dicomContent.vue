@@ -7,27 +7,39 @@
             <div class="canvasList" ref="canvasList"></div>
 
             <div class="dicomMain" ref="dicomMain">
-                <div class="btn" v-show="seriesList">
+                <div class="btn">
                     <el-button
-                        :type="currentBtn === 'wwwc' ? 'success' : 'danger' "
+                        :type="currentBtn === 'Wwwc' ? 'success' : 'danger' "
                         icon="el-icon-sunrise"
-                        @click="wwwc()" round></el-button>
+                        @click="btnType('Wwwc')" round></el-button>
                     <el-button
-                        type="danger"
-                        :icon="isInvert ? 'el-icon-sunny' : 'el-icon-moon'"
-                        @click="invert()" round></el-button>
-                    <el-button
-                        :type="currentBtn === 'zoom' ? 'success' : 'danger' "
+                        :type="currentBtn === 'Zoom' ? 'success' : 'danger' "
                         icon="el-icon-search"
-                        @click="zoom()" round></el-button>
+                        @click="btnType('Zoom')" round></el-button>
                     <el-button
-                        :type="currentBtn === 'pan' ? 'success' : 'danger' "
+                        :type="currentBtn === 'Pan' ? 'success' : 'danger' "
                         icon="el-icon-rank"
-                        @click="pan()" round></el-button>
+                        @click="btnType('Pan')" round></el-button>
                     <el-button
-                        :type="currentBtn === 'stackScroll' ? 'success' : 'danger' "
+                        :type="currentBtn === 'StackScrollTool' ? 'success' : 'danger' "
                         icon="el-icon-orange"
-                        @click="stackScroll()" round></el-button>
+                        @click="btnType('StackScrollTool')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'Length' ? 'success' : 'danger' "
+                        icon="el-icon-edit"
+                        @click="btnType('Length')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'Angle' ? 'success' : 'danger' "
+                        icon="el-icon-arrow-left"
+                        @click="btnType('Angle')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'Probe' ? 'success' : 'danger' "
+                        icon="el-icon-location-information"
+                        @click="btnType('Probe')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'Eraser' ? 'success' : 'danger' "
+                        icon="el-icon-delete"
+                        @click="btnType('Eraser')" round></el-button>
                 </div>
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false">
                 </div>
@@ -35,7 +47,11 @@
                     <span>
                         <p>Img:</p>
                         <em>
-                            {{ newImageMonitoring.currentImageIdIndex }}/{{ newImageMonitoring.imageIds }}
+                            {{
+                                newImageMonitoring.currentImageIdIndex ? newImageMonitoring.currentImageIdIndex : 1
+                            }}/{{
+                                currentImageList.length
+                            }}
                         </em>
                     </span>
                     <span>
@@ -126,14 +142,22 @@
                 parser(realUrl(imageList[0].imageId), image => {
                     if (image) {
                         let viewport = getDefaultViewportForImage(canvas, image);
-                        // 显示图像
-                        displayImage(canvas, image, viewport);
 
                         this.currentCanvas = canvas;
                         this.currentImageList = imageList;
                         this.currentViewPort = viewport;
-                        // 开启鼠标控制
-                        dicomTool.init(canvas);
+
+                        // 图片列表
+                        let allImageIds = [];
+                        this.currentImageList.forEach(item => {
+                            let imageUrl = realUrl(item.imageId);
+                            allImageIds.push(imageUrl);
+                        });
+                        // 显示图像
+                        displayImage(canvas, image, viewport);
+
+                        // 开启工具栏
+                        dicomTool.init(canvas, allImageIds);
 
                         // 监听各个参数
                         dicomTool.imageRenderedMonitoring(canvas, data => {
@@ -142,6 +166,8 @@
                         dicomTool.newImageMonitoring(canvas, data => {
                             this.newImageMonitoring = data;
                         })
+
+                        this.newImageMonitoring.currentImageIdIndex = 1
                     }
                 });
 
@@ -151,59 +177,18 @@
                 })
             },
             // 功能按钮的抽象方法
-            btnType(type, fun) {
-                let canvas = this.currentCanvas;
-                if (canvas && this.currentBtn === type) {
+            btnType(type) {
+                // let canvas = this.currentCanvas;
+                if (this.currentBtn === type) {
                     // 关闭功能 禁用全部
                     this.currentBtn = '';
-                    dicomTool.disableAllTools(canvas);
+                    dicomTool.disableAllTools();
                     return false;
                 } else {
                     this.currentBtn = type;
-                    dicomTool.disableAllTools(canvas);
-                    fun(canvas)
+                    dicomTool.disableAllTools();
+                    dicomTool.toolCollection(type)
                 }
-            },
-            // 亮度调整
-            wwwc() {
-                this.btnType('wwwc', canvas => {
-                    dicomTool.wwwc(canvas)
-                })
-            },
-            // 反色
-            invert() {
-                let canvas = this.currentCanvas;
-                this.isInvert = !this.isInvert;
-                this.currentBtn = '';
-                dicomTool.disableAllTools(canvas);
-                dicomTool.invert(canvas, this.isInvert)
-            },
-            // 放大
-            zoom() {
-                this.btnType('zoom', canvas => {
-                    dicomTool.zoom(canvas)
-                })
-            },
-            // 移动
-            pan() {
-                this.btnType('pan', canvas => {
-                    dicomTool.pan(canvas)
-                })
-            },
-            // 滚动
-            stackScroll() {
-                let allImageIds = [];
-                this.currentImageList.forEach(item => {
-                    let imageUrl = realUrl(item.imageId);
-                    allImageIds.push(imageUrl);
-                });
-                let canvasStack = {
-                    currentImageIdIndex: 0,
-                    imageIds: allImageIds
-                };
-                this.btnType('stackScroll', canvas => {
-                    dicomTool.stackScroll(canvas, canvasStack)
-                })
             },
             // 初始化
             init() {

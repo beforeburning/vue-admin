@@ -41,17 +41,56 @@ const dicomContent = {
                 "seriesNumber": "2",
                 "instanceList": [
                     {
-                        "imageId": "patients1/1.5191KB.DCM"
+                        "imageId": "MR-DICOM/000e6a9a.dcm"
                     },
                     {
-                        "imageId": "patients1/2.516KB.DCM"
+                        "imageId": "MR-DICOM/000e6a9b.dcm"
                     },
                     {
-                        "imageId": "patients1/3.79KB.DCM"
+                        "imageId": "MR-DICOM/000e6a9c.dcm"
                     },
                     {
-                        "imageId": "patients1/3.79KB.DCM"
-                    }
+                        "imageId": "MR-DICOM/000e6a9d.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6a9e.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6a9f.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6a98.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6a99.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa0.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa1.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa2.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa3.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa4.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa5.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa6.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa7.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aa8.dcm"
+                    },
                 ]
             },
             {
@@ -60,8 +99,50 @@ const dicomContent = {
                 "seriesNumber": "1",
                 "instanceList": [
                     {
-                        "imageId": "patients1/2.516KB.DCM"
-                    }
+                        "imageId": "MR-DICOM/000e6aa9.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aaa.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aab.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aac.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aad.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aae.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6aaf.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab0.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab1.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab2.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab3.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab4.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab5.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab6.dcm"
+                    },
+                    {
+                        "imageId": "MR-DICOM/000e6ab7.dcm"
+                    },
                 ]
             },
             {
