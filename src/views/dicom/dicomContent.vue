@@ -8,6 +8,10 @@
 
             <div class="dicomMain" ref="dicomMain">
                 <div class="btn">
+                     <el-button
+                         :type="currentBtn === 'Magnify' ? 'success' : 'danger' "
+                         icon="el-icon-view"
+                         @click="btnType('Magnify')" round></el-button>
                     <el-button
                         :type="currentBtn === 'Wwwc' ? 'success' : 'danger' "
                         icon="el-icon-sunrise"
@@ -40,6 +44,18 @@
                         :type="currentBtn === 'Eraser' ? 'success' : 'danger' "
                         icon="el-icon-delete"
                         @click="btnType('Eraser')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'RectangleRoi' ? 'success' : 'danger' "
+                        icon="el-icon-copy-document"
+                        @click="btnType('RectangleRoi')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'EllipticalRoi' ? 'success' : 'danger' "
+                        icon="el-icon-aim"
+                        @click="btnType('EllipticalRoi')" round></el-button>
+                    <el-button
+                        :type="currentBtn === 'Bidirectional' ? 'success' : 'danger' "
+                        icon="el-icon-sort"
+                        @click="btnType('Bidirectional')" round></el-button>
                 </div>
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false">
                 </div>
@@ -234,7 +250,7 @@
                 }
 
                 .image-canvas {
-                    width: 100%; position: absolute;left: 0;top: 50px;height: calc(~'100% - 50px');
+                    width: 100%; position: absolute;left: 0;top: 50px;height: calc(~'100% - 50px');overflow: hidden;
 
                     canvas {
                         width: 100% !important;height: 100% !important;

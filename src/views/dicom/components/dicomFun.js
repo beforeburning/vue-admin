@@ -91,14 +91,21 @@ export const dicomTool = {
             })
         })
     },
+    // 工具类注册
     addTool(canvas, allImageIds) {
+        // 放大镜工具
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.MagnifyTool, {
+            configutarion: {
+                magnifySize: 10,
+                magnificationLevel: 5
+            }
+        })
+
         // 添加亮度调整工具
-        const WwwcTool = corn.cornerstoneTools.WwwcTool;
-        corn.cornerstoneTools.addTool(WwwcTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.WwwcTool)
 
         // 添加放大工具
-        const ZoomTool = corn.cornerstoneTools.ZoomTool;
-        corn.cornerstoneTools.addTool(ZoomTool, {
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.ZoomTool, {
             // Optional configuration
             configuration: {
                 invert: false,
@@ -109,38 +116,37 @@ export const dicomTool = {
         });
 
         // 添加平移工具
-        const PanTool = corn.cornerstoneTools.PanTool;
-        corn.cornerstoneTools.addTool(PanTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.PanTool)
 
         // 添加堆叠工具
-        const StackScrollTool = corn.cornerstoneTools.StackScrollTool
-        const StackScrollMouseWheelTool = corn.cornerstoneTools.StackScrollMouseWheelTool;
-        corn.cornerstoneTools.addTool(StackScrollTool);
-        corn.cornerstoneTools.addTool(StackScrollMouseWheelTool)
-
-        const stack = {
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.StackScrollTool);
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.StackScrollMouseWheelTool)
+        corn.cornerstoneTools.addStackStateManager(canvas, ['stack'])
+        corn.cornerstoneTools.addToolState(canvas, 'stack', {
             currentImageIdIndex: 0,
             imageIds: allImageIds
-        }
-        corn.cornerstoneTools.addStackStateManager(canvas, ['stack'])
-        corn.cornerstoneTools.addToolState(canvas, 'stack', stack)
+        })
 
         // 长度测量工具
-        const LengthTool = corn.cornerstoneTools.LengthTool;
-        corn.cornerstoneTools.addTool(LengthTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.LengthTool);
 
         // 角度测量工具
-        const AngleTool = corn.cornerstoneTools.AngleTool;
-        corn.cornerstoneTools.addTool(AngleTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.AngleTool)
 
         // 探针工具
-        const ProbeTool = corn.cornerstoneTools.ProbeTool;
-        corn.cornerstoneTools.addTool(ProbeTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.ProbeTool)
 
         // 橡皮擦工具
-        const EraserTool = corn.cornerstoneTools.EraserTool;
-        corn.cornerstoneTools.addTool(EraserTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EraserTool)
 
+        // 矩形框
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.RectangleRoiTool)
+
+        // 矩形框
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EllipticalRoiTool)
+
+        // 矩形框
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.BidirectionalTool)
     },
     // 工具集合
     toolCollection(type) {
@@ -170,15 +176,32 @@ export const dicomTool = {
         if (type === 'Eraser') {
             corn.cornerstoneTools.setToolActive('Eraser', {mouseButtonMask: 1})
         }
+        if (type === 'Magnify') {
+            corn.cornerstoneTools.setToolActive('Magnify', {mouseButtonMask: 1})
+        }
+        if (type === 'RectangleRoi') {
+            corn.cornerstoneTools.setToolActive('RectangleRoi', {mouseButtonMask: 1})
+        }
+        if (type === 'EllipticalRoi') {
+            corn.cornerstoneTools.setToolActive('EllipticalRoi', {mouseButtonMask: 1})
+        }
+        if (type === 'Bidirectional') {
+            corn.cornerstoneTools.setToolActive('Bidirectional', {mouseButtonMask: 1})
+        }
     },
     // 禁用所有工具
     disableAllTools() {
-        corn.cornerstoneTools.setToolPassive('Wwwc')
-        corn.cornerstoneTools.setToolPassive('Zoom')
-        corn.cornerstoneTools.setToolPassive('Pan')
-        corn.cornerstoneTools.setToolPassive('StackScroll')
-        corn.cornerstoneTools.setToolPassive('Length')
-        corn.cornerstoneTools.setToolPassive('Angle')
-        corn.cornerstoneTools.setToolPassive('Probe')
+        corn.cornerstoneTools.setToolEnabled('Wwwc')
+        corn.cornerstoneTools.setToolEnabled('Zoom')
+        corn.cornerstoneTools.setToolEnabled('Pan')
+        corn.cornerstoneTools.setToolEnabled('StackScroll')
+        corn.cornerstoneTools.setToolEnabled('Length')
+        corn.cornerstoneTools.setToolEnabled('Angle')
+        corn.cornerstoneTools.setToolEnabled('Probe')
+        corn.cornerstoneTools.setToolEnabled('Eraser')
+        corn.cornerstoneTools.setToolEnabled('Magnify')
+        corn.cornerstoneTools.setToolEnabled('RectangleRoi')
+        corn.cornerstoneTools.setToolEnabled('EllipticalRoi')
+        corn.cornerstoneTools.setToolEnabled('Bidirectional')
     }
 }
