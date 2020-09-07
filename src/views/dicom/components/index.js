@@ -26,20 +26,15 @@ cornerstoneWADOImageLoader.external.dicomParser = dicomParser;
 cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
 
 // 配置 webWorker
-const config = {
-    webWorkerPath: "/src/utils/dicom/cornerstoneWADOImageLoaderWebWorker.js",
-    taskConfiguration: {
-        decodeTask: {
-            codecsPath: "/src/utils/dicom/cornerstoneWADOImageLoaderCodecs.js"
-        }
-    }
-};
-cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
-
-// cornerstone.events.addEventListener('cornerstoneimageloadprogress', event => {
-//     const eventData = event.detail;
-//     console.log(eventData.percentComplete);
-// });
+// const config = {
+//     webWorkerPath: "/utils/dicom/cornerstoneWADOImageLoaderWebWorker.js",
+//     taskConfiguration: {
+//         decodeTask: {
+//             codecsPath: "/utils/dicom/cornerstoneWADOImageLoaderCodecs.js"
+//         }
+//     }
+// };
+// cornerstoneWADOImageLoader.webWorkerManager.initialize(config);
 
 export default {
     cornerstone,

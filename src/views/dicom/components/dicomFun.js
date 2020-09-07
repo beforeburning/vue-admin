@@ -12,23 +12,10 @@ export const enable = div => {
 }
 
 // 解析dicom
-export const parser = (url, callback) => {
+export const parser = (url, canvas) => {
     corn.cornerstone.loadImage(url).then(image => {
-        callback(image)
-    }, err => {
-        console.log('加载失败', err);
-        callback(false);
+        corn.cornerstone.displayImage(canvas, image);
     });
-}
-
-// 初始化canvas
-export const getDefaultViewportForImage = (canvas, url) => {
-    return corn.cornerstone.getDefaultViewportForImage(canvas, url);
-}
-
-// 显示图像
-export const displayImage = (canvas, image, viewport) => {
-    corn.cornerstone.displayImage(canvas, image, viewport);
 }
 
 // 刷新canvas
@@ -206,12 +193,32 @@ export const dicomTool = {
     },
     // 保存按钮
     getToolState(canvas) {
-        let Length = corn.cornerstoneTools.getToolState(canvas, 'Length')
-        let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle')
-        let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe')
-        let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi')
-        let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi')
-        let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional')
+        // let Length = corn.cornerstoneTools.getToolState(canvas, 'Length');
+        // console.log(Length);
+        // let LengthData = Length && Length.length ? Length.data.map(item => item.handles) : '';
+        // // Length && Length.length ? LengthData = Length.data.map(item => item.handles) : ''
+        // console.log(LengthData);
+
+        // let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle').data.map(item => item.handles)
+        // let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe').data.map(item => item.handles)
+        // let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi').data.map(item => item.handles)
+        // let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi').data.map(item => item.handles)
+        // let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional').data.map(item => item.handles)
+        // return {
+        //     Length,
+        //     Angle,
+        //     Probe,
+        //     RectangleRoi,
+        //     EllipticalRoi,
+        //     Bidirectional
+        // }
+
+        let Length = corn.cornerstoneTools.getToolState(canvas, 'Length').data.map(item => item.handles)
+        let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle').data.map(item => item.handles)
+        let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe').data.map(item => item.handles)
+        let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi').data.map(item => item.handles)
+        let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi').data.map(item => item.handles)
+        let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional').data.map(item => item.handles)
         return {
             Length,
             Angle,

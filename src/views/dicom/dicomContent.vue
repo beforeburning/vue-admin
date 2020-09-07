@@ -109,7 +109,12 @@
 <script>
     import elementResizeDetectorMaker from 'element-resize-detector'
     import { dicomContent } from '@/api/dicom';
-    import { enable, parser, getDefaultViewportForImage, displayImage, dicomTool, resize } from './components/dicomFun'
+    import {
+        enable,
+        parser,
+        dicomTool,
+        resize,
+    } from './components/dicomFun'
     import { realUrl, newDiv } from './components/tool'
 
     export default {
@@ -122,7 +127,6 @@
                 // 当前canvas的参数
                 currentCanvas: '',
                 currentImageList: '',
-                currentViewPort: '',
                 // 工具类用到的值
                 isInvert: false,
                 imageRenderedMonitoring: {},
@@ -148,13 +152,7 @@
                         // 注册cornerstone
                         enable(canvas);
                         // 获取真实url 解析dicom
-                        parser(realUrl(imageId), image => {
-                            if (image) {
-                                let viewport = getDefaultViewportForImage(canvas, image);
-                                // 显示图像
-                                displayImage(canvas, image, viewport);
-                            }
-                        });
+                        parser(realUrl(imageId), canvas);
                     }
                 })
 
@@ -172,37 +170,29 @@
                 enable(canvas);
 
                 // 获取真实url 解析dicom
-                parser(realUrl(imageList[0].imageId), image => {
-                    if (image) {
-                        let viewport = getDefaultViewportForImage(canvas, image);
+                parser(realUrl(imageList[0].imageId),canvas);
 
-                        this.currentCanvas = canvas;
-                        this.currentImageList = imageList;
-                        this.currentViewPort = viewport;
+                this.currentCanvas = canvas;
+                this.currentImageList = imageList;
 
-                        // 图片列表
-                        let allImageIds = [];
-                        this.currentImageList.forEach(item => {
-                            let imageUrl = realUrl(item.imageId);
-                            allImageIds.push(imageUrl);
-                        });
-                        // 显示图像
-                        displayImage(canvas, image, viewport);
-
-                        // 开启工具栏
-                        dicomTool.init(canvas, allImageIds);
-
-                        // 监听各个参数
-                        dicomTool.imageRenderedMonitoring(canvas, data => {
-                            this.imageRenderedMonitoring = data;
-                        })
-                        dicomTool.newImageMonitoring(canvas, data => {
-                            this.newImageMonitoring = data;
-                        })
-
-                        this.newImageMonitoring.currentImageIdIndex = 1
-                    }
+                // 图片列表
+                let allImageIds = [];
+                this.currentImageList.forEach(item => {
+                    allImageIds.push(realUrl(item.imageId));
                 });
+
+                // 开启工具栏
+                dicomTool.init(canvas, allImageIds);
+
+                // 监听各个参数
+                dicomTool.imageRenderedMonitoring(canvas, data => {
+                    this.imageRenderedMonitoring = data;
+                })
+                dicomTool.newImageMonitoring(canvas, data => {
+                    this.newImageMonitoring = data;
+                })
+
+                this.newImageMonitoring.currentImageIdIndex = 1
 
                 // 修改窗口大小
                 elementResizeDetectorMaker().listenTo(this.$refs.dicomMain, () => {
@@ -253,10 +243,11 @@
             position: absolute;width: 100%;height: 100%;left: 0;top: 0;flex-direction: row;
 
             .canvasList {
-                width: 200px;height: 100%;overflow-y: scroll;background: black;display: flex;flex-direction: column;
+                width: 200px;height: 100%;overflow-y: scroll;display: flex;flex-direction: column;
+                background: black;
 
                 .list {
-                    margin-bottom: 20px;display: flex;width: 200px;cursor: pointer;
+                    margin-bottom: 20px;display: block;width: 200px;cursor: pointer;
                 }
             }
 
