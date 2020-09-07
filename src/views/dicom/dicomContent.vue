@@ -192,7 +192,7 @@
                     this.newImageMonitoring = data;
                 })
 
-                this.newImageMonitoring.currentImageIdIndex = 1
+                this.newImageMonitoring.currentImageIdIndex = 1;
 
                 // 修改窗口大小
                 elementResizeDetectorMaker().listenTo(this.$refs.dicomMain, () => {

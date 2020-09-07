@@ -193,39 +193,14 @@ export const dicomTool = {
     },
     // 保存按钮
     getToolState(canvas) {
-        // let Length = corn.cornerstoneTools.getToolState(canvas, 'Length');
-        // console.log(Length);
-        // let LengthData = Length && Length.length ? Length.data.map(item => item.handles) : '';
-        // // Length && Length.length ? LengthData = Length.data.map(item => item.handles) : ''
-        // console.log(LengthData);
+        let arr = ['Length', 'Angle', 'Probe', 'RectangleRoi', 'EllipticalRoi', 'Bidirectional'];
+        let str = {};
 
-        // let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle').data.map(item => item.handles)
-        // let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe').data.map(item => item.handles)
-        // let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi').data.map(item => item.handles)
-        // let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi').data.map(item => item.handles)
-        // let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional').data.map(item => item.handles)
-        // return {
-        //     Length,
-        //     Angle,
-        //     Probe,
-        //     RectangleRoi,
-        //     EllipticalRoi,
-        //     Bidirectional
-        // }
+        arr.map(item => {
+            let type = corn.cornerstoneTools.getToolState(canvas, item);
+            str[item] = type && type.data.length ? type.data.map(item => item.handles) : '';
+        })
 
-        let Length = corn.cornerstoneTools.getToolState(canvas, 'Length').data.map(item => item.handles)
-        let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle').data.map(item => item.handles)
-        let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe').data.map(item => item.handles)
-        let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi').data.map(item => item.handles)
-        let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi').data.map(item => item.handles)
-        let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional').data.map(item => item.handles)
-        return {
-            Length,
-            Angle,
-            Probe,
-            RectangleRoi,
-            EllipticalRoi,
-            Bidirectional
-        }
+        return str;
     }
 }
