@@ -81,7 +81,7 @@ export const dicomTool = {
         });
     },
     newImageMonitoring(canvas, callback) {
-        canvas.addEventListener('cornerstonenewimage', (e) => {
+        canvas.addEventListener('cornerstonenewimage', e => {
             let toolData = corn.cornerstoneTools.getToolState(canvas, 'stack');
             let stack = toolData.data[0];
             callback({
@@ -203,5 +203,22 @@ export const dicomTool = {
         corn.cornerstoneTools.setToolEnabled('RectangleRoi')
         corn.cornerstoneTools.setToolEnabled('EllipticalRoi')
         corn.cornerstoneTools.setToolEnabled('Bidirectional')
+    },
+    // 保存按钮
+    getToolState(canvas) {
+        let Length = corn.cornerstoneTools.getToolState(canvas, 'Length')
+        let Angle = corn.cornerstoneTools.getToolState(canvas, 'Angle')
+        let Probe = corn.cornerstoneTools.getToolState(canvas, 'Probe')
+        let RectangleRoi = corn.cornerstoneTools.getToolState(canvas, 'RectangleRoi')
+        let EllipticalRoi = corn.cornerstoneTools.getToolState(canvas, 'EllipticalRoi')
+        let Bidirectional = corn.cornerstoneTools.getToolState(canvas, 'Bidirectional')
+        return {
+            Length,
+            Angle,
+            Probe,
+            RectangleRoi,
+            EllipticalRoi,
+            Bidirectional
+        }
     }
 }

@@ -8,54 +8,71 @@
 
             <div class="dicomMain" ref="dicomMain">
                 <div class="btn">
-                     <el-button
-                         :type="currentBtn === 'Magnify' ? 'success' : 'danger' "
-                         icon="el-icon-view"
-                         @click="btnType('Magnify')" round></el-button>
+                    <!--放大镜效果-->
+                    <el-button
+                        :type="currentBtn === 'Magnify' ? 'success' : 'danger' "
+                        icon="el-icon-view"
+                        @click="btnType('Magnify')" round></el-button>
+                    <!--亮度调整-->
                     <el-button
                         :type="currentBtn === 'Wwwc' ? 'success' : 'danger' "
                         icon="el-icon-sunrise"
                         @click="btnType('Wwwc')" round></el-button>
+                    <!--放大-->
                     <el-button
                         :type="currentBtn === 'Zoom' ? 'success' : 'danger' "
                         icon="el-icon-search"
                         @click="btnType('Zoom')" round></el-button>
+                    <!--移动-->
                     <el-button
                         :type="currentBtn === 'Pan' ? 'success' : 'danger' "
                         icon="el-icon-rank"
                         @click="btnType('Pan')" round></el-button>
+                    <!--滚动-->
                     <el-button
                         :type="currentBtn === 'StackScrollTool' ? 'success' : 'danger' "
                         icon="el-icon-orange"
                         @click="btnType('StackScrollTool')" round></el-button>
+                    <!--画线-->
                     <el-button
                         :type="currentBtn === 'Length' ? 'success' : 'danger' "
                         icon="el-icon-edit"
                         @click="btnType('Length')" round></el-button>
+                    <!--角-->
                     <el-button
                         :type="currentBtn === 'Angle' ? 'success' : 'danger' "
                         icon="el-icon-arrow-left"
                         @click="btnType('Angle')" round></el-button>
+                    <!--定位-->
                     <el-button
                         :type="currentBtn === 'Probe' ? 'success' : 'danger' "
                         icon="el-icon-location-information"
                         @click="btnType('Probe')" round></el-button>
-                    <el-button
-                        :type="currentBtn === 'Eraser' ? 'success' : 'danger' "
-                        icon="el-icon-delete"
-                        @click="btnType('Eraser')" round></el-button>
+                    <!--矩形-->
                     <el-button
                         :type="currentBtn === 'RectangleRoi' ? 'success' : 'danger' "
                         icon="el-icon-copy-document"
                         @click="btnType('RectangleRoi')" round></el-button>
+                    <!--圆形-->
                     <el-button
                         :type="currentBtn === 'EllipticalRoi' ? 'success' : 'danger' "
                         icon="el-icon-aim"
                         @click="btnType('EllipticalRoi')" round></el-button>
+                    <!--十字-->
                     <el-button
                         :type="currentBtn === 'Bidirectional' ? 'success' : 'danger' "
                         icon="el-icon-sort"
                         @click="btnType('Bidirectional')" round></el-button>
+                    <!--删除-->
+                    <el-button
+                        :type="currentBtn === 'Eraser' ? 'success' : 'danger' "
+                        icon="el-icon-delete"
+                        @click="btnType('Eraser')" round></el-button>
+                    <!--获取状态-->
+                    <el-button
+                        type="success"
+                        icon="el-icon-check"
+                        @click="getToolState()" round></el-button>
                 </div>
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false">
                 </div>
@@ -205,6 +222,11 @@
                     dicomTool.disableAllTools();
                     dicomTool.toolCollection(type)
                 }
+            },
+            // 保存按钮
+            getToolState() {
+                let data = dicomTool.getToolState(this.$refs.canvas);
+                console.log(data);
             },
             // 初始化
             init() {
