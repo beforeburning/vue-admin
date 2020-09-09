@@ -23,6 +23,7 @@ export const resize = canvas => {
     corn.cornerstone.resize(canvas, true);
 }
 
+
 // 工具栏
 export const dicomTool = {
     // 开启鼠标控制
@@ -53,39 +54,48 @@ export const dicomTool = {
         corn.cornerstoneTools.setToolActive('ScaleOverlay', {mouseButtonMask: 1})
     },
     // 监听各个参数
-    imageRenderedMonitoring(canvas, callback) {
-        canvas.addEventListener('cornerstoneimagerendered', e => {
-            const contextData = e.detail;
-            const viewport = corn.cornerstone.getViewport(canvas);
-            let zoomValue = viewport.scale.toFixed(3);
-            let wwwcValue = Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);
-            let renderTime = contextData.renderTimeInMs.toFixed(3);
-            callback({
-                zoom: zoomValue,
-                wwwc: wwwcValue,
-                renderTime,
-            })
-        });
-    },
-    newImageMonitoring(canvas, callback) {
-        canvas.addEventListener('cornerstonenewimage', e => {
-            let toolData = corn.cornerstoneTools.getToolState(canvas, 'stack');
-            let stack = toolData.data[0];
-            callback({
-                currentImageIdIndex: stack.currentImageIdIndex + 1,
-                imageIds: stack.imageIds.length,
-                frameRate: e.detail.frameRate
-            })
-        })
+    addEventListener(_this, canvas) {
+        // 监听方法类
+        let eventFun = {
+            // 监听zoom等数据
+            cornerstoneimagerendered(e) {
+                const contextData = e.detail;
+                const viewport = corn.cornerstone.getViewport(canvas);
+                let zoomValue = viewport.scale.toFixed(3);
+                let wwwcValue = Math.round(viewport.voi.windowWidth) + "/" + Math.round(viewport.voi.windowCenter);
+                let renderTime = contextData.renderTimeInMs.toFixed(3);
+                _this.imageRenderedMonitoring = {
+                    zoom: zoomValue,
+                    wwwc: wwwcValue,
+                    renderTime,
+                }
+            },
+            // 监听图片在第几张
+            cornerstonenewimage(e) {
+                let toolData = corn.cornerstoneTools.getToolState(canvas, 'stack');
+                let stack = toolData.data[0];
+                _this.newImageMonitoring = {
+                    currentImageIdIndex: stack.currentImageIdIndex + 1,
+                    imageIds: stack.imageIds.length,
+                    frameRate: e.detail.frameRate
+                }
+            },
+            // 监听工具类
+            cornerstonetoolsmeasurementadded(e) {
+                e.detail.measurementData.color = '#53e601'
+            }
+        }
+
+        let eventArr = ['cornerstoneimagerendered', 'cornerstonenewimage', 'cornerstonetoolsmeasurementadded'];
+        eventArr.map(item => canvas.removeEventListener(item, eventFun[item]));
+        eventArr.map(item => canvas.addEventListener(item, eventFun[item]));
     },
     // 工具类注册
     addTool(canvas, allImageIds) {
         // 放大镜工具
         corn.cornerstoneTools.addTool(corn.cornerstoneTools.MagnifyTool, {
-            configutarion: {
-                magnifySize: 10,
-                magnificationLevel: 5
-            }
+            magnifySize: 100,
+            magnificationLevel: 1,
         })
 
         // 添加亮度调整工具
@@ -152,6 +162,10 @@ export const dicomTool = {
             // corn.cornerstoneTools.setToolActive('StackScrollMouseWheel', { })
         }
         if (type === 'Length') {
+            // corn.cornerstoneTools.toolStyle.setToolWidth(1);
+            // corn.cornerstoneTools.toolColors.setToolColor('rgb(255, 0, 0)');
+            // corn.cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
+
             corn.cornerstoneTools.setToolActive('Length', {mouseButtonMask: 1})
         }
         if (type === 'Angle') {
@@ -192,15 +206,17 @@ export const dicomTool = {
         corn.cornerstoneTools.setToolEnabled('Bidirectional')
     },
     // 保存按钮
-    getToolState(canvas) {
-        let arr = ['Length', 'Angle', 'Probe', 'RectangleRoi', 'EllipticalRoi', 'Bidirectional'];
-        let str = {};
-
-        arr.map(item => {
-            let type = corn.cornerstoneTools.getToolState(canvas, item);
-            str[item] = type && type.data.length ? type.data.map(item => item.handles) : '';
-        })
-
-        return str;
+    saveToolState() {
+        return corn.cornerstoneTools.globalImageIdSpecificToolStateManager.saveToolState();
+    },
+    // 渲染默认数据
+    defaultData(canvas, data) {
+        for (let imageid in data) {
+            let listName = data[imageid]
+            for (let item in listName) {
+                corn.cornerstoneTools.globalImageIdSpecificToolStateManager.addImageIdToolState(imageid, item, listName[item].data[0]);
+                this.disableAllTools();
+            }
+        }
     }
 }
