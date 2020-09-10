@@ -22,3 +22,12 @@ export const dicomContent = data => {
         data
     })
 }
+
+// 影像默认数据
+export const dicomDefaultData = data => {
+    return request({
+        url: '/dicom/dicomDefaultData',
+        method: 'post',
+        data
+    })
+}

@@ -73,6 +73,9 @@
                         type="success"
                         icon="el-icon-check"
                         @click="getToolState()" round></el-button>
+
+                    <!--颜色选择-->
+                    <el-color-picker class="picker" v-model="color"></el-color-picker>
                 </div>
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false">
                 </div>
@@ -108,7 +111,7 @@
 
 <script>
     import elementResizeDetectorMaker from 'element-resize-detector'
-    import { dicomContent } from '@/api/dicom';
+    import { dicomContent, dicomDefaultData } from '@/api/dicom';
     import {
         enable,
         parser,
@@ -131,196 +134,17 @@
                 isInvert: false,
                 imageRenderedMonitoring: {},
                 newImageMonitoring: {},
+                color: '#409EFF',
                 // 默认数据
-                defaultData: {
-                    "wadouri://127.0.0.1/vue-admin/mock/mockData/dicomFiles/MR-DICOM/000e6a9a.dcm": {
-                        "Length": {
-                            "data": [{
-                                "visible": true,
-                                "active": false,
-                                "invalidated": false,
-                                "color": '#000',
-                                "handles": {
-                                    "start": {
-                                        "x": 122.47715736040607,
-                                        "y": 39.63451776649746,
-                                        "highlight": true,
-                                        "active": false
-                                    },
-                                    "end": {
-                                        "x": 122.47715736040607,
-                                        "y": 90.31472081218273,
-                                        "highlight": true,
-                                        "active": false,
-                                        "moving": false
-                                    },
-                                    "textBox": {
-                                        "active": false,
-                                        "hasMoved": false,
-                                        "movesIndependently": false,
-                                        "drawnIndependently": true,
-                                        "allowedOutsideImage": true,
-                                        "hasBoundingBox": true,
-                                        "x": 122.47715736040607,
-                                        "y": 39.63451776649746,
-                                        "boundingBox": {
-                                            "width": 76.6943359375,
-                                            "height": 25,
-                                            "left": 233.99999999999997,
-                                            "top": 48.5
-                                        }
-                                    }
-                                },
-                                "uuid": "3024ed01-8223-4a87-b421-fe63c51b3c26",
-                                "length": 35.63451776649745,
-                                "unit": "mm"
-                            }]
-                        },
-                        "Angle": {
-                            "data": [{
-                                "visible": true,
-                                "active": false,
-                                "invalidated": false,
-                                "handles": {
-                                    "start": {
-                                        "x": 201.09644670050758,
-                                        "y": 133.1979695431472,
-                                        "highlight": true,
-                                        "active": false
-                                    },
-                                    "middle": {
-                                        "x": 206.9441624365482,
-                                        "y": 191.02538071065987,
-                                        "highlight": true,
-                                        "active": false,
-                                        "moving": false
-                                    },
-                                    "end": {
-                                        "x": 239.43147208121826,
-                                        "y": 134.497461928934,
-                                        "highlight": true,
-                                        "active": false,
-                                        "moving": false
-                                    },
-                                    "textBox": {
-                                        "active": false,
-                                        "hasMoved": false,
-                                        "movesIndependently": false,
-                                        "drawnIndependently": true,
-                                        "allowedOutsideImage": true,
-                                        "hasBoundingBox": true,
-                                        "x": 216.69035532994917,
-                                        "y": 191.02538071065985,
-                                        "boundingBox": {
-                                            "width": 53.53515625,
-                                            "height": 25,
-                                            "left": 368.9999999999999,
-                                            "top": 281.49999999999994
-                                        }
-                                    }
-                                },
-                                "uuid": "84197dfc-7f5e-4dd7-a0f9-6e86bf88edd4",
-                                "rAngle": 35.66
-                            }]
-                        },
-                        "EllipticalRoi": {
-                            "data": [{
-                                "visible": true,
-                                "active": false,
-                                "invalidated": false,
-                                "handles": {
-                                    "start": {
-                                        "x": 268.6700507614213,
-                                        "y": 70.1725888324873,
-                                        "highlight": true,
-                                        "active": false
-                                    },
-                                    "end": {
-                                        "x": 313.50253807106594,
-                                        "y": 115.65482233502537,
-                                        "highlight": true,
-                                        "active": false,
-                                        "moving": false
-                                    },
-                                    "initialRotation": 0,
-                                    "textBox": {
-                                        "active": false,
-                                        "hasMoved": false,
-                                        "movesIndependently": false,
-                                        "drawnIndependently": true,
-                                        "allowedOutsideImage": true,
-                                        "hasBoundingBox": true,
-                                        "x": 313.50253807106594,
-                                        "y": 92.91370558375634,
-                                        "boundingBox": {"width": 230.13671875, "height": 45, "left": 528, "top": 120.5}
-                                    }
-                                },
-                                "uuid": "128c4c11-c2ae-431b-9886-c7af8a8f01d5",
-                                "cachedStats": {
-                                    "area": 786.2849960404446,
-                                    "count": 1576,
-                                    "mean": 146.7030456852792,
-                                    "variance": 470.9486201654254,
-                                    "stdDev": 21.70135065302216,
-                                    "min": 83,
-                                    "max": 239
-                                },
-                                "unit": ""
-                            }]
-                        }
-                    },
-                    "wadouri://127.0.0.1/vue-admin/mock/mockData/dicomFiles/MR-DICOM/000e6a9c.dcm": {
-                        "Length": {
-                            "data": [{
-                                "visible": true,
-                                "active": false,
-                                "invalidated": false,
-                                "handles": {
-                                    "start": {
-                                        "x": 123.77664974619287,
-                                        "y": 61.076142131979694,
-                                        "highlight": true,
-                                        "active": false
-                                    },
-                                    "end": {
-                                        "x": 125.72588832487307,
-                                        "y": 399.5939086294416,
-                                        "highlight": true,
-                                        "active": false,
-                                        "moving": false
-                                    },
-                                    "textBox": {
-                                        "active": false,
-                                        "hasMoved": false,
-                                        "movesIndependently": false,
-                                        "drawnIndependently": true,
-                                        "allowedOutsideImage": true,
-                                        "hasBoundingBox": true,
-                                        "x": 125.72588832487307,
-                                        "y": 399.5939086294416,
-                                        "boundingBox": {
-                                            "width": 85.03662109375,
-                                            "height": 25,
-                                            "left": 238.99999999999994,
-                                            "top": 602.5
-                                        }
-                                    }
-                                },
-                                "uuid": "c16fb4ca-d80e-47e9-8ee5-714c06975317",
-                                "length": 238.02425048123945,
-                                "unit": "mm"
-                            }]
-                        }
-                    }
-                }
+                defaultData: {}
             }
         },
-        activated() {
+        mounted() {
             this.init()
         },
         methods: {
             // dicom开始
-            dicomStart() {
+            dicomStart(id) {
                 // 渲染列表
                 this.seriesList.map(item => {
                     if (item.instanceList[0]) {
@@ -338,15 +162,24 @@
                     }
                 })
 
-                // 直接打开第一个
-                if (this.$refs.canvasList.children[0]) {
-                    this.$refs.canvasList.children[0].click()
-                }
+                // 获取默认数据
+                dicomDefaultData({
+                    id: id
+                }).then((res) => {
+                    if (res.data) {
+                        this.defaultData = res.data;
+                    }
+
+                    // 直接打开第一个
+                    if (this.$refs.canvasList.children[0]) {
+                        this.$refs.canvasList.children[0].click();
+                    }
+
+                    this.loading = false;
+                })
             },
             // 点击事件 打开dicom
             dicomOpen(item) {
-                // 取消之前的监听
-                // this.$refs.canvas.innerHTML = '';
 
                 let imageList = item.instanceList;
                 // 找到要渲染的元素
@@ -371,7 +204,7 @@
                 dicomTool.init(canvas, allImageIds);
 
                 // 监听各个参数
-                dicomTool.addEventListener(this,canvas)
+                dicomTool.addEventListener(this, canvas)
 
                 this.newImageMonitoring.currentImageIdIndex = 1;
 
@@ -408,15 +241,15 @@
             },
             // 初始化
             init() {
-                dicomContent({id: this.$route.params.pathMatch}).then(res => {
+                let id = this.$route.params.pathMatch
+                dicomContent({id: id}).then(res => {
                     // 未找到数据
                     if (!res.state) {
                         this.$router.push({name: 'dicom'})
                         return false;
                     }
                     this.seriesList = res.data.seriesList;
-                    this.loading = false;
-                    this.dicomStart()
+                    this.dicomStart(id)
                 })
             }
         }
@@ -448,6 +281,10 @@
                     .el-button {
                         width: 30px;height: 30px;padding: 0;margin-left: 10px;
                     }
+
+                    .picker {
+                        margin-left: 10px;
+                    }
                 }
 
                 .image-canvas {
@@ -473,5 +310,4 @@
             }
         }
     }
-
 </style>

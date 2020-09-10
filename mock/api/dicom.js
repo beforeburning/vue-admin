@@ -37,7 +37,27 @@ const dicom = [
                 code: 200,
                 state: true,
                 message: '请求成功',
-                data: dicomMockData.dicomContent[res.body.id]
+                data: data
+            }
+        }
+    },
+    {
+        url: '/dicom/dicomDefaultData',
+        type: 'post',
+        response: res => {
+            let data = dicomMockData.dicomDefaultData[res.body.id];
+            if (!data) {
+                return {
+                    code: 200,
+                    state: true,
+                    message: '没有默认数据'
+                }
+            }
+            return {
+                code: 200,
+                state: true,
+                message: '请求成功',
+                data: data
             }
         }
     }

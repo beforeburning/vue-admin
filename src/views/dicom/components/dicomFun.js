@@ -82,7 +82,7 @@ export const dicomTool = {
             },
             // 监听工具类
             cornerstonetoolsmeasurementadded(e) {
-                e.detail.measurementData.color = '#53e601'
+                e.detail.measurementData.color = _this.color;
             }
         }
 
