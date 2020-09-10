@@ -162,10 +162,6 @@ export const dicomTool = {
             // corn.cornerstoneTools.setToolActive('StackScrollMouseWheel', { })
         }
         if (type === 'Length') {
-            // corn.cornerstoneTools.toolStyle.setToolWidth(1);
-            // corn.cornerstoneTools.toolColors.setToolColor('rgb(255, 0, 0)');
-            // corn.cornerstoneTools.toolColors.setActiveColor('rgb(0, 255, 0)');
-
             corn.cornerstoneTools.setToolActive('Length', {mouseButtonMask: 1})
         }
         if (type === 'Angle') {
