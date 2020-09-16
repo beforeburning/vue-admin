@@ -29,19 +29,19 @@ const user = [
             const {username} = res.body;
             const {password} = res.body;
 
-            if (userMockData.userData[username].user.state === '0') {
-                return {
-                    code: 200,
-                    state: false,
-                    message: '账户已禁用'
-                }
-            }
-
             if (!userMockData.userData[username]) {
                 return {
                     code: 200,
                     state: false,
                     message: '用户不存在'
+                }
+            }
+
+            if (userMockData.userData[username].user.state === '0') {
+                return {
+                    code: 200,
+                    state: false,
+                    message: '账户已禁用'
                 }
             }
 

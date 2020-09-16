@@ -94,8 +94,7 @@ export const dicomTool = {
     addTool(canvas, allImageIds) {
         // 放大镜工具
         corn.cornerstoneTools.addTool(corn.cornerstoneTools.MagnifyTool, {
-            magnifySize: 100,
-            magnificationLevel: 1,
+            configuration: {magnifySize: 300, magnificationLevel: 1}
         })
 
         // 添加亮度调整工具
@@ -128,22 +127,22 @@ export const dicomTool = {
         corn.cornerstoneTools.addTool(corn.cornerstoneTools.LengthTool);
 
         // 角度测量工具
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.AngleTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.AngleTool);
 
         // 探针工具
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.ProbeTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.ProbeTool);
 
         // 橡皮擦工具
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EraserTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EraserTool);
 
         // 矩形框
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.RectangleRoiTool)
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.RectangleRoiTool);
 
-        // 矩形框
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EllipticalRoiTool)
+        // 圆形框
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.EllipticalRoiTool);
 
-        // 矩形框
-        corn.cornerstoneTools.addTool(corn.cornerstoneTools.BidirectionalTool)
+        // 十字线
+        corn.cornerstoneTools.addTool(corn.cornerstoneTools.BidirectionalTool);
     },
     // 工具集合
     toolCollection(type) {
@@ -159,7 +158,7 @@ export const dicomTool = {
         }
         if (type === 'StackScrollTool') {
             corn.cornerstoneTools.setToolActive('StackScroll', {mouseButtonMask: 1})
-            // corn.cornerstoneTools.setToolActive('StackScrollMouseWheel', { })
+            corn.cornerstoneTools.setToolActive('StackScrollMouseWheel', {mouseButtonMask: 1})
         }
         if (type === 'Length') {
             corn.cornerstoneTools.setToolActive('Length', {mouseButtonMask: 1})
@@ -192,6 +191,7 @@ export const dicomTool = {
         corn.cornerstoneTools.setToolEnabled('Zoom')
         corn.cornerstoneTools.setToolEnabled('Pan')
         corn.cornerstoneTools.setToolEnabled('StackScroll')
+        corn.cornerstoneTools.setToolEnabled('StackScrollMouseWheel')
         corn.cornerstoneTools.setToolEnabled('Length')
         corn.cornerstoneTools.setToolEnabled('Angle')
         corn.cornerstoneTools.setToolEnabled('Probe')
