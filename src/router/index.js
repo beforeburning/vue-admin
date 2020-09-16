@@ -220,7 +220,7 @@ let dicom = [
         component: Layout,
         redirect: '/dicom/index',
         meta: {
-            title: '影响系统',
+            title: '影像系统',
             icon: 'el-icon-video-camera'
         },
         children: [
