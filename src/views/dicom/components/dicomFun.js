@@ -23,7 +23,6 @@ export const resize = canvas => {
     corn.cornerstone.resize(canvas, true);
 }
 
-
 // 工具栏
 export const dicomTool = {
     // 开启鼠标控制
@@ -214,5 +213,8 @@ export const dicomTool = {
                 this.disableAllTools();
             }
         }
+    },
+    rong(canvas) {
+        console.log(11);
     }
 }

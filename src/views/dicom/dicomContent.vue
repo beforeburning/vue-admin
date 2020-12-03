@@ -74,11 +74,16 @@
                         icon="el-icon-check"
                         @click="getToolState()" round></el-button>
 
+                    <!--获取状态-->
+                    <el-button @click="rong()"></el-button>
+
                     <!--颜色选择-->
                     <el-color-picker class="picker" v-model="color"></el-color-picker>
                 </div>
+
                 <div ref="canvas" class="image-canvas" oncontextmenu="return false">
                 </div>
+
                 <div class="parameterMonitoringRight">
                     <span>
                         <p>Img:</p>
@@ -238,6 +243,10 @@
                 console.log(data);
                 // console.log(data);
                 // console.log(JSON.stringify(data));
+            },
+            rong() {
+                let canvas = this.$refs.canvas;
+                dicomTool.rong(canvas);
             },
             // 初始化
             init() {

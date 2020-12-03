@@ -70,9 +70,14 @@ export default {
         }
 
         .el-menu-vertical {
-            position: absolute;height: calc(100% - 50px);top: 50px;overflow-y: scroll;
-            width: 100% !important;
-            min-width: 64px !important;
+            position: absolute;height: calc(100% - 50px);top: 50px;overflow-y: scroll;width: 100% !important;min-width: 64px !important;
+
+            scrollbar-width: none; /* firefox */
+            -ms-overflow-style: none; /* IE 10+ */
+
+            &::-webkit-scrollbar {
+                display: none; /* Chrome Safari */
+            }
         }
 
         .is-active {
