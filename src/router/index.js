@@ -175,6 +175,12 @@ let library = [
                 name: 'videoLibrary',
                 meta: {title: '视频播放'}
             },
+            {
+                path: 'videoCilp',
+                component: () => import('@/views/library/videoCilp'),
+                name: 'videoCilp',
+                meta: {title: '视频剪辑'}
+            },
         ]
     },
 ]
