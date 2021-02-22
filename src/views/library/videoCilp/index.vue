@@ -935,7 +935,7 @@ export default {
         },
         // 生成字幕
         generateBtn() {
-            console.log(11234);
+            console.log(123);
         }
     }
 }
