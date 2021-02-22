@@ -181,6 +181,12 @@ let library = [
                 name: 'videoCilp',
                 meta: {title: '视频剪辑'}
             },
+            {
+                path: 'konva',
+                component: () => import('@/views/library/konva'),
+                name: 'konva',
+                meta: {title: 'konva'}
+            },
         ]
     },
 ]

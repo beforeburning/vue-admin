@@ -240,6 +240,11 @@
                         </div>
                     </div>
                 </el-tab-pane>
+                <el-tab-pane class="addAudioData" label="生成字幕">
+                    <div class="generateBox">
+                        <el-button class="generateBtn" @click="generateBtn" type="primary">生成字幕</el-button>
+                    </div>
+                </el-tab-pane>
              </el-tabs>
         </div>
 
@@ -447,7 +452,9 @@ export default {
             // 字体地址
             fontUrl: '',
             // 动画列表
-            effect: []
+            effect: [],
+            // 字幕文件
+            strArr: []
         }
     },
     watch: {
@@ -876,7 +883,6 @@ export default {
             })
         },
         preview() {
-            console.log(this.dataListArr);
             // return false;
             let formData = new window.FormData();
             formData.append("file", this.videoData.files[0]);
@@ -926,6 +932,10 @@ export default {
                 item.y = y * (1 - proportion + 1)
                 event.preventDefault();
             }
+        },
+        // 生成字幕
+        generateBtn() {
+            console.log(1123);
         }
     }
 }
@@ -1316,4 +1326,12 @@ export default {
     }
 
     ::-webkit-scrollbar {width: 0}
+
+    .generateBox {
+        display: flex;justify-content: center;align-items: center;height: 100%;
+
+        .generateBtn {
+            display: flex;width: 200px;height: 60px;justify-content: center;align-items: center;font-size: 18px;
+        }
+    }
 </style>
