@@ -240,9 +240,15 @@
                         </div>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane class="addAudioData" label="生成字幕">
-                    <div class="generateBox">
-                        <el-button class="generateBtn" @click="generateBtn" type="primary">生成字幕</el-button>
+                <el-tab-pane class="addStrData" label="生成字幕">
+                    <div class="generateBox" v-loading='strLoading'>
+                        <el-button v-if="addStrData.str" class="generateBtn" @click="generateBtn"
+                                   type="primary">生成字幕</el-button>
+
+                        <div class="strContent" v-else>
+                            <p class="title">插入列表</p>
+
+                        </div>
                     </div>
                 </el-tab-pane>
              </el-tabs>
@@ -453,8 +459,16 @@ export default {
             fontUrl: '',
             // 动画列表
             effect: [],
+            // 字幕 Loading
+            strLoading: false,
             // 字幕文件
-            strArr: []
+            addStrData: {
+                y: 0,
+                color: '#333',
+                font: '',
+                size: '',
+                str: ''
+            }
         }
     },
     watch: {
@@ -515,7 +529,7 @@ export default {
                             css += `
                                  @font-face {
                                     font-family: '${item.name}';
-                                    src: url(${fontSrc}) format('truetype')
+                                    src: url('${fontSrc}') format('truetype')
                                 }
                             `
                         })
@@ -935,7 +949,32 @@ export default {
         },
         // 生成字幕
         generateBtn() {
-            console.log(123);
+            this.strLoading = true
+            setTimeout(() => {
+                this.addStrData.str = [
+                    {"time": "00:00:00,000 --> 00:00:02,000", "text": "文字文字文字文字1"},
+                    {"time": "00:00:01,673 --> 00:00:03,346", "text": "文字文字文字文字2"},
+                    {"time": "00:00:03,120 --> 00:00:06,690", "text": "文字文字文字文字3"},
+                    {"time": "00:00:07,350 --> 00:00:09,998", "text": "文字文字文字文字4"},
+                    {"time": "00:00:10,000 --> 00:00:10,315", "text": "文字文字文字文字5"},
+                    {"time": "00:00:12,220 --> 00:00:15,196", "text": "文字文字文字文字6"},
+                    {"time": "00:00:15,196 --> 00:00:17,800", "text": "文字文字文字文字7"},
+                    {"time": "00:00:18,170 --> 00:00:21,420", "text": "文字文字文字文字8"},
+                    {"time": "00:00:21,780 --> 00:00:24,519", "text": "文字文字文字文字9"},
+                    {"time": "00:00:24,740 --> 00:00:27,720", "text": "文字文字文字文字10"},
+                    {"time": "00:00:29,130 --> 00:00:31,176", "text": "文字文字文字文字11"},
+                    {"time": "00:00:31,176 --> 00:00:33,594", "text": "文字文字文字文字12"},
+                    {"time": "00:00:33,470 --> 00:00:35,278", "text": "文字文字文字文字13"},
+                    {"time": "00:00:36,500 --> 00:00:40,586", "text": "文字文字文字文字14"},
+                    {"time": "00:00:40,586 --> 00:00:42,175", "text": "文字文字文字文字15"}
+                ]
+                this.strLoading = false
+                this.$notify({
+                    title: '成功',
+                    message: '字幕已生成',
+                    type: 'success'
+                });
+            }, 2000)
         }
     }
 }
@@ -1327,11 +1366,19 @@ export default {
 
     ::-webkit-scrollbar {width: 0}
 
+    #pane-3 {
+        height: 100%;
+    }
+
     .generateBox {
-        display: flex;justify-content: center;align-items: center;height: 100%;
+        display: flex;justify-content: center;align-items: center;height: 100%;width: 100%;
 
         .generateBtn {
             display: flex;width: 200px;height: 60px;justify-content: center;align-items: center;font-size: 18px;
+        }
+
+        .strContent {
+            display: flex;
         }
     }
 </style>
