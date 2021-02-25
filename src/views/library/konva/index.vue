@@ -1,19 +1,15 @@
 <template>
-    <div>
-        <div class="konvaCon">
-
-            <video class="video1" ref="video" src="./74.mp4"></video>
-            <div id="container" ref="container" class="container" />
-            <!--            <img ref="img" class="img" src="" alt="">-->
-            <video controls style="width: 200px;height: 200px" ref="video2" src=""></video>
-            <el-button type="primary" @click="videoPlay">播放视频</el-button>
-            <el-button class="btn" @click="generate" type="primary">生成</el-button>
-        </div>
+    <div class="konvaCon">
+        <div id="container" ref="container" class="container" />
+        <img ref="img" class="img" src="" alt="">
+        <el-button class="btn" @click="generate" type="primary">生成</el-button>
     </div>
 </template>
 
 <script>
 import Konva from 'konva'
+// import gifler from 'gifler'
+import GIF from 'gif.js'
 
 export default {
     name: "konva",
@@ -44,9 +40,6 @@ export default {
     mounted() {
     },
     methods: {
-        videoPlay() {
-            this.$refs.video.play()
-        },
         /**
          * 生命周期--初始化
          */
@@ -151,53 +144,25 @@ export default {
         },
         // 生成
         generate() {
-            const canvas = document.querySelector('canvas');
-            const ctx = canvas.getContext('2d');
-            // const {width, height} = canvas;
-            //
-            // ctx.fillStyle = 'red';
-            //
-            // function draw(rotation = 0) {
-            //     ctx.clearRect(0, 0, 1000, 1000);
-            //     ctx.save();
-            //     ctx.translate(width / 2, height / 2);
-            //     ctx.rotate(rotation);
-            //     ctx.translate(-width / 2, -height / 2);
-            //     ctx.beginPath();
-            //     ctx.rect(200, 200, 200, 200);
-            //     ctx.fill();
-            //     ctx.restore();
-            // }
+            const layer = document.getElementsByClassName('konvajs-content')[0].getElementsByTagName('canvas')[0]
+            let imageElement = this.$refs.img
+            let gif = new GIF({
+                workers: 2,
+                quality: 10
+            });
 
-            function update(t) {
-                // draw(t / 500);
-                requestAnimationFrame(update);
-            }
-
-            update(0);
-
-            const stream = canvas.captureStream();
-            const recorder = new MediaRecorder(stream, {mimeType: 'video/webm'});
-
-            const data = [];
-            recorder.ondataavailable = function (event) {
-                if (event.data && event.data.size) {
-                    data.push(event.data);
-                }
-            };
-
-            recorder.onstop = () => {
-                const url = URL.createObjectURL(new Blob(data, {type: 'video/webm'}));
-                console.log(this.$refs.video2);
-                this.$refs.video2.src = url
-                console.log(url);
-            };
-
-            recorder.start();
-
-            setTimeout(() => {
-                recorder.stop();
-            }, 6000);
+            // 添加一个图片标签对象像素到当前帧
+            gif.addFrame(imageElement);
+            gif.addFrame(layer, {
+                delay: 200
+            });
+            gif.addFrame(layer, {
+                copy: true
+            });
+            gif.on('finished', function (blob) {
+                window.open(URL.createObjectURL(blob));
+            });
+            gif.render();
         }
     }
 }
@@ -205,12 +170,7 @@ export default {
 
 <style scoped lang="less">
     .konvaCon {
-        display: flex;justify-content: center;align-items: center;flex-direction: column;
-        position: relative;width: 960px;
-
-        .video1 {
-            position: absolute;left: 0;top: 0;width: 960px;height: 540px;
-        }
+        display: flex;width: 100%;justify-content: center;align-items: center;height: 100%;flex-direction: column;
 
         .container {
             border: 1px solid red;width: 960px;height: 540px;
