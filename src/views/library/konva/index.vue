@@ -2,7 +2,7 @@
     <div>
         <div class="konvaCon">
 
-            <video class="video1" ref="video" src="./74.mp4"></video>
+<!--            <video class="video1" ref="video" src="./74.mp4"></video>-->
             <div id="container" ref="container" class="container" />
             <!--            <img ref="img" class="img" src="" alt="">-->
             <video controls style="width: 100px;height: 100px" ref="video2" src=""></video>

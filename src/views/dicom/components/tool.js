@@ -6,7 +6,7 @@
 
 // 返回真实地址
 export const realUrl = (imageId) => {
-    return `wadouri://127.0.0.1/vue-admin/mock/mockData/dicomFiles/${imageId}`;
+    return `wadouri://192.168.1.110/vue-admin/mock/mockData/dicomFiles/${imageId}`;
 }
 
 // 创建一个div
