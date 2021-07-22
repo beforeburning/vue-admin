@@ -43,7 +43,7 @@
     "vue-wechat-title": "^2.0.5",
     "vuedraggable": "^2.23.0",
     "vuex": "^3.0.1",
-    "xlsx": "^0.15.1"
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
